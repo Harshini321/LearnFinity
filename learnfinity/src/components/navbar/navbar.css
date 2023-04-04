@@ -1,0 +1,14 @@
+.side-nav{
+    min-height: 100vh;
+}
+.nav-logo{
+    text-align: center;
+    margin-left: 25%;
+}
+.nav-header{
+    font-size: 18px;
+    text-decoration: none;
+}
+.nav-header:active{
+    color: #00ADB5;
+}

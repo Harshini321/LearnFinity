@@ -1,0 +1,171 @@
+.landing{
+    height: 100vh;
+    background-color: #fff; /* For browsers that do not support gradients */
+    /* background-image: linear-gradient(120deg, #fff,#00ADB5 ); */
+    /* background-image: linear-gradient(to bottom right, rgba(255,0,0,0), rgba(255,0,0,1)); */
+    background-image: linear-gradient(27deg, rgba(0,173,181,0.4), rgba(0,173,181,0));
+    /* background-image: url('../../images/inf_back.png'); */
+}
+.bg-text {
+    color: black;
+    font-weight: bold;
+    position: absolute;
+    top: 30%;
+    left: 4%;
+    /* transform: translate(-50%, -50%); */
+    z-index: 0.5;
+    /* width: 80%; */
+    text-align: center;
+  }
+
+.bg-text1 {
+  color: black;
+  font-weight: bold;
+  position: absolute;
+  top: 3%;
+  /* left: 15%; */
+  /* transform: translate(-50%, -50%); */
+  z-index: 0.5;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+
+.bg-image {
+  /* The image used */
+  background-image: url("../../images/inf_grey.png");
+  /* Add the blur effect */
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+  /* Full height */
+  height: 115%; 
+  background-position: left bottom; /*Positioning*/
+  background-repeat: no-repeat; /*Prevent showing multiple background images*/
+  /* Center and scale the image nicely */
+  /* background-position: center; */
+  background-repeat: no-repeat;
+  /* background-size: cover; */
+}
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family:sans-serif, Arial, Helvetica ;
+}
+
+* {
+  box-sizing: border-box;
+}
+.logo{
+  margin-top: -1%;
+}
+.inf{
+    background-image: url('../../images/inf_back_small.png');
+    background-position: left bottom; /*Positioning*/
+    background-repeat: no-repeat; /*Prevent showing multiple background images*/
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    height: 100%;
+}
+.top{
+    padding-top: 3%;
+}
+.loginbtn{
+    background-color: #00ADB5 !important;
+    border-color: #00ADB5;
+    padding-left: 21px ;
+    padding-right: 21px;
+    color: black;
+}
+.signupbtn{
+    border-color: black !important;
+    background-color: white!important;
+    padding-left: 21px ;
+    padding-right: 21px;
+    color: black;
+}
+
+.loginbtn:hover{
+    color: white;
+    border-color: #00ADB5;
+}
+.signupbtn:hover{
+    color: #00ADB5;
+    background-color: #00ADB5;
+}
+.ttl{
+    padding-top: 13%;
+    padding-bottom: 2%;
+    /* padding-bottom: 150px; */
+}
+.main_ttl_div{
+    text-align: center;
+}
+.main_ttl{
+    font-size: 100px;
+    font-weight: bolder;
+    opacity: 80%;
+    /* font-family: 'Poppins'; */
+    letter-spacing: 15px;
+}
+.lp_txt{
+    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+    font-size: 18px;
+    opacity: 80%;
+}
+
+.rmbtn{
+    background-color: #00ADB5 !important;
+    border-color: #00ADB5;
+    padding-left: 25px ;
+    padding-right: 25px;
+    font-size: 20px;
+    color: black;
+}
+/* .rmbtn:hover{
+    color: #00ADB5;
+    background-color: #fff !important;
+    border-color: #00ADB5;
+} */
+.rmbtn_div{
+    text-align: center;
+}
+.btm{
+    padding-top: 3%;
+}
+
+.modal-title{
+    font-size: 24px;
+    /* padding-left: 10px; */
+}
+.email-form{
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+}
+.form-group{
+    margin-bottom: 10px;
+}
+.sub-btn{
+    padding-left: 44%;
+    padding-right: 45%;
+    border-color: #36454F !important;
+    background-color: #36454F !important;
+    color: white;
+}
+.sub-btn:hover{
+    color: #00ADB5 !important;
+}
+.modal-header{
+    font-family: sans-serif, Arial, Helvetica;
+    
+}
+.modal-title{
+    color: #224957;
+    /* font-family: Montserrat; */
+}
+.form-check-label{
+    font-weight: 200;
+    opacity: 80%;
+    font-size: 15px;
+}
