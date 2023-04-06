@@ -28,7 +28,6 @@ export default function nav() {
                 <div class="col-2"></div>
             </div>
 
-
             <div class="row py-2">
                 <div class="col-2">    
                 </div>
@@ -72,7 +71,7 @@ export default function nav() {
                             <img src={ann} alt='CAIC' width='20' height='20' />
                         </div>
                         <div class="col-8 ">
-                            <a href="/announcements" class="link-light nav-header">Announcements</a>
+                            <a href="/announcement" class="link-light nav-header">Announcements</a>
                         </div>
                     </div>      
                 </div>

@@ -1,14 +1,17 @@
 import React, { useState, useEffect }  from 'react';
+import { useParams } from 'react-router-dom';
 import './announcements.css';
 import Nav from "../../components/navbar/navbar"
 import Footer from "../../components/footer/footer"
 import ann from "../../images/ann.png"
 import Profile_comp from '../../components/profile';
 import Announcement from '../../components/announcement_card';
-export default function Announcements() {
+export default function Announcements_course() {
+    const parms=useParams()
+    const course_id=parms.course_id
     const [ans,setAns]=useState([])
     useEffect(()=>{
-        fetch("/announcement",{
+        fetch("/announcement/${course_id}",{
             'methods':'GET',
             headers:{
                 'Content-Type':'application/json'
@@ -24,7 +27,7 @@ export default function Announcements() {
         <Nav></Nav>
         <div class="col-10 dash">     
         <div class="row">
-                <div class="col-11 pb-3 pt-1"><h2>Announcements</h2></div>
+                <div class="col-11 pb-3 pt-1"><h2>{course_id} Announcements</h2></div>
                 <Profile_comp></Profile_comp>
             </div>
             <div class="card my-3">

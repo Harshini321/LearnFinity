@@ -1,14 +1,16 @@
-
+import { useParams } from 'react-router-dom';
 import React, { useState, useEffect }  from 'react';
 import './assignment.css';
 import Nav from "../../components/navbar/navbar"
 import Eval_card from '../../components/eval_card';
 import Footer from "../../components/footer/footer"
 import nt from "../../images/notes.png"
-export default function Assignment() {
+export default function Assignment_course() {
+    const parms=useParams()
+    const course_id=parms.course_id
     const [evals,setEvals]=useState([])
     useEffect(()=>{
-        fetch("/evaluation",{
+        fetch("/evaluation/${course_id}",{
             'methods':'GET',
             headers:{
                 'Content-Type':'application/json'
@@ -23,9 +25,9 @@ export default function Assignment() {
         <Nav></Nav>
         <div class="col-10 dash">
         <div class="row">
-                <div class="col-11 pb-3 pt-1"><h2>Assignments</h2></div>
+                <div class="col-11 pb-3 pt-1"><h2>{course_id} : Assignments</h2></div>
                 <profile_comp></profile_comp>
-            </div>           
+            </div>         
             <div class="card my-3">
                 <div class="card-body">
                     <div class="row px-3">
@@ -38,7 +40,6 @@ export default function Assignment() {
                                     <h5>New Assignment</h5>
                                 </div>
                             </div>
-
                         </div>
                         <div class="col-9">
                             <div class="row">
@@ -67,10 +68,9 @@ export default function Assignment() {
                                 Download
                             </button>
                         </div>
-                    </div>                
+                    </div>
                 </div>
             </div>
-
             {evals.map(eva=>{
                 return<Eval_card
                     id={eva.id}

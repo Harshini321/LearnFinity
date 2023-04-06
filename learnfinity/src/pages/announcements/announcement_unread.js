@@ -5,10 +5,10 @@ import Footer from "../../components/footer/footer"
 import ann from "../../images/ann.png"
 import Profile_comp from '../../components/profile';
 import Announcement from '../../components/announcement_card';
-export default function Announcements() {
+export default function Announcements_Unread() {
     const [ans,setAns]=useState([])
     useEffect(()=>{
-        fetch("/announcement",{
+        fetch("/announcement/unread",{
             'methods':'GET',
             headers:{
                 'Content-Type':'application/json'
@@ -24,7 +24,7 @@ export default function Announcements() {
         <Nav></Nav>
         <div class="col-10 dash">     
         <div class="row">
-                <div class="col-11 pb-3 pt-1"><h2>Announcements</h2></div>
+                <div class="col-11 pb-3 pt-1"><h2>Unread Announcements</h2></div>
                 <Profile_comp></Profile_comp>
             </div>
             <div class="card my-3">

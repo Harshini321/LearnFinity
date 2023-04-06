@@ -1,12 +1,3 @@
-// import React, { useEffect, useState } from 'react';
-// import './landingpage.css';
-
-// export const landingpage=() =>{
-//     return (
-//         <h1>Landing Page</h1>
-//     )
-// }
-
 import React from 'react';
 import './course.css';
 import logo from '../../images/course.png';
@@ -66,10 +57,6 @@ export default function course() {
                                         </div>    
                                     </div>
                                 </div>
-                                {/* <div class="text-center py-2">
-                                    <button type="submit" class="btn btn-primary sub-btn btn-block">Register</button>
-                                </div> */}
-                                
                             </form>
                             </div>
                             </div>
