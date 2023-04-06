@@ -1,12 +1,13 @@
 from server.db import db
 from server.models import user
+from flask import request
 
 def getUserbyPar(par):
     # Returns the user object by decrypting the access token. For the purpose of testing before login, we return the details of a particular user.
     return {
             "email_id": "cs1210081@iitd.ac.in", 
             "name": "Kavya Chopra", 
-            "is_Admin": False, 
+            "is_Admin": True, 
             "is_Prof": False, 
             "insti_id": 1,
             "profile_pic": "~/static/default_profile_pic.png"
@@ -16,7 +17,7 @@ def getUser(): # Returns the user object. For the purpose of testing before logi
     return {
         "email_id": "cs1210081@iitd.ac.in", 
             "name": "Kavya Chopra", 
-            "is_Admin": False, 
+            "is_Admin": True, 
             "is_Prof": False, 
             "insti_id": 1,
             "profile_pic": "~/static/default_profile_pic.png"
@@ -40,11 +41,11 @@ def changePic():
 def isAdmin():
     req = request.get_json(force=True)
     user = getUserbyPar(req["access_token"])
-    if(user["is_admin"] == True):
+    if(user["is_Admin"] == True):
         return {
                 "message": "User is admin", 
                 "status_code": 200, 
-                "is_admin": True
+                "is_Admin": True
                 }
 
 

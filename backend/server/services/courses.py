@@ -170,7 +170,7 @@ def addUser():
         return {
             "message": "User-Course Mapping Added successfully", 
             "status_code" : 201, 
-            "email": obj.user
+            "email": obj.user,
             "course_id": obj.course
             }
     else:

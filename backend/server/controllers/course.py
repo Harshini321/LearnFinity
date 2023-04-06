@@ -19,7 +19,7 @@ def getCourses():
 @course_app.route('/courses/delete', methods = ['DELETE']) #For deleting a course
 def deleteCourse():
     return courses.deleteCourse()
-getA
+
 @course_app.route('/courses/all', methods = ['GET']) #For getting all courses of a particular institute
 def getAllCourses():
     return courses.getAllCourses()
