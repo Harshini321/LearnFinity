@@ -24,8 +24,8 @@ def create_app():
 
     # importing models
     from server.models import institute, user, courses, static_files, schedule, communication, evaluations, grades
-    with app.app_context():
-        db.create_all()
+    # with app.app_context():
+    #     db.create_all()
     return app
 
 
