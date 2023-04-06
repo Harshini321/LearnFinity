@@ -4,7 +4,7 @@ from ..services import users
 #Blueprint for the submodule
 user_app = Blueprint('user', __name__)
 
-@user_app.route('/user/', methods=['GET'])
+@user_app.route('/user', methods=['GET'])
 def getUser():
     return users.getUser()
 
