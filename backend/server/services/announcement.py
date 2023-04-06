@@ -1,4 +1,5 @@
 def getAnnouncements():
+    
     return "Get Announcements"
 
 def postAnnouncement():

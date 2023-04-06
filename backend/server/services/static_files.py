@@ -6,3 +6,6 @@ def postStatic():
 
 def deleteStatic():
     return 'Delete File'
+
+def uploadFile():
+    return 'Upload File'

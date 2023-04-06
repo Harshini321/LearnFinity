@@ -20,3 +20,11 @@ def isAuthenticated():
 def changePic():
     return users.changePic()
 
+@user_app.route('/user/checkAdmin', methods = ['GET'])
+def checkAdmin():
+    return users.isAdmin()
+
+@user_app.route('/user/checkStaff', methods = ['GET'])
+def checkInstructor():
+    return users.isStaff()
+
