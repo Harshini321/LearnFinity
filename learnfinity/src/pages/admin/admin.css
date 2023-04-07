@@ -1,0 +1,38 @@
+.full{
+    background-color: aqua;
+}
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family:sans-serif, Arial, Helvetica ;
+  }
+.top-l{
+    height: 60vh;
+    background-color:#39BDC8 ;
+    width:100%;
+}
+.head{
+    font-size: 32px;
+    padding-top: 2px;
+}
+.mn-header{
+    margin-top: 9%;
+    margin-bottom: 4%;
+}
+.mn-header-h1{
+    font-weight: bold;
+    font-size: 52px;
+    letter-spacing: 5px;
+    font-family: poppins;
+}
+.co-row{
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.co-card{
+    padding-left: 3%;
+    margin-bottom: 3%;
+}
+/* .co-rad{
+    border-radius: 100px;
+} */

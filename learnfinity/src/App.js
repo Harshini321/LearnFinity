@@ -21,6 +21,13 @@ import Announcements from './pages/announcements/announcements';
 import Announcements_Unread from './pages/announcements/announcement_unread';
 import Announcements_course from './pages/announcements/announcement_course';
 
+import Register from './pages/auth/register';
+import Login from './pages/auth/login';
+
+import Landingpage_a from './pages/admin/landingpage_a';
+import Announcement_add from './pages/admin/announcement_add';
+import Assignment_add from './pages/admin/assignment_add';
+import Dashboard_a from './pages/admin/dashboard_a';
 import Trial from "./pages/trial/trial"
 function App() {
   return (
@@ -30,6 +37,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Landingpage/>}/> 
           <Route path="/dashboard" element={<Dashboard/>}/> 
+          <Route path="/signup" element={<Register/>}/>
+          <Route path="/signin" element={<Login/>}/>
 
           <Route path="/courses" element={<AllCourses/>}/> 
           <Route path="/courses/all" element={<AllCourses_Insti/>}/> 
@@ -52,6 +61,10 @@ function App() {
           <Route path="/evaluation" element={<Assignment/>}/>
           <Route path="/evaluation/:course_id" element={<Assignment_course/>}/>
           <Route path="/trial" element={<Trial/>}/>
+
+          <Route path="/admin" element={<Landingpage_a/>}/>
+          <Route path="/admin/dashboard" element={<Dashboard_a/>}/>
+          <Route path="/admin/assignment/add" element={<Assignment_add/>}/>
         </Routes>
         
       </Router>

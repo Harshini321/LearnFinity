@@ -28,6 +28,9 @@ function Eval_card(props) {
                 </div>
             </div>
             <div class="row px-3">
+                <div class="col-12">
+                    {props.content}
+                </div>
                 <div class="col-6">
                 <p className='py-1 px-2'> Weightage : {props.weightage}</p>
                 </div>

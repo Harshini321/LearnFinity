@@ -76,6 +76,7 @@ export default function Assignment_course() {
                     id={eva.id}
                     title={eva.title}
                     staticfile_id={eva.staticfile_id}
+                    content={eva.content}
                     deadline={eva.deadline}
                     course_id={eva.course_id}
                     weightage={eva.weightage}

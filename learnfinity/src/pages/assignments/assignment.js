@@ -75,6 +75,7 @@ export default function Assignment() {
                 return<Eval_card
                     id={eva.id}
                     title={eva.title}
+                    content={eva.content}
                     staticfile_id={eva.staticfile_id}
                     deadline={eva.deadline}
                     course_id={eva.course_id}
