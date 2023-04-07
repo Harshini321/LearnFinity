@@ -14,14 +14,14 @@ def getAnnouncements(email):
                 static_files = []
                 for static_file in static_announcement:
                     static_files.append(static_file.announcement_attachment_file)
-                announcement_list.append({" id" : announcement.announcement_id,
+                announcements_list.append({" id" : announcement.announcement_id,
                                             "course_id" : announcement.announcement_course,
                                             "title" : announcement.announcement_title, 
                                             "body" : announcement.announcement_content, 
                                             "static_files" : static_files, 
                                             "createdAt" : announcement.announcement_date,
                                             "author_id" : announcement.announcement_author})
-    return json.dumps({"announcement_list" : announcement_list, "status_code" : 200})
+    return {"announcement_list" : announcements_list, "status_code" : 200}
 
 def postAnnouncement(email, course_id, title, body, static_files):
     user = user.User.query.filter_by(email=email).first()
@@ -49,7 +49,7 @@ def unreadAnnouncements(email):
         obj = communication.Announcement_Read.query.filter_by(announcement_read_announcement=announcement['id'], announcement_read_user=email).first()
         if(obj is None):
             unread_announcements.append(announcement)
-    return json.dumps({"unread_announcements" : unread_announcements, "status_code" : 200})
+    return {"unread_announcements" : unread_announcements, "status_code" : 200}
 
 def courseAnnouncement(course_id):
     announcements = communication.Announcement.query.filter_by(announcement_course=course_id).all()
@@ -66,7 +66,7 @@ def courseAnnouncement(course_id):
                                     "static_files" : static_files, 
                                     "createdAt" : announcement.announcement_date,
                                     "author_id" : announcement.announcement_author})
-    return json.dumps({"announcement_list" : announcement_list, "status_code" : 200})
+    return {"announcement_list" : announcement_list, "status_code" : 200}
 
 def getPosts(email):
     user = user.User.query.filter_by(email=email).first()
@@ -87,7 +87,7 @@ def getPosts(email):
                                 "createdAt" : post.post_date,
                                 "author_id" : post.post_author, 
                                 "can_comment": True})
-    return json.dumps({"posts_list" : posts_list, "status_code" : 200})
+    return {"posts_list" : posts_list, "status_code" : 200}
 
 
 def postPost(email, course_id, title, body, static_files):
@@ -133,7 +133,7 @@ def coursePost(course_id, email, is_Admin):
                                         "createdAt" : post.post_date,
                                         "author_id" : post.post_author, 
                                         "can_comment": True})
-                return json.dumps({"posts_list" : posts_list, "status_code" : 200})
+                return {"posts_list" : posts_list, "status_code" : 200}
 
 def getPostId(post_id, email, is_Admin):
     post = communication.Post.query.filter_by(post_id=post_id).first()
@@ -157,7 +157,7 @@ def getPostId(post_id, email, is_Admin):
                     "createdAt" : post.post_date,
                     "author_id" : post.post_author, 
                     "can_comment": True}
-            return json.dumps({"post" : post, "status_code" : 200})
+            return {"post" : post, "status_code" : 200}
 
 def deletePost(post_id, email, is_Prof):
     post = communication.Post.query.filter_by(post_id=post_id).first()
@@ -219,7 +219,7 @@ def getCommentById(comment_id, email, is_Admin):
                         "createdAt" : comment.comment_date,
                         "author_id" : comment.comment_author, 
                         "can_comment": True}
-            return json.dumps({"comment" : comment, "status_code" : 200})
+            return {"comment" : comment, "status_code" : 200}
 
 
 def getCommentsByPostId(post_id):
@@ -242,6 +242,6 @@ def getCommentsByPostId(post_id):
                                     "createdAt" : comment.comment_date,
                                     "author_id" : comment.comment_author, 
                                     "can_comment": True})
-        return json.dumps({"comments_list" : comments_list, "status_code" : 200})
+        return {"comments_list" : comments_list, "status_code" : 200}
 
 

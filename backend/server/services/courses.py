@@ -2,7 +2,7 @@ from server.models import institute, user, courses, schedule
 from server.db import db
 from server.services import users
 from flask import request
-
+import requests
 
 def addCourse():    #Requires admin access to add a course
     req = request.get_json(force=True)
