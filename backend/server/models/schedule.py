@@ -16,7 +16,7 @@ class Entry(db.Model):
     entry_day = db.Column(db.Enum('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'), nullable=False)
     entry_start_time = db.Column(db.Time, nullable=False)
     entry_end_time = db.Column(db.Time, nullable=False)
-    entry_insti_id = db.Column(db.Integer, nullable=False)
+    entry_insti_id = db.Column(db.Integer, db.ForeignKey("institute.insti_id"), nullable=False)
     # entries = db.relationship('Slot_Entry', backref='entry', lazy=True)
     def __repr__(self):
         return {"entry_id": {self.entry_id}, "entry_day": {self.entry_day}, "entry_start_time": {self.entry_start_time}, "entry_end_time": {self.entry_end_time}, "entry_insti_id": {self.entry_insti_id}}
