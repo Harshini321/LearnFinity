@@ -5,18 +5,21 @@ from ..models import grades, evaluations
 from ..controllers import evaluations as evalcontroller
 import json
 
-def calcGrade(course):
+def getTotal(course):
     total = 0
     for eval in evalcontroller.getEvaluations(course):
         e = eval
         submission = evalcontroller.getSubmission(e['id'])
         if submission:
             total += e['weightage'] * (submission['marks']/e['total_marks']) * 100
+    return {'total': total}
+
+def calcGrade(course):
+    total = getTotal(course)['total']
     cutoffs = grades.GradeCutoffs.query.filter_by(cutoff_course = course).all()
     for cutoff in cutoffs:
         if cutoff.cutoff_lowerlimit <= total <= cutoff.cutoff_upperlimit:
             return cutoff.cutoff_grade
-
 
 def getGrades(user, courses):
     grades = []

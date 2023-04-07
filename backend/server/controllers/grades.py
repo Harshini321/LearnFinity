@@ -17,6 +17,10 @@ def getAllGrades():
         courselist.append(c['id'])
     return grades.getGrades(user = user, courses = courselist)
 
+@grade_app.route('/total/<course_id>', methods = ['GET'])
+def getTotal(course_id): #get grades for a particular course
+    return grades.getTotal(course = course_id)
+
 @grade_app.route('/grades/<course_id>', methods = ['GET'])
 def getGrades(course_id): #get grades for a particular course
     user = users.getUser()['email_id']
