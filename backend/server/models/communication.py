@@ -43,6 +43,7 @@ class Comment(db.Model):
 class Announcement(db.Model):
     announcement_id = db.Column(db.Integer, primary_key=True)
     announcement_content = db.Column(db.Text, nullable=False)
+    announcement_title = db.Column(db.String(100), nullable=False)
     announcement_author = db.Column(db.String(100), db.ForeignKey("user.email"))
     announcement_course = db.Column(db.Integer, db.ForeignKey("course.course_id"))
     announcement_date = db.Column(db.DateTime, nullable=False, default=datetime.now(tz('Asia/Kolkata')))
@@ -57,3 +58,11 @@ class Announcement_Attachment(db.Model):
     announcement_attachment_announcement = db.Column(db.Integer, db.ForeignKey("announcement.announcement_id"))
     def __repr__(self):
         return f"Announcement_Attachments('{self.announcement_attachment_file}', '{self.announcement_attachment_announcement}')" 
+
+class Announcement_Read(db.Model):
+    __tablename__ = 'announcement_read'
+    announcement_read_id = db.Column(db.Integer, primary_key=True)
+    announcement_read_announcement = db.Column(db.Integer, db.ForeignKey("announcement.announcement_id"))
+    announcement_read_user = db.Column(db.String(100), db.ForeignKey("user.email"))
+    def __repr__(self):
+        return f"Announcement_Read('{self.announcement_read_announcement}', '{self.announcement_read_user}')"

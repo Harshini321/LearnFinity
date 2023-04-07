@@ -1,5 +1,5 @@
 from flask import Flask
-from server.controllers import base, auth, announcement, static_file, users, institutes, course, schedule as sched 
+from server.controllers import base, auth, communications, static_file, users, institutes, course, schedule as sched 
 from server.db import db
 from flask_migrate import Migrate
 
@@ -14,7 +14,7 @@ def create_app():
     app.register_blueprint(base.base_app)
     app.register_blueprint(auth.auth_app)
     app.register_blueprint(users.user_app)
-    app.register_blueprint(announcement.announcement_app)
+    app.register_blueprint(communications.communication_app)
     app.register_blueprint(institutes.institute_app)
     app.register_blueprint(course.course_app)
     app.register_blueprint(static_file.static_app)
@@ -24,10 +24,11 @@ def create_app():
     db.init_app(app)
     migrate = Migrate(app,db)
 
+
     # importing models
     from server.models import institute, user, courses, static_files, schedule, communication, evaluations, grades
-    # with app.app_context():
-    #     db.create_all()
+    with app.app_context():
+        db.create_all()
     return app
 
 
