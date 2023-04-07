@@ -29,7 +29,7 @@ def unreadAnnouncements(): #Get unread announcements for all courses the user is
 
 @communication_app.route('/announcement/<course_id>', methods = ['GET'])
 def fetchAnnouncement(course_id): #Get all announcements for the course specified
-    return communication.fetchAnnouncement(course_id)
+    return communication.courseAnnouncement(course_id)
 
 #Endpoints for posts
 
@@ -51,7 +51,7 @@ def getPosts(course_id): #Get all the posts corresponding to a course
     if(user['status_code'] != 200):
         return {"message" : 'User not authenticated to perform this action. Please login', "status_code" : 401}
     else:
-        return communication.fetchPost(course_id, user['email'], user['is_Admin'])
+        return communication.coursePost(course_id, user['email'], user['is_Admin'])
 
 @communication_app.route('/post/<post_id>', methods = ['GET'])
 def getPostById(post_id): #Get all the post by postid

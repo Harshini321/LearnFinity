@@ -20,7 +20,7 @@ def getUser(): # Returns the user object. For the purpose of testing before logi
             "is_Admin": True, 
             "is_Prof": False, 
             "insti_id": 1,
-            "profile_pic": "~/static/default_profile_pic.png"
+            "profile_pic": "~/static/default_profile_pic.png",
             "status_code": 200,
             "message": "User is logged in, details fetched successfully"
             }

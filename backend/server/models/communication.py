@@ -40,6 +40,14 @@ class Comment(db.Model):
     def __repr__(self):
         return f"Comments('{self.comment_content}', '{self.comment_author}', '{self.comment_post}', '{self.comment_date}', '{self.comment_likes}', '{self.comment_parent}')"
 
+class Comment_Attachment(db.Model):
+    __tablename__ = 'comment_attachment'
+    comment_attachment_id = db.Column(db.Integer, primary_key=True)
+    comment_attachment_file = db.Column(db.Integer, db.ForeignKey("static_file.file_id"))
+    comment_attachment_comment = db.Column(db.Integer, db.ForeignKey("comment.comment_id"))
+    def __repr__(self):
+        return f"Comment_Attachments('{self.comment_attachment_file}', '{self.comment_attachment_comment}')"
+
 class Announcement(db.Model):
     announcement_id = db.Column(db.Integer, primary_key=True)
     announcement_content = db.Column(db.Text, nullable=False)
@@ -50,7 +58,9 @@ class Announcement(db.Model):
     #attachments = db.relationship('Announcement_Attachment', backref='announcement', lazy=True)
     def __repr__(self):
         return f"Announcements('{self.announcement_content}', '{self.announcement_author}', '{self.announcement_course}', '{self.announcement_date}')"
-    
+
+
+
 class Announcement_Attachment(db.Model):
     __tablename__ = 'announcement_attachment'
     announcement_attachment_id = db.Column(db.Integer, primary_key=True)
