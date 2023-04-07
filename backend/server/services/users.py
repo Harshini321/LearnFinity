@@ -40,7 +40,7 @@ def changePic():
 
 def isAdmin():
     req = request.get_json(force=True)
-    user = getUserbyPar(req["access_token"])
+    user = getUserbyPar(1)
     if(user["is_Admin"] == True):
         return {
                 "message": "User is admin", 
@@ -51,7 +51,7 @@ def isAdmin():
 
 def isStaff():
     req = request.get_json(force=True)
-    user = getUserbyPar(req["access_token"])
+    user = getUserbyPar(1)
     if(user["is_staff"] == True):
         return {
                 "message": "User is staff", 

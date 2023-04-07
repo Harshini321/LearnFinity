@@ -7,7 +7,7 @@ from flask_migrate import Migrate
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'SGVsbG9vb29vLi4uLklmIHUgYXJlIHRoaXMgdmVsbGEgcGxzIGRvIG15IGFzc2lnbm1lbnQgOik='
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:open@localhost/learnfinity'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password@localhost/learnfinity'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     #setting up blueprints
