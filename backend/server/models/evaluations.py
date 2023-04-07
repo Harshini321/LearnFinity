@@ -16,7 +16,6 @@ class Evaluation(db.Model):
     evaluation_submission_allowed = db.Column(db.Boolean, default=True)
     evaluation_date = db.Column(db.DateTime, nullable=False, default=datetime.now(tz('Asia/Kolkata')))
     evaluation_deadline = db.Column(db.DateTime, nullable=False)
-    evaluation_obtained_score = db.Column(db.Float, default=0)
     evaluation_max_score = db.Column(db.Float, default=100)
     evaluation_weightage = db.Column(db.Float, nullable=False)
     #submissions = db.relationship('Submission', backref='evaluation', lazy=True)
