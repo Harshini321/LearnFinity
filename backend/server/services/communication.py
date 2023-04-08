@@ -4,11 +4,13 @@ from server.db import db
 from flask import request
 
 def getAnnouncements(email):
-    user = user.User.query.filter_by(email=email).first()
-    courses = courses.User_Course.query.filter_by(user_id=user.email).all()
+    user_instance = user.User.query.filter_by(email=email).first()
+    if user_instance is None:
+        return {"message" : 'User not found. Please enter a valid email id', "status_code" : 404}
+    all_courses_of_user = courses.User_Course.query.filter_by(user=email).all()
     announcements_list = []
-    for course in courses:
-        announcements = communication.Announcement.query.filter_by(course_id=course.course_id).all()
+    for entry in all_courses_of_user:
+        announcements = communication.Announcement.query.filter_by(announcement_course=entry.course).all()
         for announcement in announcements:
                 static_announcement = communication.Announcement_Attachment.query.filter_by(announcement_attachment_announcement=announcement.announcement_id).all()
                 static_files = []
@@ -24,16 +26,16 @@ def getAnnouncements(email):
     return {"announcement_list" : announcements_list, "status_code" : 200}
 
 def postAnnouncement(email, course_id, title, body, static_files):
-    user = user.User.query.filter_by(email=email).first()
+    user_instance = user.User.query.filter_by(email=email).first()
     course = courses.Course.query.filter_by(course_id=course_id).first()
     if(course is None):
         return {"message" : 'Course not found. Please enter a valid course id', "status_code" : 404}
     else:
-        mapping = courses.User_Course.query.filter_by(user_id=user.email, course_id=course_id).first()
+        mapping = courses.User_Course.query.filter_by(user=email, course=course_id).first()
         if(mapping is None):
             return {"message" : 'Instructor not associated with the course. Unauthorised access', "status_code" : 401}
         else:
-            announcement = communication.Announcement(announcement_course=course_id, announcement_title=title, announcement_content=body, announcement_author=user.email)
+            announcement = communication.Announcement(announcement_course=course_id, announcement_title=title, announcement_content=body, announcement_author=email)
             db.session.add(announcement)
             db.session.commit()
             for static_file in static_files:
@@ -68,12 +70,22 @@ def courseAnnouncement(course_id):
                                     "author_id" : announcement.announcement_author})
     return {"announcement_list" : announcement_list, "status_code" : 200}
 
+def markAnnouncementRead(email, announcement_id):
+    announcement = communication.Announcement.query.filter_by(announcement_id=announcement_id).first()
+    if(announcement is None):
+        return {"message" : 'Announcement not found. Please enter a valid announcement id', "status_code" : 404}
+    else:
+        announcement_read = communication.Announcement_Read(announcement_read_announcement=announcement_id, announcement_read_user=email)
+        db.session.add(announcement_read)
+        db.session.commit()
+        return {"message" : 'Announcement marked as read', "status_code" : 200}
+
 def getPosts(email):
-    user = user.User.query.filter_by(email=email).first()
-    courses = courses.User_Course.query.filter_by(user_id=user.email).all()
+    user_instance = user.User.query.filter_by(email=email).first()
+    all_courses_of_user = courses.User_Course.query.filter_by(user=email).all()
     posts_list = []
-    for course in courses:
-        posts = communication.Post.query.filter_by(post_course=course.course_id, post_author = email).all()
+    for course in all_courses_of_user:
+        posts = communication.Post.query.filter_by(post_course=course.course, post_author = email).all()
         for post in posts:
             static_posts = communication.Post_Attachment.query.filter_by(post_attachment_post=post.post_id).all()
             static_files = []
@@ -90,17 +102,17 @@ def getPosts(email):
     return {"posts_list" : posts_list, "status_code" : 200}
 
 
-def postPost(email, course_id, title, body, static_files):
-    user = user.User.query.filter_by(email=email).first()
+def postPost(email, course_id, title, body, static_files, can_comment):
+    user_instance = user.User.query.filter_by(email=email).first()
     course = courses.Course.query.filter_by(course_id=course_id).first()
     if(course is None):
         return {"message" : 'Course not found. Please enter a valid course id', "status_code" : 404}
     else:
-        mapping = courses.User_Course.query.filter_by(user_id=user.email, course_id=course_id).first()
+        mapping = courses.User_Course.query.filter_by(user=email, course=course_id).first()
         if(mapping is None):
             return {"message" : 'User not associated with the course. Unauthorised access', "status_code" : 401}
         else:
-            post = communication.Post(post_course=course_id, post_title=title, post_content=body, post_author=user.email)
+            post = communication.Post(post_course=course_id, post_title=title, post_content=body, post_author=user_instance.email, post_canComment=can_comment)
             db.session.add(post)
             db.session.commit()
             for static_file in static_files:
@@ -114,7 +126,7 @@ def coursePost(course_id, email, is_Admin):
         if(course is None):
             return {"message" : 'Course not found. Please enter a valid course id', "status_code" : 404}
         else:
-            mapping = courses.User_Course.query.filter_by(user_id=user.email, course_id=course_id).first()
+            mapping = courses.User_Course.query.filter_by(user=email, course=course_id).first()
             if(mapping is None and is_Admin == False):
                 return {"message" : 'User not associated with the course. Unauthorised access', "status_code" : 401}
             else:
@@ -141,7 +153,7 @@ def getPostId(post_id, email, is_Admin):
         return {"message" : 'Post not found. Please enter a valid post id', "status_code" : 404}
     else:
         course = courses.Course.query.filter_by(course_id=post.post_course).first()
-        mapping = courses.User_Course.query.filter_by(user_id=user.email, course_id=course.course_id).first()
+        mapping = courses.User_Course.query.filter_by(user=email, course=course.course_id).first()
         if(mapping is None and is_Admin == False):
             return {"message" : 'User not associated with the course. Unauthorised access', "status_code" : 401}
         else:
@@ -165,7 +177,7 @@ def deletePost(post_id, email, is_Prof):
         return {"message" : 'Post not found. Please enter a valid post id', "status_code" : 404}
     else:
         course = courses.Course.query.filter_by(course_id=post.post_course).first()
-        mapping = courses.User_Course.query.filter_by(user_id=user.email, course_id=course.course_id).first()
+        mapping = courses.User_Course.query.filter_by(user=email, course=course.course_id).first()
         if(mapping is None and is_Admin == False):
             return {"message" : 'User not associated with the course. Unauthorised access', "status_code" : 401}
         else:
@@ -183,7 +195,7 @@ def postComment(email, parentpost_id, parentcomment_id, body, static_files):
         return {"message" : 'Post not found. Please enter a valid post id', "status_code" : 404}
     else:
         course = courses.Course.query.filter_by(course_id=post.post_course).first()
-        mapping = courses.User_Course.query.filter_by(user_id=user.email, course_id=course.course_id).first()
+        mapping = courses.User_Course.query.filter_by(user=email, course=course.course_id).first()
         if(mapping is None):
             return {"message" : 'User not associated with the course. Unauthorised access', "status_code" : 401}
         else:
@@ -214,7 +226,7 @@ def getCommentById(comment_id, email, is_Admin):
     else:
         post = communication.Post.query.filter_by(post_id=comment.comment_post).first()
         course = courses.Course.query.filter_by(course_id=post.post_course).first()
-        mapping = courses.User_Course.query.filter_by(user_id=user.email, course_id=course.course_id).first()
+        mapping = courses.User_Course.query.filter_by(user=email, course=course.course_id).first()
         if(mapping is None and is_Admin == False):
             return {"message" : 'User not associated with the course. Unauthorised access', "status_code" : 401}
         else:
@@ -280,7 +292,7 @@ def deleteComment(comment_id, email, is_Prof):
     else:
         post = communication.Post.query.filter_by(post_id=comment.comment_post).first()
         course = courses.Course.query.filter_by(course_id=post.post_course).first()
-        mapping = courses.User_Course.query.filter_by(user_id=user.email, course_id=course.course_id).first()
+        mapping = courses.User_Course.query.filter_by(user=email, course=course.course_id).first()
         if(mapping is None and is_Admin == False):
             return {"message" : 'User not associated with the course. Unauthorised access', "status_code" : 401}
         else:

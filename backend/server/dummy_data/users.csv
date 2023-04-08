@@ -1,11 +1,4 @@
 Name, Email, insti_id, is_Staff, is_Admin, password
-Kavya Chopra, cs1210081@iitd.ac.in, 2, False, False, password_kavya
-Sakshi Gupta, cs1210567@iitd.ac.in, 2, False, False, password_sakshi
-Penta Harshini, cs12100108@iitd.ac.in, 2, False, False, password_penta
-Ashish Arora, cs1210069@iitd.ac.in, 2, False, False, password_ashish
-Rijurekha Sen, rijucs@iitd.ac.in, 2, True, False, password_rijurekha
-Abhishek Dixit, abhishekee@iitd.ac.in, 2, True, False, password_abhishek
-IITD_Admin, admin@iitd.ac.in, 1, True, True, password_admin_iitd
 Kavya Chopra, cs1210081@iitb.ac.in, 1, False, False, password_kavya
 Sakshi Gupta, cs1210567@iitb.ac.in, 1, False, False, password_sakshi
 Penta Harshini, cs12100108@iitb.ac.in, 1, False, False, password_penta
@@ -13,3 +6,11 @@ Ashish Arora, cs1210069@iitb.ac.in, 1, False, False, password_ashish
 Rijurekha Sen, rijucs@iitb.ac.in, 1, True, False, password_rijurekha
 Abhishek Dixit, abhishekee@iitb.ac.in, 1, True, False, password_abhishek
 IITB_Admin, admin@iitb.ac.in, 1, True, True, password_admin_iitb
+Kavya Chopra, cs1210081@iitd.ac.in, 2, False, False, password_kavya
+Sakshi Gupta, cs1210567@iitd.ac.in, 2, False, False, password_sakshi
+Penta Harshini, cs12100108@iitd.ac.in, 2, False, False, password_penta
+Ashish Arora, cs1210069@iitd.ac.in, 2, False, False, password_ashish
+Rijurekha Sen, rijucs@iitd.ac.in, 2, True, False, password_rijurekha
+Abhishek Dixit, abhishekee@iitd.ac.in, 2, True, False, password_abhishek
+IITD_Admin, admin@iitd.ac.in, 1, True, True, password_admin_iitd
+
