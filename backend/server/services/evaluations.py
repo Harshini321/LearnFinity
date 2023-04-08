@@ -10,7 +10,15 @@ def getEvaluations(courses):
     for course in courses:
         res = evaluations.Evaluation.query.filter_by(evaluation_course = course).all()
         for e in res:
-            evals.append({'id': e.evaluation_id, 'title': e.evaluation_title, 'content' : e.evaluation_content, 'staticfile_id': e.evaluation_file, 'deadline': str(e.evaluation_deadline), 'course_id': e.evaluation_course, 'weightage': e.evaluation_weightage, 'total_marks': e.evaluation_max_score, 'submission_allowed': e.evaluation_submission_allowed})
+            evals.append({'id': e.evaluation_id, 
+                        'title': e.evaluation_title,
+                         'content' : e.evaluation_content,
+                          'staticfile_id': e.evaluation_file, 
+                          'deadline': str(e.evaluation_deadline), 
+                          'course_id': e.evaluation_course, 
+                          'weightage': e.evaluation_weightage, 
+                          'total_marks': e.evaluation_max_score,
+                           'submission_allowed': e.evaluation_submission_allowed})
     return evals
 
 def createEvaluation(title, content, staticfile_id, deadline, course_id, weightage, total_marks, submission_allowed):
