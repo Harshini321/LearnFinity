@@ -37,7 +37,6 @@ import Cut from './pages/admin/cut';
 import Minor from './pages/admin/minor';
 import Enrolled from './pages/admin/enrolled';
 import Major from './pages/admin/major';
-
 import Notes_add from './pages/admin/notes_add';
 import Trial from "./pages/trial/trial"
 function App() {
