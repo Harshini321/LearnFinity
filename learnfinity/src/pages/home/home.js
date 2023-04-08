@@ -12,7 +12,7 @@ import lab from "../../images/lab.png"
 import nf from "../../images/notification.png"
 import ann from "../../images/ann.png"
 import { useState, useEffect } from 'react';
-export default function home() {
+export default function Home() {
     const [courseList, setCourseList] = useState([]);
     useEffect(() =>
     {
