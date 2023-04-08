@@ -12,10 +12,10 @@ def getUser():
     if access_token:
         return users.getUser(access_token)
     else:
-        return {
+        return json.dumps({
             'error': 'Authentication failed',
             'status_code': 401
-        }
+        })
 
 @user_app.route('/user/profilepic', methods = ['GET'])
 def getProfilePic():

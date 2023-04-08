@@ -8,21 +8,43 @@ import pf from "../../images/prof_def.png"
 import expand from "../../images/expand.png"
 import ann from "../../images/ann.png"
 import notes from "../../images/notes.png"
+import axios from 'axios';
 export default function Course_id() {
     const parms=useParams()
     const course_id=parms.course_id
     const [ans,setAns]=useState([])
-    useEffect(()=>{
-        fetch("/course/${course_id}",{
-            'methods':'GET',
-            headers:{
-                'Content-Type':'application/json'
-            }
+    const [announcementList, setAnnouncementList] = useState([]);
+    const [evaluationList, setEvaluationList] = useState([]);
+    const [postList, setPostList] = useState([]);
+
+    useEffect(() =>
+    {
+        axios.get(`http://localhost:5000/announcement/${course_id}`, {withCredentials: true })
+        .then(res => {
+            console.log(res.data.announcement_list)
+            console.log("courselist")
+            setAnnouncementList(res.data.announcement_list)
         })
-        .then(resp => resp.json())
-        .then(resp => setAns(resp))
-        .catch(error => console.log(error))
-    },[])
+    }, [])
+
+    useEffect(() =>
+    {
+        axios.get(`http://localhost:5000/evaluation/${course_id}`, {withCredentials: true })
+        .then(res => {
+            console.log(res.data.evaluation_list)
+            setEvaluationList(res.data.evaluation_list)
+        })
+    }, [])
+
+    useEffect(() =>
+    {
+        axios.get(`http://localhost:5000/post/${course_id}`, {withCredentials: true })
+        .then(res => {
+            console.log(res.data.post_list)
+            setEvaluationList(res.data.post_list)
+        })
+    }, [])
+
   return (
     <div class='container-fluid dashboard row  min-vh-100'>      
             <Nav></Nav>

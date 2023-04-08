@@ -10,6 +10,7 @@ import expand from "../../images/expand.png"
 import ann from "../../images/ann.png"
 import lg from '../../images/lf_logo.png';
 import notes from "../../images/notes.png"
+
 export default function Course() {
   return (
     <div className='container-fluid dashboard row  min-vh-100'>      
