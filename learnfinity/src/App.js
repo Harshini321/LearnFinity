@@ -11,6 +11,7 @@ import AllCourses_inst_year from './pages/allcourses/allcourses_inst_year';
 
 import Posts from "./pages/posts/posts"
 import Course from "./pages/course/course"
+import Course_id from './pages/course/course_id';
 import Grades from "./pages/grades/grades"
 import Grades_courses from './pages/grades/grades_course';
 import Notes from "./pages/notes/notes"
@@ -57,7 +58,9 @@ function App() {
           <Route path="/courses/:year/:semester" element={<AllCourses_inst_year/>}/> 
           <Route path="/courses/:year/:semester/:slot_id" element={<AllCourses_inst_year/>}/>
 
+          <Route path="/course/:course_id" element={<Course_id/>}/>
           <Route path="/course" element={<Course/>}/> 
+           
           <Route path="/pastcourses" element={<AllCourses/>}/> 
           <Route path="/posts" element={<Posts/>}/>
 
