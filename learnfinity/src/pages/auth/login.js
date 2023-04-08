@@ -17,14 +17,14 @@ function Login() {
         axios.post('http://localhost:5000/signin', {
             email_id :email_id,
             password: password
-        }, {
+        }, { withCredentials: true,
             headers: {
                 'Content-Type': 'application/json',
             }
         }).then((response)=>{
             console.log(response)
             alert("Login Successful")
-            navigate("/dashboard")
+            // navigate("/dashboard")
         }).catch((err)=>{
             console.log(err)
             alert("Login Failed")

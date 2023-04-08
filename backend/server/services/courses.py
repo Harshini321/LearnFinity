@@ -145,7 +145,11 @@ def editCourse():  #Requires admin access to edit a course
 
 def getUserCourse():
     print("here2")
-    print("args, ", request.args)
+    print(request.headers)
+    print("form", request.form)
+    print("files", request.files)
+    print("cookies", request.cookies)
+    print("args", request.args)
     req = request.get_json(force=True)
     response = users_controller.getUser()
     user_email = response['email_id']

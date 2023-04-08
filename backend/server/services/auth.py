@@ -34,7 +34,8 @@ def signin(email, password):
         if Bcrypt.check_password_hash(userobj.password, password):
             access_token = jwt.encode(payload = {"email": email}, key = "eea5927809c165323a4212c404b9d9f2", algorithm = 'HS256')
             resp = Response(access_token, status = 200, content_type = "application/json")
-            resp.set_cookie("access_token", access_token)
+            resp.set_cookie("access_token", access_token, domain='127.0.0.1', secure=True, samesite='None')
+            print(resp.headers)
             return resp
         else:
             return {"message": "Invalid Credentials", "status_code": 401}

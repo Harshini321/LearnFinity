@@ -6,7 +6,7 @@ from ..controllers import users_controller, course
 from flask_cors import CORS
 #Blueprint for the submodule
 eval_app = Blueprint('eval', __name__)
-CORS(eval_app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
+CORS(eval_app, resources={r"/*": { "origins" : ["http://localhost:3000", "127.0.0.1:3000", "http://localhost:3000/", "127.0.0.1:3000/"]}}, supports_credentials=True)
 # Evaluation endpoints
 
 @eval_app.route('/evaluation/', methods = ['GET', 'POST'])
