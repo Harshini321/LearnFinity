@@ -11,7 +11,7 @@ import expand from "../../images/expand.png"
 import profile_comp from '../../components/profile';
 export default function Posts() {
   return (
-    <div class='container-fluid dashboard row  min-vh-100'>      
+    <div className='container-fluid dashboard row  min-vh-100'>      
         <Nav></Nav>
         <div class="col-10 dash">
             
@@ -23,7 +23,7 @@ export default function Posts() {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class='px-3'>COP 290</h4> 
+                            <h4 className='px-3'>COP 290</h4> 
                             <div class="row py-3">
                                 <div class="col-4 px-3">
                                     <div class="px-2">

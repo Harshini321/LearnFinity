@@ -5,16 +5,25 @@ import Nav from "../../components/navbar/navbar"
 import Footer from "../../components/footer/footer"
 import Profile_comp from '../../components/profile';
 import CourseCard from "../../components/course_card/coursecard"
-
+import axios from 'axios';
 import dl from "../../images/deadline.png"
 import quiz from "../../images/quiz.png"
 import lab from "../../images/lab.png"
 import nf from "../../images/notification.png"
 import ann from "../../images/ann.png"
-
+import { useState, useEffect } from 'react';
 export default function home() {
+    const [courseList, setCourseList] = useState([]);
+    useEffect(() =>
+    {
+        axios.get('http://localhost:5000/courses')
+        .then(res => {
+            console.log(res)
+            setCourseList(res.data.courses_list)
+        })
+    })
   return (
-    <div class='container-fluid dashboard row  min-vh-100'>      
+    <div className='container-fluid dashboard row  min-vh-100'>      
         <Nav></Nav>
         <div class="col-10 dash">
             <div class="row">
@@ -25,7 +34,7 @@ export default function home() {
                 <div class="col-8">
                     <div class="card">
                         <div class="card-body ">
-                            <h4 class='px-3'>Overview</h4>
+                            <h4 className='px-3'>Overview</h4>
                             <div class="row px-3">
                                 <div class="col-4 py-3">
                                     <div class="row">
@@ -75,7 +84,7 @@ export default function home() {
                 <div class="col-4 ">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class='px-3'>Deadlines</h4>
+                            <h4 className='px-3'>Deadlines</h4>
                             <div class="form-check dl py-2 ">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
                                 <label class="form-check-label" for="flexCheckDefault">
@@ -105,7 +114,7 @@ export default function home() {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class='px-3'>Announcements</h4>
+                            <h4 className='px-3'>Announcements</h4>
                             <div class="card my-3">
                                 <div class="card-body">
                                     <div class="row px-3">
@@ -127,7 +136,7 @@ export default function home() {
                                     </div>
                                     <div class="row px-3">
                                         <div class="col-12">
-                                        <p class='py-2 px-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                        <p className='py-2 px-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                                         </div>
                                     </div>
 
@@ -155,7 +164,7 @@ export default function home() {
                                     </div>
                                     <div class="row px-3">
                                         <div class="col-12">
-                                        <p class='py-2 px-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                        <p className='py-2 px-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                                         </div>
                                     </div>
 
@@ -172,7 +181,7 @@ export default function home() {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class='px-3'>Courses</h4> 
+                            <h4 className='px-3'>Courses</h4> 
                             <div class="row py-3">
                                 <div class="col-4 px-3">
                                     <CourseCard></CourseCard>

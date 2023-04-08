@@ -3,13 +3,11 @@ import './footer.css';
 import lg from '../../images/logo_black.png';
 export default function footer() {
   return (      
-
-    <div class="card mt-3" >
-            <footer>
+    <div class="card">
                 <div class="card-body">
                     <div class="row ftr  text-center" >
                         <div class="col-1">
-                            <a class='navbar-brand nav-logo' href='/'>
+                            <a className='navbar-brand nav-logo' href='/'>
                                 <img src={lg} alt='CAIC' width='100' height='60' />
                             </a>
                         </div>
@@ -19,7 +17,6 @@ export default function footer() {
                         </div>
                     </div>
                 </div>
-                </footer>
             </div>
   );
 }

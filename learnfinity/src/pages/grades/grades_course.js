@@ -21,7 +21,7 @@ export default function Grades_courses() {
         .catch(error => console.log(error))
     },[])
   return (
-    <div class='container-fluid dashboard row  min-vh-100'>      
+    <div className='container-fluid dashboard row  min-vh-100'>      
         <Nav></Nav>
         <div class="col-10 dash">
         <div class="row">
