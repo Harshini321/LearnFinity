@@ -3,6 +3,7 @@ import './footer.css';
 import lg from '../../images/logo_black.png';
 export default function footer() {
   return (      
+
     <div class="card mt-3" >
             <footer>
                 <div class="card-body">

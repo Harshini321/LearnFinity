@@ -1,16 +1,10 @@
 import React,{useState} from 'react'
 import { Form,Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import "./auth.css"
-function Login() {
-    const [username,setUsername]=useState('')
-    const [password,setPassword]=useState('')
-
-    const loginUser =() =>{
-        console.log("Form Submitted")
-        setUsername('')
-        setPassword('')
-    }
+import "./admin.css"
+import {useForm} from 'react-hook-form'
+function Create_Ann() {
+    const {register,handleSubmit,rest,formState:{errors}}=useForm()
   return (
     <div className='container-fluid'>
         <div className='row'>
@@ -19,34 +13,32 @@ function Login() {
                 <div class="card">
                     <div class="card-body">
                         <div className='form'>
-                        <h3 className='text-center'>Login Page</h3>
+                        <h3 className='text-center'>Create Announcement</h3>
                         <form>
                             <Form.Group className='my-3'>
-                                
+                                <Form.Label>Title</Form.Label>
                                 <Form.Control type="text"
-                                    placeholder="Your username"
-                                    value={username}
+                                    placeholder=""
+                                    // value={username}
                                     name="username"
-                                    onChange={(e)=>{setUsername(e.target.value)}}
+                                    // onChange={(e)=>{setUsername(e.target.value)}}
                                 ></Form.Control>
                             </Form.Group>
                             
                             <Form.Group className='my-3'>
-                                
-                                <Form.Control type="password"
-                                    placeholder="Your password"
-                                    value={password}
+                                <Form.Label>Description</Form.Label>
+                                <Form.Control as="textarea" rows={5}
+                                    placeholder="Type here..."
+                                    // value={password}
                                     name="password"
-                                    onChange={(e)=>{setPassword(e.target.value)}}
+                                    // onChange={(e)=>{setPassword(e.target.value)}}
                                 ></Form.Control>
                             </Form.Group>
                             
                             <Form.Group className='text-center'>
-                                <Button as="sub" variant="primary" className="btn btn-primary sub-btn btn-block loginbtn" onClick={loginUser}>Login</Button>
+                                <Button as="sub" variant="primary" className="btn btn-primary sub-btn btn-block loginbtn" >Create</Button>
                             </Form.Group>
-                            <Form.Group className='mt-3 px-3'>
-                                <small>Do not have an account? <Link to ='/signup' className='rm_ud px-3'>Create one</Link></small>
-                            </Form.Group>
+                            
                         </form>
                     </div>
                     </div>
@@ -59,4 +51,4 @@ function Login() {
   )
 }
 
-export default Login
+export default Create_Ann

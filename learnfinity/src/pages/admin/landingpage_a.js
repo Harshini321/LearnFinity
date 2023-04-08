@@ -71,7 +71,7 @@ export default function Landingpage_a() {
 
             <div className='row co-row'>
                 <div className='col-3 co-card'>
-                    <div class="card px-3 py-3">
+                    <div class="card px-3 py-3 co-rad">
                         <div class="card-body">
                             <h4 class="card-title text-center">COL 216</h4>
                             <h6 class="card-subtitle mb-2 text-muted text-center">Computer Architecture</h6>
