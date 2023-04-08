@@ -7,14 +7,10 @@ from flask_cors import CORS
 #basic setup
 def create_app():
     app = Flask(__name__)
-    CORS(app, resources={r"/*": { "origins" : ["http://localhost:3000", "127.0.0.1:3000", "http://localhost:3000/", "127.0.0.1:3000/"]}}, supports_credentials=True)    
+    CORS(app, supports_credentials=True, origins=['http://localhost:3000', 'http://localhost:5000', "http://127.0.0.1:5000", "http://127.0.0.1:3000",'http://localhost:3000/', 'http://localhost:5000/', "http://127.0.0.1:5000/", "http://127.0.0.1:3000/" ])    
     app.config['SECRET_KEY'] = 'SGVsbG9vb29vLi4uLklmIHUgYXJlIHRoaXMgdmVsbGEgcGxzIGRvIG15IGFzc2lnbm1lbnQgOik='
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password@localhost/learnfinity'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['CORS_HEADERS'] = 'Content-Type'
-    app.config['CORS_RESOURCES'] = {r"/*": { "origins" : ["http://localhost:3000", "127.0.0.1:3000", "http://localhost:3000/", "127.0.0.1:3000/"]}}
-
-
     #setting up blueprints
     app.register_blueprint(base.base_app)
     app.register_blueprint(auth.auth_app)

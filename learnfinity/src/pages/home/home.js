@@ -19,6 +19,7 @@ export default function Home() {
         axios.get('http://localhost:5000/courses',  {withCredentials: true })
         .then(res => {
             console.log(res)
+            console.log("courselist")
             setCourseList(res.data.courses_list)
         })
     })

@@ -3,7 +3,7 @@ from ..services import users
 from flask_cors import CORS
 #Blueprint for the submodule
 user_app = Blueprint('user', __name__)
-CORS(user_app, resources={r"/*": { "origins" : ["http://localhost:3000", "127.0.0.1:3000", "http://localhost:3000/", "127.0.0.1:3000/"]}}, supports_credentials=True)
+CORS(user_app, supports_credentials=True, origins=['http://localhost:3000', 'http://localhost:5000', "http://127.0.0.1:5000", "http://127.0.0.1:3000",'http://localhost:3000/', 'http://localhost:5000/', "http://127.0.0.1:5000/", "http://127.0.0.1:3000/" ])
 @user_app.route('/user', methods=['GET'])
 def getUser():
     print("req", request)

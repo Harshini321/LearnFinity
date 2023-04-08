@@ -4,7 +4,7 @@ Bcrypt = Bcrypt()
 from server.models import user
 from server.db import db
 from ..controllers import users_controller as users
-
+from flask import json
 import jwt
 
 def signup():
@@ -19,7 +19,7 @@ def signup():
             req["is_Prof"] = False
         obj = user.User.query.filter_by(email = req['email_id']).first()
         if(obj != None):
-            return {"message": "User already exits", "status_code": 400} #ambivalent about this
+            return json.dumps({"message": "User already exits", "status_code": 400}) #ambivalent about this
         else:
             user1 = user.User(email = req['email_id'], password = Bcrypt.generate_password_hash(req['password']).decode('utf-8'), name = req['name'], is_staff = req["is_Prof"], insti_id = req["insti_id"])
             user.db.session.add(user1)   
@@ -33,12 +33,10 @@ def signin(email, password):
         userobj = user.User.query.filter_by(email = email).first()
         if Bcrypt.check_password_hash(userobj.password, password):
             access_token = jwt.encode(payload = {"email": email}, key = "eea5927809c165323a4212c404b9d9f2", algorithm = 'HS256')
-            resp = Response(access_token, status = 200, content_type = "application/json")
-            resp.set_cookie("access_token", access_token, domain='127.0.0.1', secure=True, samesite='None')
-            print(resp.headers)
-            return resp
+            print(access_token)
+            return json.dumps({"message": "User logged in successfully", "status_code": 200, "access_token": access_token})
         else:
-            return {"message": "Invalid Credentials", "status_code": 401}
+            return json.dumps({"message": "Invalid Credentials", "status_code": 401})
 
 def forgotpassword():
     return "Forgot Password"

@@ -144,14 +144,8 @@ def editCourse():  #Requires admin access to edit a course
             }
 
 def getUserCourse():
-    print("here2")
-    print(request.headers)
-    print("form", request.form)
-    print("files", request.files)
-    print("cookies", request.cookies)
-    print("args", request.args)
-    req = request.get_json(force=True)
     response = users_controller.getUser()
+    print(response)
     user_email = response['email_id']
     if(response['status_code'] == 200):
         if(response['is_Admin'] == False):
@@ -171,19 +165,20 @@ def getUserCourse():
                         "image": course.course_image
                         }
                 courses_list.append(course)
+            print(courses_list)
             return {
-                "status_code": 200, 
+                # "status_code": 200, 
                 "courses": courses_list
                 }
         else:
             return {
                 "message": "No courses defined for admin, use another endpoint",
-                "status_code" : 401
+                # "status_code" : 401
                 }
     else:
         return {
-            "message": "User not found",
-            "status_code" : 232
+            "message": "User not found"
+            # "status_code" : 400
             }
 def addUser():
     req = request.get_json(force=True)
