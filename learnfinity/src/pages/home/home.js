@@ -17,6 +17,7 @@ export default function Home() {
     const [pastCourseList, setPastCourseList] = useState([]);
     const [presentCourseList, setPresentCourseList] = useState([]);
     const [announcementList, setAnnouncementList] = useState([]);
+    
     useEffect(() =>
     {
         axios.get('http://localhost:5000/courses',  {withCredentials: true })
