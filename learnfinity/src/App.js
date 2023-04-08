@@ -26,8 +26,10 @@ import Login from './pages/auth/login';
 
 import Landingpage_a from './pages/admin/landingpage_a';
 import Announcement_add from './pages/admin/announcement_add';
+import Create_Ann from './pages/admin/create_announcement';
 import Assignment_add from './pages/admin/assignment_add';
 import Dashboard_a from './pages/admin/dashboard_a';
+import Notes_add from './pages/admin/notes_add';
 import Trial from "./pages/trial/trial"
 function App() {
   return (
@@ -65,6 +67,9 @@ function App() {
           <Route path="/admin" element={<Landingpage_a/>}/>
           <Route path="/admin/dashboard" element={<Dashboard_a/>}/>
           <Route path="/admin/assignment/add" element={<Assignment_add/>}/>
+          <Route path="/admin/announcement/add" element={<Announcement_add/>}/>
+          <Route path="/admin/announcement/add/new" element={<Create_Ann/>}/>
+          <Route path="/admin/notes/add" element={<Notes_add/>}/>
         </Routes>
         
       </Router>

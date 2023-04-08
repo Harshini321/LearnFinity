@@ -39,63 +39,74 @@ function Register() {
         // setConfirmPassword('')
     }
   return (
-    <div className='container'>
-        <div className='form'>
-            <h1>Sign Up Page</h1>
-            <form>
-                <Form.Group>
-                    <Form.Label>UserName</Form.Label>
-                    <Form.Control type="text"
-                        placeholder="Your username"
-                        {...register("username",{required:true})}
-                        // value={username}
-                        // name="username"
-                        // onChange={(e)=>{setUsername(e.target.value)}}
-                    ></Form.Control>
-                    {errors.username && <span style={{color:"red"}}>Username is required</span>}
-                </Form.Group>
-                
-                <Form.Group>
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type="email"
-                        placeholder="Your email"
-                        {...register("email",{required:true})}
-                        // value={email}
-                        // name="email"
-                        // onChange={(e)=>{setEmail(e.target.value)}}
-                    ></Form.Control>
-                    {errors.email && <span style={{color:"red"}}>Email is required</span>}
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password"
-                        placeholder="Your password"
-                        {...register("password",{required:true})}
-                        // value={password}
-                        // name="password"
-                        // onChange={(e)=>{setPassword(e.target.value)}}
-                    ></Form.Control>
-                    {errors.password && <span style={{color:"red"}}>Password is required</span>}
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Confirm Password</Form.Label>
-                    <Form.Control type="password"
-                        placeholder="Confirm Password"
-                        {...register("confirmPassword",{required:true})}
-                        // value={confirmPassword}
-                        // name="confirmPassword"
-                        // onChange={(e)=>{setConfirmPassword(e.target.value)}}
-                    ></Form.Control>
-                    {errors.confirmPassword && <span style={{color:"red"}}>confirmPassword is required</span>}
-                </Form.Group>
-                <Form.Group>
-                    <Button as="sub" variant="primary" onClick={handleSubmit(submitForm)}>Register</Button>
-                </Form.Group>
-                <Form.Group>
-                    <small>Already have an account? <Link to ='/signin'>SignIn</Link></small>
-                </Form.Group>
-            </form>
+    <div className='container-fluid'>
+        <div className='row'>
+            <div className='col-4'></div>
+            <div className='col-4 vertical-center'>
+                <div class="card">
+                    <div class="card-body">
+                    <div className='form'>
+                        <h3 className='text-center'>Sign Up</h3>
+                        <form>
+                            <Form.Group className='my-3'>
+                                
+                                <Form.Control type="text"
+                                    placeholder="Username"
+                                    {...register("username",{required:true})}
+                                    // value={username}
+                                    // name="username"
+                                    // onChange={(e)=>{setUsername(e.target.value)}}
+                                ></Form.Control>
+                                {errors.username && <span style={{color:"red"}}>Username is required</span>}
+                            </Form.Group>
+                            
+                            <Form.Group className='my-3'>
+                                
+                                <Form.Control type="email"
+                                    placeholder="Email"
+                                    {...register("email",{required:true})}
+                                    // value={email}
+                                    // name="email"
+                                    // onChange={(e)=>{setEmail(e.target.value)}}
+                                ></Form.Control>
+                                {errors.email && <span style={{color:"red"}}>Email is required</span>}
+                            </Form.Group>
+                            <Form.Group className='my-3'>
+                                
+                                <Form.Control type="password"
+                                    placeholder="Password"
+                                    {...register("password",{required:true})}
+                                    // value={password}
+                                    // name="password"
+                                    // onChange={(e)=>{setPassword(e.target.value)}}
+                                ></Form.Control>
+                                {errors.password && <span style={{color:"red"}}>Password is required</span>}
+                            </Form.Group>
+                            <Form.Group className='my-3'>
+                                
+                                <Form.Control type="password"
+                                    placeholder="Confirm Password"
+                                    {...register("confirmPassword",{required:true})}
+                                    // value={confirmPassword}
+                                    // name="confirmPassword"
+                                    // onChange={(e)=>{setConfirmPassword(e.target.value)}}
+                                ></Form.Control>
+                                {errors.confirmPassword && <span style={{color:"red"}}>confirmPassword is required</span>}
+                            </Form.Group>
+                            <Form.Group>
+                                <Button as="sub" variant="primary" onClick={handleSubmit(submitForm)} className="btn btn-primary sub-btn btn-block loginbtn">Register</Button>
+                            </Form.Group>
+                            <Form.Group className='mt-3 px-2'>
+                                <small>Already have an account? <Link to ='/signin' className='rm_ud px-3'>SignIn</Link></small>
+                            </Form.Group>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div className='col-4'></div>
         </div>
+        
     </div>
   )
 }

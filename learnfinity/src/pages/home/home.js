@@ -184,24 +184,7 @@ export default function home() {
                                     <CourseCard></CourseCard>
                                 </div>
                             </div>
-                            <div class="row py-3">
-                                <div class="col-3"></div>
-                                <div class="col-2 px-3">
-                                    <button type="button" class="btn btn-primary loginbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        Past
-                                    </button>
-                                </div>
-                                <div class="col-2 px-3">
-                                    <button type="button" class="btn btn-primary loginbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        Present
-                                    </button>
-                                </div>
-                                <div class="col-2 px-3">
-                                    <button type="button" class="btn btn-primary loginbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        Future
-                                    </button>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>   
