@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import './allcourses.css';
+import axios from 'axios'
 import logo from '../../images/course.png';
 import Nav from "../../components/navbar/navbar"
 import CourseCard from "../../components/course_card/coursecard"
 import Footer from "../../components/footer/footer"
 export default function AllCourses() {
     const [courses,setCourses]=useState([])
-    useEffect(()=>{
-        fetch("/courses",{
-            'methods':'GET',
-            headers:{
-                'Content-Type':'application/json'
-            }
+    
+    useEffect(() =>
+    {
+        axios.get('http://localhost:5000/courses',  {withCredentials: true })
+        .then(res => {
+            console.log(res.data.courses)
+            console.log("courselist")
+            setCourses(res.data.courses)
         })
-        .then(resp => resp.json())
-        .then(resp => setCourses(resp))
-        .catch(error => console.log(error))
-    },[])
+    }, [])
   return (
     <div class='container-fluid dashboard row  min-vh-100'>      
         <Nav></Nav>
