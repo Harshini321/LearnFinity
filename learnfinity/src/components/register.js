@@ -2,10 +2,11 @@ import React from 'react';
 export default function register() {
   return (
     <div class="col-3 l_btn2">
-        <button type="button" class="btn btn-outline-primary signupbtn" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+        {/* <button type="button" class="btn btn-outline-primary signupbtn" data-bs-toggle="modal" data-bs-target="#exampleModal1">
             Sign Up
-        </button>
-        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        </button> */}
+        <a href="/signup" class="btn btn-primary btn-sm" className="btn btn-primary signupbtn  loginbtn" role="button" aria-disabled="true">Sign Up</a>
+        {/* <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                 <div class="modal-header text-center row">
@@ -48,7 +49,7 @@ export default function register() {
                 </div>
                 </div>
             </div>
-        </div>
+        </div> */}
     </div>  
         
   );

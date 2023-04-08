@@ -1,11 +1,12 @@
 import React from 'react';
 export default function login_btn() {
   return (
-        <div class="col-3 l_btn1">        
-            <button type="button" class="btn btn-primary loginbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <div class="col-3">        
+            {/* <button type="button" class="btn btn-primary loginbtn" >
                 Log In
-            </button>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            </button> */}
+            <a href="/signin" class="btn btn-primary btn-sm" className="btn btn-primary  loginbtn" role="button" aria-disabled="true">Log In</a>
+            {/* <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                     <div class="modal-header row">
@@ -45,7 +46,7 @@ export default function login_btn() {
                     </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
   );
 }
