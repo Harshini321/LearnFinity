@@ -3,12 +3,14 @@ import { Form,Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import "./auth.css"
 function Login() {
-    const [username,setUsername]=useState('')
+    const [email_id,setEmailid]=useState('')
     const [password,setPassword]=useState('')
 
     const loginUser =() =>{
         console.log("Form Submitted")
-        setUsername('')
+        console.log(email_id)
+        console.log(password)
+        setEmailid('')
         setPassword('')
     }
   return (
@@ -24,10 +26,10 @@ function Login() {
                             <Form.Group className='my-3'>
                                 
                                 <Form.Control type="text"
-                                    placeholder="Your username"
-                                    value={username}
-                                    name="username"
-                                    onChange={(e)=>{setUsername(e.target.value)}}
+                                    placeholder="Email Id"
+                                    value={email_id}
+                                    name="email_id"
+                                    onChange={(e)=>{setEmailid(e.target.value)}}
                                 ></Form.Control>
                             </Form.Group>
                             
