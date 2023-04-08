@@ -3,6 +3,7 @@ import { Form,Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import {useForm} from 'react-hook-form'
 import "./admin.css"
+import {useForm} from 'react-hook-form'
 function Create_Ann() {
     const {register,handleSubmit,rest,formState:{errors}}=useForm()
   return (

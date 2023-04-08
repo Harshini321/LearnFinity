@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Nav from "../../components/navbar/navbar"
+import Nav from "../../components/navbar/admin_nav"
 import Footer from "../../components/footer/footer"
 import Profile_comp from '../../components/profile';
 import add_icon from "../../images/add_icon.png"

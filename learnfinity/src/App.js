@@ -1,6 +1,7 @@
 import './App.css';
 import {BrowserRouter as Router,Route,Routes} from "react-router-dom";
 import Landingpage from "./pages/landingpage/landingpage"
+import Readmore from "./pages/landingpage/readmore"
 import Dashboard from "./pages/home/home"
 
 import AllCourses from "./pages/allcourses/allcourses"
@@ -29,6 +30,13 @@ import Announcement_add from './pages/admin/announcement_add';
 import Create_Ann from './pages/admin/create_announcement';
 import Assignment_add from './pages/admin/assignment_add';
 import Dashboard_a from './pages/admin/dashboard_a';
+import Ass_grading from './pages/admin/ass_grading';
+import Course_tot from './pages/admin/course_tot';
+import Cut from './pages/admin/cut';
+import Minor from './pages/admin/minor';
+import Enrolled from './pages/admin/enrolled';
+import Major from './pages/admin/major';
+
 import Notes_add from './pages/admin/notes_add';
 import Trial from "./pages/trial/trial"
 function App() {
@@ -38,6 +46,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Landingpage/>}/> 
+          <Route path="/readmore" element={<Readmore/>}/> 
           <Route path="/dashboard" element={<Dashboard/>}/> 
           <Route path="/signup" element={<Register/>}/>
           <Route path="/signin" element={<Login/>}/>
@@ -66,10 +75,16 @@ function App() {
 
           <Route path="/admin" element={<Landingpage_a/>}/>
           <Route path="/admin/dashboard" element={<Dashboard_a/>}/>
+          <Route path="/admin/course_tot" element={<Course_tot/>}/>
+          <Route path="/admin/minor" element={<Minor/>}/>
+          <Route path="/admin/cut" element={<Cut/>}/>
+          <Route path="/admin/major" element={<Major/>}/>
+          <Route path="/admin/enrolled" element={<Enrolled/>}/>
           <Route path="/admin/assignment/add" element={<Assignment_add/>}/>
           <Route path="/admin/announcement/add" element={<Announcement_add/>}/>
           <Route path="/admin/announcement/add/new" element={<Create_Ann/>}/>
           <Route path="/admin/notes/add" element={<Notes_add/>}/>
+
         </Routes>
         
       </Router>
