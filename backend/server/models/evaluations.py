@@ -25,9 +25,9 @@ class Evaluation(db.Model):
 class Submission(db.Model):
     submission_id = db.Column(db.Integer, primary_key=True)
     submission_file = db.Column(db.Integer, db.ForeignKey("static_file.file_id"))
-    submission_evaluation = db.Column(db.Integer, db.ForeignKey("evaluation.evaluation_id"))
+    submission_evaluation = db.Column(db.Integer, db.ForeignKey("evaluation.evaluation_id", ondelete = 'CASCADE'))
     submission_author = db.Column(db.String(100), db.ForeignKey("user.email"))
     submission_date = db.Column(db.DateTime, nullable=False, default=datetime.now(tz('Asia/Kolkata')))
-    submission_score = db.Column(db.Float, default=0)
+    submission_score = db.Column(db.Float, default=None, nullable=True)
     def __repr__(self):
         return f"Submissions('{self.submission_file}', '{self.submission_evaluation}', '{self.submission_author}', '{self.submission_date}', '{self.submission_score}')"
