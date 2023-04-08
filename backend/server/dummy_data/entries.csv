@@ -1,4 +1,4 @@
-day, start_time, end_time, insti_id
+entry_day, entry_start_time, entry_end_time, entry_insti_id
 Tuesday, 08:00, 09:00, 2
 Wednesday, 08:00, 09:00, 2
 Friday, 08:00, 09:00, 2
