@@ -9,7 +9,7 @@ class User(db.Model):
     password = db.Column(db.String(100), nullable=False)
     is_admin  = db.Column(db.Boolean, default=False)
     is_staff = db.Column(db.Boolean, default=False)
-    profile_pic = db.Column(db.String(100), default="~/static/default_profile_pic.png")
+    profile_pic = db.Column(db.Integer, db.ForeignKey("static_file.file_id"), nullable=False)
     insti_id = db.Column(db.Integer, db.ForeignKey("institute.insti_id"), nullable=False)
     # posts = db.relationship('Post', backref='author', lazy=True)
     # comments = db.relationship('Comment', backref='author', lazy=True)

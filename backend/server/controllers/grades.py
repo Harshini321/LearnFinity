@@ -35,5 +35,5 @@ def createCutoffs(course_id):
         return grades.createCutoffs(course_id = course_id, grade_point = grade_point, lower_limit = lower_limit, upper_limit = upper_limit)
     elif request.method == 'GET':
         return grades.getCutoffs(course_id  = course_id)
-        
+
 

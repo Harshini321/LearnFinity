@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 from ..services import auth
 
 #Blueprint for the submodule
@@ -10,7 +10,9 @@ def signup():
 
 @auth_app.route('/signin', methods = ['POST'])
 def signin():
-    return auth.signin()
+    email = request.json['email_id']
+    password = request.json['password']
+    return auth.signin(email = email, password = password)
 
 @auth_app.route('/forgotpwd', methods = ['POST'])
 def forgotpwd():
