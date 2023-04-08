@@ -17,6 +17,10 @@ def getAllGrades():
         courselist.append(c['id'])
     return grades.getGrades(user = user, courses = courselist)
 
+@grade_app.route('/total/<course_id>', methods = ['GET'])
+def getTotal(course_id): #get grades for a particular course
+    return grades.getTotal(course = course_id)
+
 @grade_app.route('/grades/<course_id>', methods = ['GET'])
 def getGrades(course_id): #get grades for a particular course
     user = users.getUser()['email_id']
@@ -31,5 +35,5 @@ def createCutoffs(course_id):
         return grades.createCutoffs(course_id = course_id, grade_point = grade_point, lower_limit = lower_limit, upper_limit = upper_limit)
     elif request.method == 'GET':
         return grades.getCutoffs(course_id  = course_id)
-        
+
 
