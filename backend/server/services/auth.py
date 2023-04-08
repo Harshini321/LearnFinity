@@ -34,7 +34,7 @@ def signin(email, password):
         if Bcrypt.check_password_hash(userobj.password, password):
             access_token = jwt.encode(payload = {"email": email}, key = "eea5927809c165323a4212c404b9d9f2", algorithm = 'HS256')
             resp = Response(access_token, status = 200, content_type = "application/json")
-            resp.set_cookie("access_token", access_token, secure = True, http_only = True)
+            resp.set_cookie("access_token", access_token)
             return resp
         else:
             return {"message": "Invalid Credentials", "status_code": 401}
@@ -45,4 +45,4 @@ def forgotpassword():
 def logout():
     resp = Response("User logged out successfully", status = 200)
     resp.set_cookie("access_token", "", expires = 0)
-    return "Logout"
+    return resp
