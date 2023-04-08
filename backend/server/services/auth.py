@@ -4,11 +4,12 @@ Bcrypt = Bcrypt()
 from server.models import user
 from server.db import db
 from ..controllers import users
+
 import jwt
 
 def signup():
     req = request.get_json(force=True)
-    is_authorized = users.isAdmin()["is_Admin"]
+    is_authorized = users.checkAdmin()["is_Admin"]
     if(is_authorized == False):
         return {"message": "Unauthorized to add users", "status_code": 401}
     elif (is_authorized == None):
