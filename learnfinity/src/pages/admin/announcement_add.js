@@ -10,7 +10,7 @@ import pdf from "../../images/pdf.png"
 import Announcement from '../../components/announcement_card';
 export default function Announcement_add() {
   return (
-    <div className='container-fluid dashboard row  min-vh-100'>      
+    <div class='container-fluid dashboard row  min-vh-100'>      
         <Nav></Nav>
         <div class="col-10 dash">
             <div class="row">

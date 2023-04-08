@@ -11,13 +11,13 @@ import expand from "../../images/expand.png"
 import nt from "../../images/notes.png"
 export default function notes() {
   return (
-    <div className='container-fluid dashboard row  min-vh-100'>      
+    <div class='container-fluid dashboard row  min-vh-100'>      
         <Nav></Nav>
         <div class="col-10 dash">
         <div class="row">
                 <div class="col-11 pb-3 pt-1"><h2>Notes</h2></div>
                 <div class="col-1">
-                    <a type="button" className='navbar-brand nav-logo'   data-bs-toggle="modal" data-bs-target="#exampleModal1" >
+                    <a type="button" class='navbar-brand nav-logo'   data-bs-toggle="modal" data-bs-target="#exampleModal1" >
                         <img src={profile} alt='CAIC' width='40' height='40' />
                         <img src={expand} alt='CAIC' width='40' height='40' />
                     </a>
@@ -38,7 +38,7 @@ export default function notes() {
                                 <div class="text-center">
                                     <img src={pf} alt='CAIC' width='100' height='100' />
                                 </div>
-                            <form className='px-2'>
+                            <form class='px-2'>
                                 <div class="form-group email-form">
                                     <input type="email" class="form-control py-2" id="exampleInputEmail2" placeholder="Username"></input>
                                 </div>

@@ -22,7 +22,7 @@ export default function AllCourses_inst_year() {
         .catch(error => console.log(error))
     },[])
   return (
-    <div className='container-fluid dashboard row  min-vh-100'>      
+    <div class='container-fluid dashboard row  min-vh-100'>      
         <Nav></Nav>
         <div class="col-10 dash">
             

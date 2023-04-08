@@ -32,10 +32,10 @@ function Eval_card(props) {
                     {props.content}
                 </div>
                 <div class="col-6">
-                <p className='py-1 px-2'> Weightage : {props.weightage}</p>
+                <p class='py-1 px-2'> Weightage : {props.weightage}</p>
                 </div>
                 <div class="col-6">
-                <p className='py-1 px-2'> Total Marks : {props.total_marks}</p>
+                <p class='py-1 px-2'> Total Marks : {props.total_marks}</p>
                 </div>
             </div>
             <div class="row px-3">

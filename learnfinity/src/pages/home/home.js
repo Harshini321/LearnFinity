@@ -14,7 +14,7 @@ import ann from "../../images/ann.png"
 
 export default function home() {
   return (
-    <div className='container-fluid dashboard row  min-vh-100'>      
+    <div class='container-fluid dashboard row  min-vh-100'>      
         <Nav></Nav>
         <div class="col-10 dash">
             <div class="row">
@@ -25,7 +25,7 @@ export default function home() {
                 <div class="col-8">
                     <div class="card">
                         <div class="card-body ">
-                            <h4 className='px-3'>Overview</h4>
+                            <h4 class='px-3'>Overview</h4>
                             <div class="row px-3">
                                 <div class="col-4 py-3">
                                     <div class="row">
@@ -75,7 +75,7 @@ export default function home() {
                 <div class="col-4 ">
                     <div class="card">
                         <div class="card-body">
-                            <h4 className='px-3'>Deadlines</h4>
+                            <h4 class='px-3'>Deadlines</h4>
                             <div class="form-check dl py-2 ">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
                                 <label class="form-check-label" for="flexCheckDefault">
@@ -105,7 +105,7 @@ export default function home() {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 className='px-3'>Announcements</h4>
+                            <h4 class='px-3'>Announcements</h4>
                             <div class="card my-3">
                                 <div class="card-body">
                                     <div class="row px-3">
@@ -127,7 +127,7 @@ export default function home() {
                                     </div>
                                     <div class="row px-3">
                                         <div class="col-12">
-                                        <p className='py-2 px-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                        <p class='py-2 px-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                                         </div>
                                     </div>
 
@@ -155,7 +155,7 @@ export default function home() {
                                     </div>
                                     <div class="row px-3">
                                         <div class="col-12">
-                                        <p className='py-2 px-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                        <p class='py-2 px-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                                         </div>
                                     </div>
 
@@ -172,7 +172,7 @@ export default function home() {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 className='px-3'>Courses</h4> 
+                            <h4 class='px-3'>Courses</h4> 
                             <div class="row py-3">
                                 <div class="col-4 px-3">
                                     <CourseCard></CourseCard>

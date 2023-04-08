@@ -7,7 +7,7 @@ export default function footer() {
                 <div class="card-body">
                     <div class="row ftr  text-center" >
                         <div class="col-1">
-                            <a className='navbar-brand nav-logo' href='/'>
+                            <a class='navbar-brand nav-logo' href='/'>
                                 <img src={lg} alt='CAIC' width='100' height='60' />
                             </a>
                         </div>

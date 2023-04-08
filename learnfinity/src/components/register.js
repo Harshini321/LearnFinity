@@ -17,7 +17,7 @@ export default function register() {
                     </div>                                                                            
                 </div>
                 <div class="modal-body">
-                <form className='px-2'>
+                <form class='px-2'>
                     <div class="form-group email-form">
                         <input type="email" class="form-control py-2" id="exampleInputEmail2" placeholder="Username"></input>
                     </div>

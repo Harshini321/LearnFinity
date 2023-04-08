@@ -9,7 +9,7 @@ import grade_icon from "../../images/grade_icon.png"
 import pdf from "../../images/pdf.png"
 export default function Notes_add() {
   return (
-    <div className='container-fluid dashboard row  min-vh-100'>      
+    <div class='container-fluid dashboard row  min-vh-100'>      
         <Nav></Nav>
         <div class="col-10 dash">
             <div class="row">
@@ -22,7 +22,7 @@ export default function Notes_add() {
                     <div class="row text-center">
                         <div class="col-4"></div>
                         <div class="col-3">
-                            <h3 className='text-center my-2'>Add Notes</h3>
+                            <h3 class='text-center my-2'>Add Notes</h3>
                         </div>
                         <div class="col-1 mt-2">
                             <a type="button" href='/admin/notes/add' >
@@ -35,7 +35,7 @@ export default function Notes_add() {
             </div>
             <div class="card mt-3">
                 <div class="card-body">
-                <h5 className='mb-3'>Uploaded notes</h5>
+                <h5 class='mb-3'>Uploaded notes</h5>
                     <div class="card my-2">
                         <div class="card-body">
                             <div class="row">

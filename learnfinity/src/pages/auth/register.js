@@ -39,16 +39,16 @@ function Register() {
         // setConfirmPassword('')
     }
   return (
-    <div className='container-fluid'>
-        <div className='row'>
-            <div className='col-4'></div>
-            <div className='col-4 vertical-center'>
+    <div class='container-fluid'>
+        <div class='row'>
+            <div class='col-4'></div>
+            <div class='col-4 vertical-center'>
                 <div class="card">
                     <div class="card-body">
-                    <div className='form'>
-                        <h3 className='text-center'>Sign Up</h3>
+                    <div class='form'>
+                        <h3 class='text-center'>Sign Up</h3>
                         <form>
-                            <Form.Group className='my-3'>
+                            <Form.Group class='my-3'>
                                 
                                 <Form.Control type="text"
                                     placeholder="Username"
@@ -60,7 +60,7 @@ function Register() {
                                 {errors.username && <span style={{color:"red"}}>Username is required</span>}
                             </Form.Group>
                             
-                            <Form.Group className='my-3'>
+                            <Form.Group class='my-3'>
                                 
                                 <Form.Control type="email"
                                     placeholder="Email"
@@ -71,7 +71,7 @@ function Register() {
                                 ></Form.Control>
                                 {errors.email && <span style={{color:"red"}}>Email is required</span>}
                             </Form.Group>
-                            <Form.Group className='my-3'>
+                            <Form.Group class='my-3'>
                                 
                                 <Form.Control type="password"
                                     placeholder="Password"
@@ -82,7 +82,7 @@ function Register() {
                                 ></Form.Control>
                                 {errors.password && <span style={{color:"red"}}>Password is required</span>}
                             </Form.Group>
-                            <Form.Group className='my-3'>
+                            <Form.Group class='my-3'>
                                 
                                 <Form.Control type="password"
                                     placeholder="Confirm Password"
@@ -94,17 +94,17 @@ function Register() {
                                 {errors.confirmPassword && <span style={{color:"red"}}>confirmPassword is required</span>}
                             </Form.Group>
                             <Form.Group>
-                                <Button as="sub" variant="primary" onClick={handleSubmit(submitForm)} className="btn btn-primary sub-btn btn-block loginbtn">Register</Button>
+                                <Button as="sub" variant="primary" onClick={handleSubmit(submitForm)} class="btn btn-primary sub-btn btn-block loginbtn">Register</Button>
                             </Form.Group>
-                            <Form.Group className='mt-3 px-2'>
-                                <small>Already have an account? <Link to ='/signin' className='rm_ud px-3'>SignIn</Link></small>
+                            <Form.Group class='mt-3 px-2'>
+                                <small>Already have an account? <Link to ='/signin' class='rm_ud px-3'>SignIn</Link></small>
                             </Form.Group>
                         </form>
                     </div>
                     </div>
                 </div>
             </div>
-            <div className='col-4'></div>
+            <div class='col-4'></div>
         </div>
         
     </div>

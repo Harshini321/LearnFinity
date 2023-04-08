@@ -18,7 +18,7 @@ export default function login_btn() {
                         </div>                                                                            
                     </div>
                     <div class="modal-body">
-                    <form className='px-2'>
+                    <form class='px-2'>
                         <div class="form-group email-form">
                             
                             <input type="email" class="form-control py-2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>

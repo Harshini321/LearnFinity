@@ -22,7 +22,7 @@ export default function Announcement(props) {
             </div>
             <div class="row px-3">
                 <div class="col-12">
-                <p className='py-2 px-2'>{props.body}</p>
+                <p class='py-2 px-2'>{props.body}</p>
                 </div>
             </div>
         </div>

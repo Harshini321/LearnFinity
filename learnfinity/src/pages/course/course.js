@@ -12,13 +12,13 @@ import lg from '../../images/lf_logo.png';
 import notes from "../../images/notes.png"
 export default function Course() {
   return (
-    <div className='container-fluid dashboard row  min-vh-100'>      
+    <div class='container-fluid dashboard row  min-vh-100'>      
         <Nav></Nav>
         <div class="col-10 dash">
         <div class="row">
                 <div class="col-11 pb-3 pt-1"><h2>COP 290</h2></div>
                 <div class="col-1">
-                    <a type="button" className='navbar-brand nav-logo'   data-bs-toggle="modal" data-bs-target="#exampleModal1" >
+                    <a type="button" class='navbar-brand nav-logo'   data-bs-toggle="modal" data-bs-target="#exampleModal1" >
                         <img src={profile} alt='CAIC' width='40' height='40' />
                         <img src={expand} alt='CAIC' width='40' height='40' />
                     </a>
@@ -39,7 +39,7 @@ export default function Course() {
                                 <div class="text-center">
                                     <img src={pf} alt='CAIC' width='100' height='100' />
                                 </div>
-                            <form className='px-2'>
+                            <form class='px-2'>
                                 <div class="form-group email-form">
                                     <input type="email" class="form-control py-2" id="exampleInputEmail2" placeholder="Username"></input>
                                 </div>
@@ -70,7 +70,7 @@ export default function Course() {
                 <div class="col-6 ">
                     <div class="card">
                         <div class="card-body">
-                            <h4 className='px-3'>Assignments</h4>
+                            <h4 class='px-3'>Assignments</h4>
                             <div class="form-check dl2 py-2 ">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
                                 <label class="form-check-label" for="flexCheckDefault">
@@ -92,7 +92,7 @@ export default function Course() {
                 <div class="col-6 ">
                     <div class="card">
                         <div class="card-body">
-                            <h4 className='px-3'>Upcoming Events</h4>
+                            <h4 class='px-3'>Upcoming Events</h4>
                             <div class="form-check dl2 py-2 ">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
                                 <label class="form-check-label" for="flexCheckDefault">
@@ -118,7 +118,7 @@ export default function Course() {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 className='px-3'>Announcements</h4>
+                            <h4 class='px-3'>Announcements</h4>
                             <div class="card my-3">
                                 <div class="card-body">
                                     <div class="row px-3">
@@ -140,7 +140,7 @@ export default function Course() {
                                     </div>
                                     <div class="row px-3">
                                         <div class="col-12">
-                                        <p className='py-2 px-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                        <p class='py-2 px-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                                         </div>
                                     </div>
 
@@ -168,7 +168,7 @@ export default function Course() {
                                     </div>
                                     <div class="row px-3">
                                         <div class="col-12">
-                                        <p className='py-2 px-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                        <p class='py-2 px-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                                         </div>
                                     </div>
 
@@ -184,7 +184,7 @@ export default function Course() {
                 <div class="col-4 ">
                     <div class="card">
                         <div class="card-body">
-                            <h4 className='px-3'>Notes</h4>
+                            <h4 class='px-3'>Notes</h4>
                             <div class="row">
                                 <div class="col-2 icon-block1">
                                     <img src={notes} alt='CAIC' width='30' height='30' />
@@ -216,7 +216,7 @@ export default function Course() {
                 <div class="col-8">
                     <div class="card">
                         <div class="card-body">
-                            <h4 className='px-3'>Posts And Comments</h4>
+                            <h4 class='px-3'>Posts And Comments</h4>
                                 <div class="card my-3">
                                     <div class="card-body">
                                         This is some text within a card body.

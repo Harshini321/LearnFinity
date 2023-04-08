@@ -8,18 +8,18 @@ import expand from "../../images/expand2.png"
 export default function Landingpage_a() {
   return (
     <div >
-        <div className='container-fluid top-l'>
-            <div className='row'>
-                <div className='col-2 pt-3 mt-2'>
-                    <a className='navbar-brand nav-logo' href='/'>
+        <div class='container-fluid top-l'>
+            <div class='row'>
+                <div class='col-2 pt-3 mt-2'>
+                    <a class='navbar-brand nav-logo' href='/'>
                         <img src={logo} alt='CAIC' width='100' height='60' />
                     </a>
                 </div>
-                <div className='col-8 pt-3 mt-3'>
-                    <h2 className='head'>Welcome back , Abhilash !</h2>
+                <div class='col-8 pt-3 mt-3'>
+                    <h2 class='head'>Welcome back , Abhilash !</h2>
                 </div>
-                <div className='col-2 pt-3 mt-3'>
-                    <a type="button" className='navbar-brand nav-logo'   data-bs-toggle="modal" data-bs-target="#exampleModal1" >
+                <div class='col-2 pt-3 mt-3'>
+                    <a type="button" class='navbar-brand nav-logo'   data-bs-toggle="modal" data-bs-target="#exampleModal1" >
                         <img src={profile} alt='CAIC' width='35' height='35' />
                         <img src={expand} alt='CAIC' width='30' height='30' />
                     </a>
@@ -40,7 +40,7 @@ export default function Landingpage_a() {
                                 <div class="text-center">
                                     <img src={pf} alt='CAIC' width='100' height='100' />
                                 </div>
-                            <form className='px-2'>
+                            <form class='px-2'>
                                 <div class="form-group email-form">
                                     <input type="email" class="form-control py-2" id="exampleInputEmail2" placeholder="Username"></input>
                                 </div>
@@ -65,12 +65,12 @@ export default function Landingpage_a() {
                     </div>
                 </div>
             </div>
-            <div className='row mn-header'>
-                <h1 className='text-center mn-header-h1'>CHOOSE COURSE</h1>
+            <div class='row mn-header'>
+                <h1 class='text-center mn-header-h1'>CHOOSE COURSE</h1>
             </div>
 
-            <div className='row co-row'>
-                <div className='col-3 co-card'>
+            <div class='row co-row'>
+                <div class='col-3 co-card'>
                     <div class="card px-3 py-3 co-rad">
                         <div class="card-body">
                             <h4 class="card-title text-center">COL 216</h4>
@@ -80,7 +80,7 @@ export default function Landingpage_a() {
                         </div>
                     </div>
                 </div>
-                <div className='col-3 co-card'>
+                <div class='col-3 co-card'>
                     <div class="card px-3 py-3">
                         <div class="card-body">
                             <h4 class="card-title text-center">COL 216</h4>
@@ -90,7 +90,7 @@ export default function Landingpage_a() {
                         </div>
                     </div>
                 </div>
-                <div className='col-3 co-card'>
+                <div class='col-3 co-card'>
                     <div class="card px-3 py-3">
                         <div class="card-body">
                             <h4 class="card-title text-center">COL 216</h4>
@@ -100,7 +100,7 @@ export default function Landingpage_a() {
                         </div>
                     </div>
                 </div>
-                <div className='col-3 co-card'>
+                <div class='col-3 co-card'>
                     <div class="card px-3 py-3">
                         <div class="card-body">
                             <h4 class="card-title text-center">COL 216</h4>
@@ -112,7 +112,7 @@ export default function Landingpage_a() {
                 </div>               
             </div>
         </div>
-        <div className='container-fluid bottom-l'></div>
+        <div class='container-fluid bottom-l'></div>
     </div>
   );
 }

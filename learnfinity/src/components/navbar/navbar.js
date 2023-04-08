@@ -9,7 +9,7 @@ import sd from "../../images/schedule.png"
 export default function nav() {
   return (      
         <div class="col-2 side-nav ">
-            <a className='navbar-brand nav-logo' href='/'>
+            <a class='navbar-brand nav-logo' href='/'>
                 <img src={logo} alt='CAIC' width='100' height='60' />
             </a>
             <div class="row py-2">
