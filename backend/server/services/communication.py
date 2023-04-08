@@ -187,14 +187,25 @@ def postComment(email, parentpost_id, parentcomment_id, body, static_files):
         if(mapping is None):
             return {"message" : 'User not associated with the course. Unauthorised access', "status_code" : 401}
         else:
-            comment = communication.Comment(comment_post=parentpost_id, comment_parent=parentcomment_id, comment_content=body, comment_author=user.email)
-            db.session.add(comment)
-            db.session.commit()
-            for static_file in static_files:
-                comment_attachment = communication.Comment_Attachment(comment_attachment_comment=comment.comment_id, comment_attachment_file=static_file)
-                db.session.add(comment_attachment)
+            if(parentcomment_id is not None):
+                comment = communication.Comment(comment_post=parentpost_id, comment_parentComment=parentcomment_id, comment_content=body, comment_author=user.email)
+                db.session.add(comment)
                 db.session.commit()
-            return {"message" : 'Comment posted successfully', "status_code" : 200}
+                for static_file in static_files:
+                    comment_attachment = communication.Comment_Attachment(comment_attachment_comment=comment.comment_id, comment_attachment_file=static_file)
+                    db.session.add(comment_attachment)
+                    db.session.commit()
+                return {"message" : 'Comment posted successfully', "status_code" : 200}
+            else:
+                comment = communication.Comment(comment_post= parentpost_id, comment_parentPost=parentpost_id, comment_content=body, comment_author=user.email)
+                db.session.add(comment)
+                db.session.commit()
+                for static_file in static_files:
+                    comment_attachment = communication.Comment_Attachment(comment_attachment_comment=comment.comment_id, comment_attachment_file=static_file)
+                    db.session.add(comment_attachment)
+                    db.session.commit()
+                return {"message" : 'Comment posted successfully', "status_code" : 200}
+            
 
 def getCommentById(comment_id, email, is_Admin):
     comment = communication.Comment.query.filter_by(comment_id=comment_id).first()
@@ -244,4 +255,38 @@ def getCommentsByPostId(post_id):
                                     "can_comment": True})
         return json.dumps({"comments_list" : comments_list, "status_code" : 200})
 
+def getReplies(parentcomment_id):
+    comments = communication.Comment.query.filter_by(comment_parentComment=parentcomment_id).all()
+    comments_list = []
+    for comment in comments:
+        static_comments = communication.Comment_Attachment.query.filter_by(comment_attachment_comment=comment.comment_id).all()
+        static_files = []
+        for static_comment in static_comments:
+            static_files.append(static_comment.comment_attachment_file)
+        comments_list.append({ "id" : comment.comment_id,
+                                "post_id" : comment.comment_post,
+                                "parent_id" : comment.comment_parent, 
+                                "body" : comment.comment_content, 
+                                "static_files" : static_files, 
+                                "createdAt" : comment.comment_date,
+                                "author_id" : comment.comment_author, 
+                                "can_comment": True})
+    return json.dumps({"comments_list" : comments_list, "status_code" : 200})
 
+def deleteComment(comment_id, email, is_Prof):
+    comment = communication.Comment.query.filter_by(comment_id=comment_id).first()
+    if(comment is None):
+        return {"message" : 'Comment not found. Please enter a valid comment id', "status_code" : 404}
+    else:
+        post = communication.Post.query.filter_by(post_id=comment.comment_post).first()
+        course = courses.Course.query.filter_by(course_id=post.post_course).first()
+        mapping = courses.User_Course.query.filter_by(user_id=user.email, course_id=course.course_id).first()
+        if(mapping is None and is_Admin == False):
+            return {"message" : 'User not associated with the course. Unauthorised access', "status_code" : 401}
+        else:
+            if(comment.comment_author == email or is_Prof == True):
+                db.session.delete(comment)
+                db.session.commit()
+                return {"message" : 'Comment deleted successfully', "status_code" : 200}
+            else:
+                return {"message" : 'User not authorised to delete this comment', "status_code" : 401}

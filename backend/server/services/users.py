@@ -5,7 +5,7 @@ from flask import request
 def getUserbyPar(par):
     # Returns the user object by decrypting the access token. For the purpose of testing before login, we return the details of a particular user.
     return {
-            "email_id": "cs1210081@iitd.ac.in", 
+            "email_id": "cs1210081@iitb.ac.in", 
             "name": "Kavya Chopra", 
             "is_Admin": True, 
             "is_Prof": False, 
@@ -15,7 +15,7 @@ def getUserbyPar(par):
 
 def getUser(): # Returns the user object. For the purpose of testing before login, we return the details of a particular user.
     return {
-        "email_id": "cs1210081@iitd.ac.in", 
+        "email_id": "cs1210081@iitb.ac.in", 
             "name": "Kavya Chopra", 
             "is_Admin": True, 
             "is_Prof": False, 
@@ -60,3 +60,4 @@ def isStaff():
                 "status_code": 200, 
                 "is_staff": True
                 }
+    

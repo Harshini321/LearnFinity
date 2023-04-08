@@ -22,9 +22,11 @@ def postSlot(insti_id, slot_name):
 
 def deleteSlot(slot_id):
     obj = schedule.Slot.query.filter_by(slot_id = slot_id).first()
+    if(obj == None):
+        return json.dumps({"message": "Slot does not exist", "status_code": 400})
     db.session.delete(obj)
     db.session.commit()
-    return json.dumps({"id": obj.slot_id, "name": obj.slot_name, "insti_id": slot.insti_id, "status_code": 200, "message": "Slot deleted successfully"})
+    return json.dumps({"id": obj.slot_id, "name": obj.slot_name, "insti_id": obj.insti_id, "status_code": 200, "message": "Slot deleted successfully"})
 
 def getEntries(insti_id):
     results = schedule.Entry.query.filter_by(entry_insti_id = insti_id).all()
@@ -46,11 +48,20 @@ def postEntry(insti_id, entry_day, entry_start_time, entry_end_time):
 
 def deleteEntry(id):
     obj = schedule.Entry.query.filter_by(entry_id = id).first()
-    db.session.delete(obj)
-    db.session.commit()
-    return json.dumps({"id": obj.entry_id, "day": obj.entry_day, "start_time": str(obj.entry_start_time), "end_time": str(obj.entry_end_time), "insti_id": obj.entry_insti_id, "status_code": 200, "message": "Entry deleted successfully"})
+    if obj is None:
+        return json.dumps({"message": "Entry does not exist", "status_code": 400})
+    else:
+        db.session.delete(obj)
+        db.session.commit()
+        return json.dumps({"id": obj.entry_id, "day": obj.entry_day, "start_time": str(obj.entry_start_time), "end_time": str(obj.entry_end_time), "insti_id": obj.entry_insti_id, "status_code": 200, "message": "Entry deleted successfully"})
 
 def slotEntry(slot_id, entry_id):
+    obj = schedule.Slot.query.filter_by(slot_id = slot_id).first()
+    if obj is None:
+        return json.dumps({"message": "Slot does not exist", "status_code": 400})
+    obj = schedule.Entry.query.filter_by(entry_id = entry_id).first()
+    if obj is None:
+        return json.dumps({"message": "Entry does not exist", "status_code": 400})
     r = schedule.Slot_Entry.query.filter_by(slot = slot_id, entry = entry_id).first()
     if r:
         return json.dumps({"message": "Mapping already exists", "status_code": 400})
@@ -62,6 +73,8 @@ def slotEntry(slot_id, entry_id):
 
 def getSlotEntries(insti_id):
     slots = schedule.Slot.query.filter_by(insti_id = insti_id).all()
+    if (slots == []):
+        return json.dumps({"message": "No slots found", "status_code": 400})
     slot_entries = []
     for slot in slots:
         entries = schedule.Slot_Entry.query.filter_by(slot = slot.slot_id).all()

@@ -105,7 +105,7 @@ def getCommentById(comment_id): #Get comment by commentid
 
 @communication_app.route('/comment/<parentpost_id>', methods = ['GET'])
 def getComments(parentpost_id): #Get all the comments for a post
-    return communication.getComments(parentpost_id)
+    return communication.getCommentsByPostId(parentpost_id)
 
 @communication_app.route('/comment/<parentcomment_id>', methods = ['GET'])
 def getReplies(parentcomment_id): #Get all the replies for a comment
