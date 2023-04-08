@@ -1,7 +1,7 @@
 from ..models import communication, user, courses
 import json
 from server.db import db
-from flask import request
+from flask import request, json
 
 
 def getAnnouncements(email):
@@ -19,12 +19,13 @@ def getAnnouncements(email):
                     static_files.append(static_file.announcement_attachment_file)
                 announcements_list.append({" id" : announcement.announcement_id,
                                             "course_id" : announcement.announcement_course,
+                                            "course_name" : courses.Course.query.filter_by(course_id=announcement.announcement_course).first().course_name,
                                             "title" : announcement.announcement_title, 
                                             "body" : announcement.announcement_content, 
                                             "static_files" : static_files, 
                                             "createdAt" : announcement.announcement_date,
                                             "author_id" : announcement.announcement_author})
-    return {"announcement_list" : announcements_list, "status_code" : 200}
+    return json.dumps({"announcement_list" : announcements_list, "status_code" : 200})
 
 def postAnnouncement(email, course_id, title, body, static_files):
     user_instance = user.User.query.filter_by(email=email).first()

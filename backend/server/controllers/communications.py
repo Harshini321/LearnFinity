@@ -10,12 +10,13 @@ CORS(communication_app, supports_credentials=True, origins=['http://localhost:30
 def handleAnnouncements(): #tested
     user_obj = users.getUser()
     print(user_obj)
-    req = request.get_json(force=True)
+    
     if(user_obj['status_code'] != 200):
         return {"message" : 'User not authenticated to perform this action. Please login', "status_code" : 401}
     if request.method == 'GET': # Get all announcements for all the courses user is enrolled in
         return communication.getAnnouncements(user_obj['email_id'])
     else:
+        req = request.get_json(force=True)
         if(user_obj['is_Prof'] == True):
             return communication.postAnnouncement(user_obj['email_id'], req['course_id'], req['title'], req['body'], req['static_files']) #Create a new annoncement
         else:

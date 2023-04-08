@@ -14,15 +14,45 @@ import ann from "../../images/ann.png"
 import { useState, useEffect } from 'react';
 export default function Home() {
     const [courseList, setCourseList] = useState([]);
+    const [pastCourseList, setPastCourseList] = useState([]);
+    const [presentCourseList, setPresentCourseList] = useState([]);
+    const [announcementList, setAnnouncementList] = useState([]);
     useEffect(() =>
     {
         axios.get('http://localhost:5000/courses',  {withCredentials: true })
         .then(res => {
-            console.log(res)
+            console.log(res.data.courses)
             console.log("courselist")
-            setCourseList(res.data.courses_list)
+            setCourseList(res.data.courses)
         })
-    })
+    }, [])
+    useEffect(() =>
+    {
+        axios.get('http://localhost:5000/courses/past', {withCredentials: true})
+        .then(res => {
+            console.log(res.data.courses)
+            console.log("courselist")
+            setPastCourseList(res.data.courses)
+        })
+    }, [])
+    useEffect(() =>
+    {
+        axios.get('http://localhost:5000/courses/present', {withCredentials: true })
+        .then(res => {
+            console.log(res.data.courses)
+            console.log("courselist")
+            setPresentCourseList(res.data.courses)
+        })
+    }, [])
+    useEffect(() =>
+    {
+        axios.get('http://localhost:5000/announcement', {withCredentials: true })
+        .then(res => {
+            console.log(res.data.announcement_list)
+            console.log("courselist")
+            setAnnouncementList(res.data.announcement_list)
+        })
+    }, [])
     
   return (
     <div className='container-fluid dashboard row  min-vh-100'>      

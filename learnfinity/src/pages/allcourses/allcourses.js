@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './allcourses.css';
+import axios from 'axios'
 import logo from '../../images/course.png';
 import Nav from "../../components/navbar/navbar"
 import CourseCard from "../../components/course_card/coursecard"
@@ -38,6 +39,19 @@ export default function AllCourses() {
     //     .catch(error => console.log(error))
     // },[])
     
+
+    // const [courses,setCourses]=useState([])
+    
+    // useEffect(() =>
+    // {
+    //     axios.get('http://localhost:5000/courses',  {withCredentials: true })
+    //     .then(res => {
+    //         console.log(res.data.courses)
+    //         console.log("courselist")
+    //         setCourses(res.data.courses)
+    //     })
+    // }, [])
+
   return (
     <div class='container-fluid dashboard row  min-vh-100'>      
         <Nav></Nav>
