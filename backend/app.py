@@ -1,5 +1,5 @@
 from flask import Flask
-from server.controllers import base, auth, communications, static_file, users, institutes, course, schedule as sched, grades as grade, evaluations as evals
+from server.controllers import base, auth, communications, static_file, users_controller, institutes, course, schedule as sched, grades as grade, evaluations as evals
 from server.db import db
 from flask_migrate import Migrate
 
@@ -7,13 +7,13 @@ from flask_migrate import Migrate
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'SGVsbG9vb29vLi4uLklmIHUgYXJlIHRoaXMgdmVsbGEgcGxzIGRvIG15IGFzc2lnbm1lbnQgOik='
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:open@localhost/learnfinity'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password@localhost/learnfinity'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     #setting up blueprints
     app.register_blueprint(base.base_app)
     app.register_blueprint(auth.auth_app)
-    app.register_blueprint(users.user_app)
+    app.register_blueprint(users_controller.user_app)
     app.register_blueprint(communications.communication_app)
     app.register_blueprint(institutes.institute_app)
     app.register_blueprint(course.course_app)

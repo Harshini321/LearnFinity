@@ -2,12 +2,13 @@ from server.models import institute, user, courses, schedule
 from server.db import db
 from server.services import users
 from flask import request
+from server.controllers import users_controller
 
 def addCourse():    #Requires admin access to add a course
     req = request.get_json(force=True)
-    response = users.isAdmin()
+    response = users_controller.isAdmin()
     if(response['status_code'] == 200):
-        response_id = users.getUser()['insti_id']
+        response_id = users_controller.getUser()['insti_id']
         course = courses.Course.query.filter_by(course_name = req['name'], 
                                 course_description = req['description'], 
                                 course_insti_id= response_id, 
@@ -49,7 +50,7 @@ def addCourse():    #Requires admin access to add a course
 
 def deleteCourse(): #Requires admin access to delete a course
     req = request.get_json(force=True)
-    response = users.isAdmin()
+    response = users_controller.isAdmin()
     if(response['status_code'] == 200):
         course = courses.Course.query.filter_by(course_id = req['course_id']).first()
         db.session.delete(course)
@@ -82,7 +83,7 @@ def getCourse(id):  #Fetches a course's details using its id
         }
 
 def getAllCourses():    #Fetches all the courses in the database corresponding to the current institute. Admin access not required as of now, will see if we need to implement
-    response_id = users.getUser()["insti_id"]
+    response_id = users_controller.getUser()["insti_id"]
     courses_list_all = courses.Course.query.filter_by(course_insti_id = response_id).all()
     courses_list = []
     for course in courses_list_all:
@@ -105,7 +106,7 @@ def getAllCourses():    #Fetches all the courses in the database corresponding t
 def editCourse():  #Requires admin access to edit a course
     req = request.get_json(force=True)
     print(req)
-    response = users.isAdmin()
+    response = users_controller.isAdmin()
     if(response['status_code'] == 200):
         course = courses.Course.query.filter_by(course_id = req['id']).first()
         if('name' in req):
@@ -144,7 +145,7 @@ def editCourse():  #Requires admin access to edit a course
 
 def getUserCourse():
     req = request.get_json(force=True)
-    response = users.getUser()
+    response = users_controller.getUser()
     user_email = response['email_id']
     if(response['status_code'] == 200):
         if(response['is_Admin'] == False):
@@ -179,7 +180,7 @@ def getUserCourse():
             }
 def addUser():
     req = request.get_json(force=True)
-    response = users.isAdmin()
+    response = users_controller.isAdmin()
     response_staff = users.isStaff()
     if(response['status_code'] == 200 or response_staff['status_code'] == 200):
         obj = courses.User_Course.query.filter_by(user = req['email'], course = req['course_id']).first()
@@ -205,7 +206,7 @@ def addUser():
 
 def removeUser():
     req = request.get_json(force=True)
-    response = users.isAdmin()
+    response = users_controller.isAdmin()
     response_staff = users.isStaff()
     if(response['status_code'] == 200 or response_staff['status_code'] == 200):
         obj = courses.User_Course.query.filter_by(user = req['email'], course= req['course_id']).first()
@@ -228,7 +229,7 @@ def removeUser():
 def getYear(year):
     print(year)
     req = request.get_json(force=True)
-    response = users.getUser()
+    response = users_controller.getUser()
     if(response['status_code'] == 200):
         courses_list=[]
         courses_list_all = courses.Course.query.filter_by(course_insti_id = response['insti_id']).all()
@@ -257,7 +258,7 @@ def getYear(year):
 
 def getSemester(year, semester):
     req = request.get_json(force=True)
-    response = users.getUser()
+    response = users_controller.getUser()
     if(response['status_code'] == 200):
         courses_list=[]
         courses_list_all = courses.Course.query.filter_by(course_insti_id = response['insti_id']).all()
@@ -285,7 +286,7 @@ def getSemester(year, semester):
 
 def getSlot(year, semester, slot_id):
     req = request.get_json(force=True)
-    response = users.getUser()
+    response = users_controller.getUser()
     if(response['status_code'] == 200):
         courses_list=[]
         courses_list_all = courses.Course.query.filter_by(course_insti_id = response['insti_id']).all()
@@ -313,7 +314,7 @@ def getSlot(year, semester, slot_id):
 
 def getPastCourses(): #takes in current year, semester and user object as input. Returns a user's past courses
     req = request.get_json(force=True)
-    response = users.getUser()
+    response = users_controller.getUser()
     if(response['status_code'] == 200):
         courses_list=[]
         courses_list_all = courses.User_Course.query.filter_by(user = response['email_id']).all()
@@ -342,7 +343,7 @@ def getPastCourses(): #takes in current year, semester and user object as input.
 
 def getPresentCourses(): #takes in current year, semester and user object as input. Returns a user's present courses
     req = request.get_json(force=True)
-    response = users.getUser()
+    response = users_controller.getUser()
     if(response['status_code'] == 200):
         courses_list=[]
         courses_list_all = courses.User_Course.query.filter_by(user = response['email_id']).all()

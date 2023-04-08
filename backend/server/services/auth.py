@@ -3,7 +3,7 @@ from flask import request, Response
 Bcrypt = Bcrypt()
 from server.models import user
 from server.db import db
-from ..controllers import users
+from ..controllers import users_controller as users
 
 import jwt
 
@@ -27,14 +27,14 @@ def signup():
             return {"message": "User Created successfully", "status_code" : 201, "email": user1.email, "name": user1.name, "is_Admin": user1.is_admin, "is_Prof": user1.is_staff, "insti_id": user1.insti_id}      
 
 def signin(email, password):
-    if users.getUser():
+    if users.getUser()['status_code']==200:
         return {"message": "User is already logged in", "status_code": 200}
     else:
         userobj = user.User.query.filter_by(email = email).first()
         if Bcrypt.check_password_hash(userobj.password, password):
             access_token = jwt.encode(payload = {"email": email}, key = "eea5927809c165323a4212c404b9d9f2", algorithm = 'HS256')
             resp = Response(access_token, status = 200, content_type = "application/json")
-            resp.set_cookie("access_token", access_token, secure = True, http_only = True)
+            resp.set_cookie("access_token", access_token, secure = False, httponly = True)
             return resp
         else:
             return {"message": "Invalid Credentials", "status_code": 401}
@@ -44,5 +44,5 @@ def forgotpassword():
 
 def logout():
     resp = Response("User logged out successfully", status = 200)
-    resp.set_cookie("access_token", "", expires = 0)
-    return "Logout"
+    resp.set_cookie("access_token", "", expires = 0, secure = False, httponly = True)
+    return resp

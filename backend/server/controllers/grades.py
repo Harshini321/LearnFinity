@@ -2,7 +2,8 @@
 
 from flask import Blueprint, request
 from ..services import grades
-from ..controllers import users, course
+from ..controllers import users_controller as users
+from ..controllers import course
 
 
 #Blueprint for the submodule

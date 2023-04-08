@@ -1,5 +1,5 @@
 from ..models import evaluations
-from ..controllers import users
+from ..controllers import users_controller as users
 from server.db import db
 import json
 
