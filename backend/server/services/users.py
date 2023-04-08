@@ -22,7 +22,15 @@ def getUser(access_token): # Returns the user object. For the purpose of testing
                 "message": "User is not logged in",
                 "status_code": 234
         }
-
+    # return {
+    #         "email_id": "cs1210081@iitb.ac.in",
+    #         "name": "Kavya Chopra",
+    #         "insti_id": "1",
+    #         "is_Admin": False,
+    #         "is_Prof": False,
+    #         "status_code": 200,
+    #         "message": "User is logged in, details fetched successfully"
+    # }
 def getProfilePic(user):
     return  {
             "profile_pic": user.profile_pic, 

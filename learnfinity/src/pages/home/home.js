@@ -16,12 +16,14 @@ export default function Home() {
     const [courseList, setCourseList] = useState([]);
     useEffect(() =>
     {
-        axios.get('http://localhost:5000/courses')
+        axios.get('http://localhost:5000/courses',  {withCredentials: true })
         .then(res => {
             console.log(res)
+            console.log("courselist")
             setCourseList(res.data.courses_list)
         })
     })
+    
   return (
     <div className='container-fluid dashboard row  min-vh-100'>      
         <Nav></Nav>

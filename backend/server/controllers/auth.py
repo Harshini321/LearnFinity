@@ -3,7 +3,7 @@ from ..services import auth
 from flask_cors import CORS
 #Blueprint for the submodule
 auth_app = Blueprint('auth', __name__)
-CORS(auth_app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
+CORS(auth_app, supports_credentials=True, origins=['http://localhost:3000', 'http://localhost:5000', "http://127.0.0.1:5000", "http://127.0.0.1:3000",'http://localhost:3000/', 'http://localhost:5000/', "http://127.0.0.1:5000/", "http://127.0.0.1:3000/" ])
 @auth_app.route('/signup', methods=['POST'])
 def signup():
     return auth.signup()
@@ -12,13 +12,9 @@ def signup():
 def signin():
     print("Signing in...")
     print(request.headers)
-    print("json", request.json)
-    print("form", request.form)
-    print("files", request.files)
-    print("cookies", request.cookies)
-    print("args", request.args)
-    email = request.json['email_id']
-    password = request.json['password']
+    print(request.get_json(force=True))
+    email = request.get_json(force=True)['email_id']
+    password = request.get_json(force=True)['password']
     print(email, password)
     return auth.signin(email = email, password = password)
 

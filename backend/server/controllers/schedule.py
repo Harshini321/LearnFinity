@@ -4,7 +4,7 @@ from ..controllers import users_controller as users
 from flask_cors import CORS
 #Blueprint for the submodule
 schedule_app = Blueprint('schedule', __name__)
-CORS(schedule_app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
+CORS(schedule_app, supports_credentials=True, origins=['http://localhost:3000', 'http://localhost:5000', "http://127.0.0.1:5000", "http://127.0.0.1:3000",'http://localhost:3000/', 'http://localhost:5000/', "http://127.0.0.1:5000/", "http://127.0.0.1:3000/" ])
 # Routes for slot
 @schedule_app.route('/slots', methods=['GET', 'POST'])
 def slots():
