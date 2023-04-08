@@ -6,7 +6,7 @@ import Register_btn from '../../components/register'
 export default function landingpage() {
   return (
     <div className='container-fluid landing  min-vh-100'>
-        <div class="bg-image"></div>
+        <div class="bg-image" id='inf1'></div>
         <div class="bg-text1">
             <div class="row">
                 <div class="col-1 logo">

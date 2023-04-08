@@ -23,15 +23,18 @@
     text-align: center;
 }
 
+#inf1 {
+    margin-left: -200px;
+    opacity: 0.5;
+}
+
 .bg-image {
     /* The image used */
     background-image: url("../../images/inf_grey.png");
     /* Add the blur effect */
-    opacity: 1;
     /* Full height */
     height: 115%;
     background-position: left bottom;
-    margin-left: -200px;
     /*Positioning*/
     background-repeat: no-repeat;
     /*Prevent showing multiple background images*/

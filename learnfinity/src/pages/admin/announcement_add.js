@@ -12,7 +12,7 @@ export default function Announcement_add() {
   return (
     <div class='container-fluid dashboard row  min-vh-100'>      
         <Nav></Nav>
-        <div class="col-10 dash">
+        <div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-4 dash">
             <div class="row">
                 <div class="col-11 pb-3 pt-1"><h2>COP 290</h2></div>
                 <Profile_comp></Profile_comp>
@@ -27,8 +27,8 @@ export default function Announcement_add() {
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-3"></div>
-                        <div class="col-6">
+                       
+                        <div >
                             <form>
                                 <div class="form-group">
                                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Heading"></input>
@@ -43,7 +43,7 @@ export default function Announcement_add() {
                                 
                             </form>
                         </div>
-                        <div class="col-3"></div>
+                        
                     </div>
                 </div>
             </div>

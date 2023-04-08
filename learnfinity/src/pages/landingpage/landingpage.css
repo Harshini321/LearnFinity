@@ -34,13 +34,20 @@
     text-align: center;
 }
 
+#inf {
+    background-image: url("../../images/inf_grey.png");
+    /* Add the blur effect */
+    opacity: 0.3;
+    background-position: left bottom;
+}
+
 .bg-image {
     /* The image used */
     background-image: url("../../images/inf_grey.png");
     /* Add the blur effect */
-    opacity: 0.3;
     /* Full height */
     height: 115%;
+    opacity: 0.3;
     background-position: left bottom;
     /*Positioning*/
     background-repeat: no-repeat;
