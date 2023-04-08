@@ -3,12 +3,8 @@ from flask import request, Response
 Bcrypt = Bcrypt()
 from server.models import user
 from server.db import db
-<<<<<<< HEAD
 from ..controllers import users
 import jwt
-=======
-from server.services import users
->>>>>>> 29d6b33f78afebc0e157fcaf6985057b3e3fc153
 
 def signup():
     req = request.get_json(force=True)
