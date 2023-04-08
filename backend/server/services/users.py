@@ -49,15 +49,27 @@ def isAdmin():
                 "status_code": 200, 
                 "is_Admin": True
                 }
+    else:
+        return {
+                "message": "User is not admin", 
+                "status_code": 200, 
+                "is_Admin": False
+                }
 
 
 def isStaff():
     req = request.get_json(force=True)
     user = getUserbyPar(1)
-    if(user["is_staff"] == True):
+    if(user["is_Prof"] == True):
         return {
                 "message": "User is staff", 
                 "status_code": 200, 
-                "is_staff": True
+                "is_Staff": True
+                }
+    else:
+        return {
+                "message": "User is not staff", 
+                "status_code": 200, 
+                "is_Staff": False
                 }
     

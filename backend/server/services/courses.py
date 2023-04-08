@@ -2,7 +2,6 @@ from server.models import institute, user, courses, schedule
 from server.db import db
 from server.services import users
 from flask import request
-import requests
 
 def addCourse():    #Requires admin access to add a course
     req = request.get_json(force=True)
@@ -181,16 +180,22 @@ def getUserCourse():
 def addUser():
     req = request.get_json(force=True)
     response = users.isAdmin()
-    response_staff = requests.get(url = "http://localhost:5000/users/checkStaff", data = req)
+    response_staff = users.isStaff()
     if(response['status_code'] == 200 or response_staff['status_code'] == 200):
-        obj = courses.User_Course(user = req['email'], course = req['course_id'])
-        db.session.add(obj)
+        obj = courses.User_Course.query.filter_by(user = req['email'], course = req['course_id']).first()
+        if(obj is not None):
+            return {
+                "message": "User-Course Mapping already exists",
+                "status_code" : 409
+                }
+        init_obj = courses.User_Course(user = req['email'], course = req['course_id'])
+        db.session.add(init_obj)
         db.session.commit()
         return {
             "message": "User-Course Mapping Added successfully", 
             "status_code" : 201, 
-            "email": obj.user,
-            "course_id": obj.course
+            "email": init_obj.user,
+            "course_id": init_obj.course
             }
     else:
         return {
@@ -201,9 +206,14 @@ def addUser():
 def removeUser():
     req = request.get_json(force=True)
     response = users.isAdmin()
-    response_staff = requests.get(url = "http://localhost:5000/users/checkStaff", data = req)
+    response_staff = users.isStaff()
     if(response['status_code'] == 200 or response_staff['status_code'] == 200):
         obj = courses.User_Course.query.filter_by(user = req['email'], course= req['course_id']).first()
+        if(obj is None):
+            return {
+                "message": "User-Course Mapping does not exist for deletion",
+                "status_code" : 404
+                }
         db.session.delete(obj)
         db.session.commit()
         return {
@@ -309,7 +319,7 @@ def getPastCourses(): #takes in current year, semester and user object as input.
         courses_list_all = courses.User_Course.query.filter_by(user = response['email_id']).all()
         for course in courses_list_all:
             course_obj = courses.Course.query.filter_by(course_id = course.course).first()
-            if(course_obj.course_year < req['year'] or (course_obj.course_year == req['year'] and course_obj.course_semester < req['semester'])):
+            if(int(course_obj.course_year) < int(req['year']) or (str(course_obj.course_year) == str(req['year']) and int(course_obj.course_semester) < int(req['semester']))):
                 courses_list.append({
                         "name": course_obj.course_name, 
                         "year": course_obj.course_year, 
@@ -338,7 +348,7 @@ def getPresentCourses(): #takes in current year, semester and user object as inp
         courses_list_all = courses.User_Course.query.filter_by(user = response['email_id']).all()
         for course in courses_list_all:
             course_obj = courses.Course.query.filter_by(course_id = course.course).first()
-            if(course_obj.course_year == req['year'] and course_obj.course_semester == req['semester']):
+            if(str(course_obj.course_year) == str(req['year']) and str(course_obj.course_semester) == str(req['semester'])):
                 courses_list.append({
                         "name": course_obj.course_name, 
                         "year": course_obj.course_year, 
@@ -357,9 +367,9 @@ def getPresentCourses(): #takes in current year, semester and user object as inp
 def getCourseUsers(): #Fetches all users corresponding to a course
     req = request.get_json(force=True)
     users_list=[]
-    users = courses.User_Course.query.filter_by(course = req['course_id']).all()
-    for user in users:
-        user_obj = users.User.query.filter_by(email = user.user).first()
+    users_list_all = courses.User_Course.query.filter_by(course = req['course_id']).all()
+    for mapping in users_list_all:
+        user_obj = user.User.query.filter_by(email = mapping.user).first()
         users_list.append({
                     "name": user_obj.name, 
                     "email": user_obj.email, 

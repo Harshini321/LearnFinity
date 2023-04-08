@@ -13,7 +13,7 @@ def postCourse():   #tested, error handled
     return courses.addCourse()
 
 @course_app.route('/courses', methods = ['GET']) #For getting all courses of a particular user (parameter)
-def getCourses():  
+def getCourses():  #tested
     return courses.getUserCourse()
 
 @course_app.route('/courses/delete', methods = ['POST']) #For deleting a course
@@ -29,11 +29,11 @@ def editCourse(): #tested
     return courses.editCourse()
  
 @course_app.route('/courses/adduser', methods=['POST']) #For adding a user to a course
-def addUser():
+def addUser(): #tested
     return courses.addUser()
 
 @course_app.route('/courses/removeuser', methods=['POST']) #For removing a user from a course
-def removeUser():
+def removeUser(): #tested
     return courses.removeUser()
 
 @course_app.route('/courses/<year>', methods=['GET']) #For getting all courses of a particular year in a particular institute
@@ -49,13 +49,13 @@ def getSlot(year, semester, slot_id): #tested
     return courses.getSlot(year, semester, slot_id)
 
 @course_app.route('/courses/past', methods=['GET']) #For getting all past courses of a particular user
-def getPastCourses():
+def getPastCourses(): #tested
     return courses.getPastCourses()
 
 @course_app.route('/courses/present', methods=['GET']) #For getting all present courses of a particular user
-def getPresentCourses():
+def getPresentCourses(): #tested
     return courses.getPresentCourses()
 
 @course_app.route('/courses/getuser', methods=['GET']) #For getting all users of a particular course
-def getCourseUsers():
+def getCourseUsers(): #tested
     return courses.getCourseUsers()
