@@ -1,10 +1,10 @@
 from flask import Blueprint, request
 from ..services import communication
 from ..controllers import users_controller as users
-
+from flask_cors import CORS
 #Blueprint for the submodule
 communication_app = Blueprint('communication', __name__)
-
+CORS(communication_app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 #Endpoints for announcements
 @communication_app.route('/announcement', methods=['GET', 'POST']) #Only Prof can post announcements for the courses they're taking (add a check for that), students can only get announcements
 def handleAnnouncements(): #tested

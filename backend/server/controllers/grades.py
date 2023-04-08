@@ -4,11 +4,11 @@ from flask import Blueprint, request
 from ..services import grades
 from ..controllers import users_controller as users
 from ..controllers import course
-
+from flask_cors import CORS
 
 #Blueprint for the submodule
 grade_app = Blueprint('grade', __name__)
-
+CORS(grade_app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 @grade_app.route('/grades', methods = ['GET']) #get grades for all the courses the user has
 def getAllGrades():
     user = users.getUser()['email_id']

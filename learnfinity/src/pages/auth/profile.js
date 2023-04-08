@@ -12,21 +12,21 @@ function Login() {
         setPassword('')
     }
   return (
-    <div class='container-fluid'>
-        <div class='row'>
-            <div class='col-4'></div>
-            <div class='col-4 vertical-center'>
+    <div className='container-fluid'>
+        <div className='row'>
+            <div className='col-4'></div>
+            <div className='col-4 vertical-center'>
                 <div class="card">
                     <div class="card-body">
-                        <div class='form'>
-                        <h3 class='text-center'>Profile</h3>
+                        <div className='form'>
+                        <h3 className='text-center'>Profile</h3>
                         
                     </div>
                     </div>
                 </div>
                 
             </div>
-            <div class='col-4'></div>
+            <div className='col-4'></div>
         </div>
     </div>
   )

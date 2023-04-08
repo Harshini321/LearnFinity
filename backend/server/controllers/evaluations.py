@@ -3,10 +3,10 @@
 from flask import Blueprint, request
 from ..services import evaluations
 from ..controllers import users_controller, course
-
+from flask_cors import CORS
 #Blueprint for the submodule
 eval_app = Blueprint('eval', __name__)
-
+CORS(eval_app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 # Evaluation endpoints
 
 @eval_app.route('/evaluation/', methods = ['GET', 'POST'])

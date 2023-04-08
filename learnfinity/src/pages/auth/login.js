@@ -1,17 +1,35 @@
 import React,{useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Form,Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import "./auth.css"
+import axios from 'axios'
 function Login() {
     const [email_id,setEmailid]=useState('')
     const [password,setPassword]=useState('')
-
+    const navigate = useNavigate()
     const loginUser =() =>{
         console.log("Form Submitted")
         console.log(email_id)
         console.log(password)
         setEmailid('')
         setPassword('')
+        axios.post('http://localhost:5000/signin', {
+            email_id :email_id,
+            password: password
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then((response)=>{
+            console.log(response)
+            alert("Login Successful")
+            navigate("/dashboard")
+        }).catch((err)=>{
+            console.log(err)
+            alert("Login Failed")
+        }
+        )
     }
   return (
     <div className='container-fluid'>

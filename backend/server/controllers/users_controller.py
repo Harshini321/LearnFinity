@@ -1,13 +1,13 @@
 from flask import Blueprint, request
 from ..services import users
-
+from flask_cors import CORS
 #Blueprint for the submodule
 user_app = Blueprint('user', __name__)
-
+CORS(user_app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 @user_app.route('/user', methods=['GET'])
 def getUser():
-    print(request)
-    print(request.cookies)
+    print("req", request)
+    print("cook", request.cookies)
     access_token = request.cookies.get('access_token')
     if access_token:
         return users.getUser(access_token)

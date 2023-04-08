@@ -144,11 +144,14 @@ def editCourse():  #Requires admin access to edit a course
             }
 
 def getUserCourse():
+    print("here2")
+    print("args, ", request.args)
     req = request.get_json(force=True)
     response = users_controller.getUser()
     user_email = response['email_id']
     if(response['status_code'] == 200):
         if(response['is_Admin'] == False):
+            print("hereim")
             mappings = courses.User_Course.query.filter_by(user = user_email).all()
             courses_list = []
             for mappping in mappings:
@@ -176,7 +179,7 @@ def getUserCourse():
     else:
         return {
             "message": "User not found",
-            "status_code" : 404
+            "status_code" : 232
             }
 def addUser():
     req = request.get_json(force=True)

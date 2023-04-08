@@ -20,7 +20,7 @@ def getUser(access_token): # Returns the user object. For the purpose of testing
     except:
         return {
                 "message": "User is not logged in",
-                "status_code": 401
+                "status_code": 234
         }
 
 def getProfilePic(user):

@@ -1,9 +1,10 @@
 from flask import Blueprint
 from ..services import courses
 from ..services import users
+from flask_cors import CORS
 #Blueprint for the submodule
 course_app = Blueprint('course', __name__)
-
+CORS(course_app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 @course_app.route('/courses/id/<id>', methods=['GET']) #For getting a course by id
 def getCoursebyId(id): #tested, error handled
     return courses.getCourse(id)

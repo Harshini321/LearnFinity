@@ -1,9 +1,9 @@
 from flask import Blueprint, request
 from ..services import static_file
-
+from flask_cors import CORS
 #Blueprint for the submodule
 static_app = Blueprint('static_files', __name__)
-
+CORS(static_app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 @static_app.route('/static/<id>', methods=['GET'])
 def getStatic(id):
     return static_file.getStatic(id)

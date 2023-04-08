@@ -2,13 +2,18 @@ from flask import Flask
 from server.controllers import base, auth, communications, static_file, users_controller, institutes, course, schedule as sched, grades as grade, evaluations as evals
 from server.db import db
 from flask_migrate import Migrate
+from flask_cors import CORS
 
 #basic setup
 def create_app():
     app = Flask(__name__)
+    CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)    
     app.config['SECRET_KEY'] = 'SGVsbG9vb29vLi4uLklmIHUgYXJlIHRoaXMgdmVsbGEgcGxzIGRvIG15IGFzc2lnbm1lbnQgOik='
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password@localhost/learnfinity'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['CORS_HEADERS'] = 'Content-Type'
+    app.config['CORS_RESOURCES'] = {r"/*": {"origins": "*"}}
+
 
     #setting up blueprints
     app.register_blueprint(base.base_app)
