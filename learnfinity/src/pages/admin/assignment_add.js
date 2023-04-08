@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Nav from "../../components/navbar/navbar"
+import Nav from "../../components/navbar/admin_nav"
 import Footer from "../../components/footer/footer"
 import profile from "../../images/default.png"
 import pf from "../../images/prof_def.png"

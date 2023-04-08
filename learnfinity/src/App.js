@@ -28,6 +28,12 @@ import Landingpage_a from './pages/admin/landingpage_a';
 import Announcement_add from './pages/admin/announcement_add';
 import Assignment_add from './pages/admin/assignment_add';
 import Dashboard_a from './pages/admin/dashboard_a';
+import Ass_grading from './pages/admin/ass_grading';
+import Course_tot from './pages/admin/course_tot';
+import Cut from './pages/admin/cut';
+import Minor from './pages/admin/minor';
+import Enrolled from './pages/admin/enrolled';
+import Major from './pages/admin/major';
 import Trial from "./pages/trial/trial"
 function App() {
   return (
@@ -64,7 +70,13 @@ function App() {
 
           <Route path="/admin" element={<Landingpage_a/>}/>
           <Route path="/admin/dashboard" element={<Dashboard_a/>}/>
+          <Route path="/admin/course_tot" element={<Course_tot/>}/>
+          <Route path="/admin/minor" element={<Minor/>}/>
+          <Route path="/admin/cut" element={<Cut/>}/>
+          <Route path="/admin/major" element={<Major/>}/>
+          <Route path="/admin/enrolled" element={<Enrolled/>}/>
           <Route path="/admin/assignment/add" element={<Assignment_add/>}/>
+          <Route path="/admin/assignment/grade" element={<Ass_grading/>}/>
         </Routes>
         
       </Router>
