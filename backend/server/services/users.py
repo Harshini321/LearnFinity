@@ -35,18 +35,31 @@ def changePic(email_id, file):
     return {"email_id": user_obj.email, "insti_id": user_obj.insti_id, "is_Admin": user_obj.is_admin, "is_Prof": user_obj.is_staff, "profile_pic": user_obj.profile_pic, "status_code": 200, "message": "Profile picture changed successfully"}
 
 def isAdmin(user):
-    if(user["is_admin"] == True):
+    if(user["is_Admin"] == True):
         return {
                 "message": "User is admin", 
                 "status_code": 200, 
                 "is_Admin": True
                 }
+    else:
+        return {
+                "message": "User is not admin", 
+                "status_code": 200, 
+                "is_Admin": False
+                }
 
 
 def isStaff(user):
-    if(user["is_staff"] == True):
+    if(user["is_Prof"] == True):
         return {
                 "message": "User is staff", 
                 "status_code": 200, 
-                "is_staff": True
+                "is_Staff": True
                 }
+    else:
+        return {
+                "message": "User is not staff", 
+                "status_code": 200, 
+                "is_Staff": False
+                }
+    
