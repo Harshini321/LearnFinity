@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from ..services import schedule
-from ..controllers import users
+from ..controllers import users_controller as users
 
 #Blueprint for the submodule
 schedule_app = Blueprint('schedule', __name__)

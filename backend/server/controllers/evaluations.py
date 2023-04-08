@@ -2,7 +2,7 @@
 
 from flask import Blueprint, request
 from ..services import evaluations
-from ..controllers import users, course
+from ..controllers import users_controller, course
 
 #Blueprint for the submodule
 eval_app = Blueprint('eval', __name__)

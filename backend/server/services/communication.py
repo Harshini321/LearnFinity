@@ -3,6 +3,7 @@ import json
 from server.db import db
 from flask import request
 
+
 def getAnnouncements(email):
     user_instance = user.User.query.filter_by(email=email).first()
     if user_instance is None:

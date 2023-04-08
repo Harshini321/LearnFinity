@@ -3,7 +3,7 @@ from flask import request, Response
 Bcrypt = Bcrypt()
 from server.models import user
 from server.db import db
-from ..controllers import users
+from ..controllers import users_controller as users
 
 import jwt
 
@@ -27,7 +27,7 @@ def signup():
             return {"message": "User Created successfully", "status_code" : 201, "email": user1.email, "name": user1.name, "is_Admin": user1.is_admin, "is_Prof": user1.is_staff, "insti_id": user1.insti_id}      
 
 def signin(email, password):
-    if users.getUser():
+    if users.getUser()['status_code']==200:
         return {"message": "User is already logged in", "status_code": 200}
     else:
         userobj = user.User.query.filter_by(email = email).first()
