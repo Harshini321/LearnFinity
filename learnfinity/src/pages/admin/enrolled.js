@@ -15,8 +15,19 @@ import quiz from "../../images/quiz.png"
 import lab from "../../images/lab.png"
 import nf from "../../images/notification.png"
 import ann from "../../images/ann.png"
-
+import axios from 'axios';
+import {useState, useEffect} from 'react';
 export default function Enrolled() {
+  const [stdlist,setStdlist] = useState([]);
+  useEffect(()=>
+    {
+        axios.get('http://localhost:5000/cources/getuser', {withCredentials :  true })
+        .then(res => {
+            console.log(res.data.courses)
+            console.log("stdlist")
+            setStdlist(res.data.courses)
+        })
+    },[])
   return (
     <div className='container-fluid dashboard row min-vh-100'>      
         <Nav></Nav>

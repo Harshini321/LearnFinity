@@ -8,21 +8,45 @@ import pf from "../../images/prof_def.png"
 import expand from "../../images/expand.png"
 import ann from "../../images/ann.png"
 import notes from "../../images/notes.png"
+import Announcement from '../../components/announcement_card';
+import Evaluation_card from '../../components/evaluation_card';
+import axios from 'axios';
 export default function Course_id() {
     const parms=useParams()
     const course_id=parms.course_id
     const [ans,setAns]=useState([])
-    useEffect(()=>{
-        fetch("/course/${course_id}",{
-            'methods':'GET',
-            headers:{
-                'Content-Type':'application/json'
-            }
+    const [announcementList, setAnnouncementList] = useState([]);
+    const [evaluationList, setEvaluationList] = useState([]);
+    const [postList, setPostList] = useState([]);
+
+    useEffect(() =>
+    {
+        axios.get(`http://localhost:5000/announcement/${course_id}`, {withCredentials: true })
+        .then(res => {
+            console.log(res.data.announcement_list)
+            console.log("courselist")
+            setAnnouncementList(res.data.announcement_list)
         })
-        .then(resp => resp.json())
-        .then(resp => setAns(resp))
-        .catch(error => console.log(error))
-    },[])
+    }, [])
+
+    useEffect(() =>
+    {
+        axios.get(`http://localhost:5000/evaluation/${course_id}`, {withCredentials: true })
+        .then(res => {
+            console.log(res.data.evaluation_list)
+            setEvaluationList(res.data.evaluation_list)
+        })
+    }, [])
+
+    useEffect(() =>
+    {
+        axios.get(`http://localhost:5000/post/${course_id}`, {withCredentials: true })
+        .then(res => {
+            console.log(res.data.post_list)
+            setEvaluationList(res.data.post_list)
+        })
+    }, [])
+
   return (
     <div class='container-fluid dashboard row  min-vh-100'>      
             <Nav></Nav>
@@ -82,8 +106,8 @@ export default function Course_id() {
                 <div class="col-6 ">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class='px-3'>Assignments</h4>
-                            <div class="form-check dl2 py-2 ">
+                            <h4 class='px-3'>Evaluation</h4>
+                            <div class="form-check dl2 py-2">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
                                 <label class="form-check-label" for="flexCheckDefault">
                                     COP 290-lab3 Weightage 50%
@@ -97,6 +121,20 @@ export default function Course_id() {
                                 </label><br></br>
                                 <small>15 March</small>
                             </div>
+                            {evaluationList.map(evl=>{
+                                return(
+                                    <Evaluation_card
+                                        id={evl.id}
+                                        title={evl.title}
+                                        staticfile_id={evl.staticfile_id}
+                                        deadline={evl.deadline}
+                                        course_id={evl.course_id}
+                                        weightage={evl.weightage}
+                                        total_marks={evl.total_marks}
+                                        submission_allowed={evl.submission_allowed}
+                                    ></Evaluation_card>
+                                )
+                            })}
                             
                         </div>
                     </div>
@@ -131,6 +169,19 @@ export default function Course_id() {
                     <div class="card">
                         <div class="card-body">
                             <h4 class='px-3'>Announcements</h4>
+                            {announcementList.map(an=>{
+                                return(
+                                    <Announcement 
+                                        id={an.id}
+                                        staticfile_id={an.staticfile_id}
+                                        author_id={an.author_id}
+                                        title={an.title}
+                                        course_id={an.course_id}
+                                        createdAt={an.createdAt}
+                                        body={an.body}
+                                    ></Announcement>
+                                )
+                            })} 
                             <div class="card my-3">
                                 <div class="card-body">
                                     <div class="row px-3">
@@ -243,10 +294,8 @@ export default function Course_id() {
                         </div>
                     </div>
                 </div>
-            </div>
-            
+            </div>          
            <Footer></Footer>
-
         </div>
     </div>
   );
