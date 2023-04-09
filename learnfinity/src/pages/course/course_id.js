@@ -1,4 +1,5 @@
 import React , { useState, useEffect }  from 'react';
+import { Link } from 'react-router-dom';
 import './course.css';
 import { useParams } from 'react-router-dom';
 import Nav from "../../components/navbar/navbar"
@@ -106,7 +107,8 @@ export default function Course_id() {
                 <div class="col-6 ">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class='px-3'>Evaluation</h4>
+                            <h4 class='px-3'><a href={'/evaluation/'+course_id} class="link-dark">Evaluation</a></h4> 
+                            {/* <h4 class='px-3'><Link to={'/evaluation' + course_id} />Evaluation</h4>                            */}
                             <div class="form-check dl2 py-2">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
                                 <label class="form-check-label" for="flexCheckDefault">
@@ -168,7 +170,7 @@ export default function Course_id() {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class='px-3'>Announcements</h4>
+                            <h4 class='px-3'><a href={'/announcement/'+course_id} class="link-dark">Announcements</a></h4>
                             {announcementList.map(an=>{
                                 return(
                                     <Announcement 
