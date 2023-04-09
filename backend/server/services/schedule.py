@@ -84,3 +84,9 @@ def getSlotEntries(insti_id):
             entries_list.append({"id": obj.entry_id, "day": obj.entry_day, "start_time": str(obj.entry_start_time), "end_time": str(obj.entry_end_time), "insti_id": obj.entry_insti_id})
         slot_entries.append({"slot_id": slot.slot_id, "slot_name": slot.slot_name, "entries": entries_list})
     return {"slot_entries": slot_entries, "status_code": 200, "message": "Slot Entries fetched successfully"}
+
+def getSlotbyId(id):
+    slot = schedule.Slot.query.filter_by(slot_id = id).first()
+    return {
+        "name" : slot.slot_name
+    }

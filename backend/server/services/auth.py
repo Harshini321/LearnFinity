@@ -33,7 +33,7 @@ def signin(email, password):
     if Bcrypt.check_password_hash(userobj.password, password):
         access_token = jwt.encode(payload = {"email": email}, key = "eea5927809c165323a4212c404b9d9f2", algorithm = 'HS256')
         print(email, access_token)
-        return json.dumps({"message": "User logged in successfully", "status_code": 200, "access_token": access_token, "email": enail})
+        return json.dumps({"message": "User logged in successfully", "status_code": 200, "access_token": access_token, "email": email})
     else:
         return json.dumps({"message": "Invalid Credentials", "status_code": 401})
 
