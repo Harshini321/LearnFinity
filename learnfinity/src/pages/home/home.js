@@ -7,6 +7,7 @@ import Profile_comp from '../../components/profile';
 import CourseCard from "../../components/course_card/coursecard"
 import axios from 'axios';
 import dl from "../../images/deadline.png"
+import Announcement from "../../components/announcement_card"
 import quiz from "../../images/quiz.png"
 import lab from "../../images/lab.png"
 import nf from "../../images/notification.png"
@@ -216,7 +217,7 @@ export default function Home() {
                                         type={course.type}
                                         insti_id={course.insti_id}
                                         slot_id={course.slot_id}
-                                        onDetail={detailCourse}
+                                        onDetail={course.detailCourse}
                                     ></CourseCard>
                                 })}
                                 {/* <div class="col-4 px-3"> */}
