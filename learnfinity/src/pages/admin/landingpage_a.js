@@ -4,8 +4,20 @@ import logo from '../../images/lf_logo.png';
 import profile from "../../images/default2.png"
 import pf from "../../images/prof_def.png"
 import expand from "../../images/expand2.png"
-
+import axios from 'axios';
+import {useState, useEffect} from 'react';
 export default function Landingpage_a() {
+    const [courseList, setCourseList] = useState([]);
+    useEffect(() =>
+    {
+        axios.get('http://localhost:5000/courses', {withCredentials: true})
+        .then(res => {
+            console.log(res.data.courses)
+            console.log("courselist")
+            setCourseList(res.data.courses)
+
+        })
+    },[])
   return (
     <div >
         <div class='container-fluid top-l'>

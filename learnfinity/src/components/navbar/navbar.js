@@ -8,7 +8,7 @@ import ann from "../../images/ann.png"
 import sd from "../../images/schedule.png"
 export default function nav() {
   return (      
-        <div class="col-2 side-nav ">
+        <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-8 side-nav ">
             <a className='navbar-brand nav-logo' href='/'>
                 <img src={logo} alt='CAIC' width='100' height='60' />
             </a>
