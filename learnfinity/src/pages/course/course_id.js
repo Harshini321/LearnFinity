@@ -1,4 +1,5 @@
 import React , { useState, useEffect }  from 'react';
+import { Link } from 'react-router-dom';
 import './course.css';
 import { useParams } from 'react-router-dom';
 import Nav from "../../components/navbar/navbar"
@@ -138,7 +139,7 @@ export default function Course_id() {
                 <div class="col-6 ">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class='px-3'>Evaluations</h4>
+                            <h4 class='px-3'><a href={'/evaluation/'+course_id} class="link-dark">Evaluation</a></h4> 
                             {evaluationList.map(evl=>{
                                 return(
                                     <Evaluation_card
@@ -187,7 +188,7 @@ export default function Course_id() {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class='px-3'>Announcements</h4>
+                            <h4 class='px-3'><a href={'/announcement/'+course_id} class="link-dark">Announcements</a></h4>
                             {announcementList.map(an=>{
                                 return(
                                     <Announcement 
