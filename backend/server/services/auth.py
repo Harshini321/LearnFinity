@@ -27,16 +27,15 @@ def signup():
             return {"message": "User Created successfully", "status_code" : 201, "email": user1.email, "name": user1.name, "is_Admin": user1.is_admin, "is_Prof": user1.is_staff, "insti_id": user1.insti_id}      
 
 def signin(email, password):
-    if users.getUser()['status_code']==200:
-        return {"message": "User is already logged in", "status_code": 200}
+    userobj = user.User.query.filter_by(email = email).first()
+    if userobj is None:
+        return json.dumps({"message": "User not found", "status_code":404})
+    if Bcrypt.check_password_hash(userobj.password, password):
+        access_token = jwt.encode(payload = {"email": email}, key = "eea5927809c165323a4212c404b9d9f2", algorithm = 'HS256')
+        print(email, access_token)
+        return json.dumps({"message": "User logged in successfully", "status_code": 200, "access_token": access_token, "email": email})
     else:
-        userobj = user.User.query.filter_by(email = email).first()
-        if Bcrypt.check_password_hash(userobj.password, password):
-            access_token = jwt.encode(payload = {"email": email}, key = "eea5927809c165323a4212c404b9d9f2", algorithm = 'HS256')
-            print(access_token)
-            return json.dumps({"message": "User logged in successfully", "status_code": 200, "access_token": access_token})
-        else:
-            return json.dumps({"message": "Invalid Credentials", "status_code": 401})
+        return json.dumps({"message": "Invalid Credentials", "status_code": 401})
 
 def forgotpassword():
     return "Forgot Password"

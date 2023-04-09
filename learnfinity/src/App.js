@@ -8,8 +8,9 @@ import AllCourses from "./pages/allcourses/allcourses"
 import AllCourses_Insti from './pages/allcourses/allcourses_inst';
 import AllCourses_year from './pages/allcourses/allcourses_year';
 import AllCourses_inst_year from './pages/allcourses/allcourses_inst_year';
-
+import Coming from './pages/coming/coming';
 import Posts from "./pages/posts/posts"
+import PostsDet from "./pages/posts/postsdet"
 import Course from "./pages/course/course"
 import Course_id from './pages/course/course_id';
 import Grades from "./pages/grades/grades"
@@ -39,6 +40,8 @@ import Enrolled from './pages/admin/enrolled';
 import Major from './pages/admin/major';
 import Notes_add from './pages/admin/notes_add';
 import Trial from "./pages/trial/trial"
+
+import Eval_submission from './components/eval_submission';
 function App() {
   return (
     <div>
@@ -50,7 +53,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard/>}/> 
           <Route path="/signup" element={<Register/>}/>
           <Route path="/signin" element={<Login/>}/>
-
+          <Route path="/coming" element={<Coming/>}/>
           <Route path="/courses" element={<AllCourses/>}/> 
           <Route path="/courses/all" element={<AllCourses_Insti/>}/> 
           <Route path="/courses/:year" element={<AllCourses_year/>}/> 
@@ -62,6 +65,7 @@ function App() {
            
           <Route path="/pastcourses" element={<AllCourses/>}/> 
           <Route path="/posts" element={<Posts/>}/>
+          <Route path="/posts/postsdet" element={<PostsDet/>}/>
 
           <Route path="/announcement" element={<Announcements/>}/> 
           <Route path="/announcement/unread" element={<Announcements_Unread/>}/> 
@@ -72,6 +76,7 @@ function App() {
           <Route path="/notes" element={<Notes/>}/>
 
           <Route path="/evaluation" element={<Assignment/>}/>
+          <Route path="/eval_submission" element={<Eval_submission/>}/>
           <Route path="/evaluation/:course_id" element={<Assignment_course/>}/>
           <Route path="/trial" element={<Trial/>}/>
 

@@ -11,3 +11,4 @@ def test_signin():
     assert json.loads(response.content) == {"message": "Invalid Credentials", "status_code": 401}
 
 test_signin()
+test_signin()

@@ -1,6 +1,6 @@
 from server.models import institute, user, courses, schedule
 from server.db import db
-from server.services import users
+from server.services import users, static_file, schedule
 from flask import request
 from server.controllers import users_controller
 
@@ -65,38 +65,40 @@ def deleteCourse(): #Requires admin access to delete a course
             "status_code" : 401
             }
 def getCourse(id):  #Fetches a course's details using its id
-    course = courses.Course.query.filter_by(course_id = id).first()
-    if course is None:
+    course_obj = courses.Course.query.filter_by(course_id = id).first()
+    if course_obj is None:
         return {
             "message": "Course not found",
             "status_code" : 404
             }
     return {
-        "name": course.course_name, 
-        "year": course.course_year, 
-        "semester": course.course_semester,
-        "description": course.course_description, 
-        "insti_id": course.course_insti_id,
-        "slot_id": course.course_slot_id, 
-        "credits": course.course_credits, 
-        "image": course.course_image
-        }
+                        "name": course_obj.course_name, 
+                        "year": course_obj.course_year, 
+                        "semester": course_obj.course_semester,
+                        "description": course_obj.course_description, 
+                        "insti_id": course_obj.course_insti_id,
+                        "slot_id": schedule.getSlotbyId(course_obj.course_slot_id)['name'], 
+                        "credits": course_obj.course_credits,
+                        "image": static_file.getStatic(course_obj.course_image)['media_url'],
+                        "id": course_obj.course_id 
+                        }
 
 def getAllCourses():    #Fetches all the courses in the database corresponding to the current institute. Admin access not required as of now, will see if we need to implement
     response_id = users_controller.getUser()["insti_id"]
     courses_list_all = courses.Course.query.filter_by(course_insti_id = response_id).all()
     courses_list = []
-    for course in courses_list_all:
+    for course_obj in courses_list_all:
         course = {
-            "name": course.course_name, 
-            "year": course.course_year, 
-            "semester": course.course_semester,
-            "description": course.course_description, 
-            "insti_id": course.course_insti_id,
-            "slot_id": course.course_slot_id, 
-            "credits": course.course_credits,
-            "image": course.course_image
-            }
+                        "name": course_obj.course_name, 
+                        "year": course_obj.course_year, 
+                        "semester": course_obj.course_semester,
+                        "description": course_obj.course_description, 
+                        "insti_id": course_obj.course_insti_id,
+                        "slot_id": schedule.getSlotbyId(course_obj.course_slot_id)['name'], 
+                        "credits": course_obj.course_credits,
+                        "image": static_file.getStatic(course_obj.course_image)['media_url'],
+                        "id": course_obj.course_id 
+                        }
         courses_list.append(course)
     return {
             "status_code": 200, 
@@ -144,25 +146,28 @@ def editCourse():  #Requires admin access to edit a course
 
 def getUserCourse():
     response = users_controller.getUser()
-    user_email = response['email_id']
+    print(response)
     if(response['status_code'] == 200):
+        user_email = response['email_id']
         if(response['is_Admin'] == False):
             print("hereim")
             mappings = courses.User_Course.query.filter_by(user = user_email).all()
             courses_list = []
             for mappping in mappings:
-                course = courses.Course.query.filter_by(course_id = mappping.course).first()
+                course_obj = courses.Course.query.filter_by(course_id = mappping.course).first()
                 course = {
-                        "name": course.course_name, 
-                        "year": course.course_year, 
-                        "semester": course.course_semester,
-                        "description": course.course_description, 
-                        "insti_id": course.course_insti_id,
-                        "slot_id": course.course_slot_id, 
-                        "credits": course.course_credits,
-                        "image": course.course_image
+                        "name": course_obj.course_name, 
+                        "year": course_obj.course_year, 
+                        "semester": course_obj.course_semester,
+                        "description": course_obj.course_description, 
+                        "insti_id": course_obj.course_insti_id,
+                        "slot_id": schedule.getSlotbyId(course_obj.course_slot_id)['name'], 
+                        "credits": course_obj.course_credits,
+                        "image": static_file.getStatic(course_obj.course_image)['media_url'],
+                        "id": course_obj.course_id 
                         }
                 courses_list.append(course)
+                print(courses_list)
             return {
                 # "status_code": 200, 
                 "courses": courses_list
@@ -236,14 +241,15 @@ def getYear(year):
         for course in courses_list_all:
             if(str(course.course_year) == str(year)):
                 courses_list.append({
-                        "name": course.course_name, 
-                        "year": course.course_year, 
-                        "semester": course.course_semester,
-                        "description": course.course_description, 
-                        "insti_id": course.course_insti_id,
-                        "slot_id": course.course_slot_id, 
-                        "credits": course.course_credits,
-                        "image": course.course_image
+                        "name": course_obj.course_name, 
+                        "year": course_obj.course_year, 
+                        "semester": course_obj.course_semester,
+                        "description": course_obj.course_description, 
+                        "insti_id": course_obj.course_insti_id,
+                        "slot_id": schedule.getSlotbyId(course_obj.course_slot_id)['name'], 
+                        "credits": course_obj.course_credits,
+                        "image": static_file.getStatic(course_obj.course_image)['media_url'],
+                        "id": course_obj.course_id 
                         })
         return {
             "status_code": 200, 
@@ -264,14 +270,15 @@ def getSemester(year, semester):
         for course in courses_list_all:
             if(str(course.course_year) == str(year) and str(course.course_semester) == str(semester)):
                 courses_list.append({
-                        "name": course.course_name, 
-                        "year": course.course_year, 
-                        "semester": course.course_semester,
-                        "description": course.course_description, 
-                        "insti_id": course.course_insti_id,
-                        "slot_id": course.course_slot_id, 
-                        "credits": course.course_credits,
-                        "image": course.course_image
+                        "name": course_obj.course_name, 
+                        "year": course_obj.course_year, 
+                        "semester": course_obj.course_semester,
+                        "description": course_obj.course_description, 
+                        "insti_id": course_obj.course_insti_id,
+                        "slot_id": schedule.getSlotbyId(course_obj.course_slot_id)['name'], 
+                        "credits": course_obj.course_credits,
+                        "image": static_file.getStatic(course_obj.course_image)['media_url'],
+                        "id": course_obj.course_id 
                         })
         return {
             "status_code": 200, 
@@ -292,14 +299,15 @@ def getSlot(year, semester, slot_id):
         for course in courses_list_all:
             if(str(course.course_year)== str(year) and str(course.course_semester) == str(semester) and str(course.course_slot_id) == str(slot_id)):
                 courses_list.append({
-                        "name": course.course_name, 
-                        "year": course.course_year, 
-                        "semester": course.course_semester,
-                        "description": course.course_description, 
-                        "insti_id": course.course_insti_id,
-                        "slot_id": course.course_slot_id, 
-                        "credits": course.course_credits,
-                        "image": course.course_image
+                        "name": course_obj.course_name, 
+                        "year": course_obj.course_year, 
+                        "semester": course_obj.course_semester,
+                        "description": course_obj.course_description, 
+                        "insti_id": course_obj.course_insti_id,
+                        "slot_id": schedule.getSlotbyId(course_obj.course_slot_id)['name'], 
+                        "credits": course_obj.course_credits,
+                        "image": static_file.getStatic(course_obj.course_image)['media_url'],
+                        "id": course_obj.course_id 
                         })
         return {
             "status_code": 200, 
@@ -329,9 +337,10 @@ def getPastCourses(): #takes in current year, semester and user object as input.
                         "semester": course_obj.course_semester,
                         "description": course_obj.course_description, 
                         "insti_id": course_obj.course_insti_id,
-                        "slot_id": course_obj.course_slot_id, 
+                        "slot_id": schedule.getSlotbyId(course_obj.course_slot_id)['name'], 
                         "credits": course_obj.course_credits,
-                        "image": course_obj.course_image
+                        "image": static_file.getStatic(course_obj.course_image)['media_url'],
+                        "id": course_obj.course_id 
                         })
         return {
             "status_code": 200, 
@@ -357,10 +366,12 @@ def getPresentCourses(): #takes in current year, semester and user object as inp
                         "semester": course_obj.course_semester,
                         "description": course_obj.course_description, 
                         "insti_id": course_obj.course_insti_id,
-                        "slot_id": course_obj.course_slot_id, 
+                        "slot_id": schedule.getSlotbyId(course_obj.course_slot_id)['name'], 
                         "credits": course_obj.course_credits,
-                        "image": course_obj.course_image
+                        "image": static_file.getStatic(course_obj.course_image)['media_url'],
+                        "id": course_obj.course_id 
                         })
+        print(courses_list)
         return {
             "status_code": 200, 
             "courses": courses_list

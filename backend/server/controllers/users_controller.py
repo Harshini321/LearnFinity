@@ -3,19 +3,26 @@ from ..services import users
 from flask_cors import CORS
 #Blueprint for the submodule
 user_app = Blueprint('user', __name__)
-CORS(user_app, supports_credentials=True, origins=['http://localhost:3000', 'http://localhost:5000', "http://127.0.0.1:5000", "http://127.0.0.1:3000",'http://localhost:3000/', 'http://localhost:5000/', "http://127.0.0.1:5000/", "http://127.0.0.1:3000/" ])
+# CORS(user_app, supports_credentials=True, origins=['http://localhost:3000', 'http://localhost:5000', "http://127.0.0.1:5000", "http://127.0.0.1:3000",'http://localhost:3000/', 'http://localhost:5000/', "http://127.0.0.1:5000/", "http://127.0.0.1:3000/",  "http://127.0.0.1:80/", "http://127.0.0.1:80", 'http://localhost:80 ', 'http://localhost:80/', 'http://10.17.6.4/', 'http://10.17.6.4/80','http://10.17.6.4/80/', 'http://10.17.6.4'])
+CORS(user_app)
 @user_app.route('/user', methods=['GET'])
 def getUser():
-    print("req", request)
-    print("cook", request.cookies)
-    access_token = request.cookies.get('access_token')
+    # print("req", request)
+    # print("cook", request.cookies)
+    print(request.headers)
+    access_token=None
+    bearer = request.headers.get('Authorization')    # Bearer YourTokenHere
+    if(bearer is None):
+        access_token = request.cookies.get('access_token')
+    else:
+        access_token = bearer.split()[1]
     if access_token:
         return users.getUser(access_token)
     else:
-        return json.dumps({
+        return {
             'error': 'Authentication failed',
             'status_code': 401
-        })
+        }
 
 @user_app.route('/user/profilepic', methods = ['GET'])
 def getProfilePic():

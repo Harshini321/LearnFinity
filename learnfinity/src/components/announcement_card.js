@@ -13,7 +13,7 @@ export default function Announcement(props) {
                         </div>
                         <div class="col-9">
                             {props.title}<br></br>
-                            {props.course_id} {props.createdAt}
+                             {props.createdAt}
                         </div>
                     </div>
                 </div>

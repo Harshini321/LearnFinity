@@ -4,7 +4,8 @@ from ..controllers import users_controller as users
 from flask_cors import CORS
 #Blueprint for the submodule
 communication_app = Blueprint('communication', __name__)
-CORS(communication_app, supports_credentials=True, origins=['http://localhost:3000', 'http://localhost:5000', "http://127.0.0.1:5000", "http://127.0.0.1:3000",'http://localhost:3000/', 'http://localhost:5000/', "http://127.0.0.1:5000/", "http://127.0.0.1:3000/" ])
+CORS(communication_app)
+#CORS(communication_app, supports_credentials=True, origins=['http://localhost:3000', 'http://localhost:5000', "http://127.0.0.1:5000", "http://127.0.0.1:3000",'http://localhost:3000/', 'http://localhost:5000/', "http://127.0.0.1:5000/", "http://127.0.0.1:3000/",  "http://127.0.0.1:80/", "http://127.0.0.1:80", 'http://localhost:80 ', 'http://localhost:80/', 'http://10.17.6.4/', 'http://10.17.6.4/80','http://10.17.6.4/80/', 'http://10.17.6.4'])
 #Endpoints for announcements
 @communication_app.route('/announcement', methods=['GET', 'POST']) #Only Prof can post announcements for the courses they're taking (add a check for that), students can only get announcements
 def handleAnnouncements(): #tested
