@@ -79,7 +79,7 @@ def getCourse(id):  #Fetches a course's details using its id
                         "insti_id": course_obj.course_insti_id,
                         "slot_id": schedule.getSlotbyId(course_obj.course_slot_id)['name'], 
                         "credits": course_obj.course_credits,
-                        "image": static_file.getStatic(course_obj.course_image)['media_url'],
+                        "image": None if course_obj.course_image is None else static_file.getStatic(course_obj.course_image)['media_url'],
                         "id": course_obj.course_id 
                         }
 

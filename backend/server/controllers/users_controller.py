@@ -35,9 +35,9 @@ def getProfilePic():
 @user_app.route('/user/isAuthenticated', methods = ['GET'])
 def isAuthenticated():
     if getUser()['status_code']==200:
-        return True
+        return {'Authenticated' : True}
     else:
-        return False
+        return {'Authenticated' : False}
 
 @user_app.route('/user/changePic', methods = ['POST'])
 def changePic():

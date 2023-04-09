@@ -32,7 +32,7 @@ def getUser(access_token): # Returns the user object. For the purpose of testing
     # }
 def getProfilePic(user):
     return  {
-            "profile_pic": user.profile_pic, 
+            "profile_pic": user['profile_pic'], 
             "status_code": 200, 
             "message": "Profile picture fetched successfully"
             }
