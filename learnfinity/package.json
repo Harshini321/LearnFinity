@@ -2,6 +2,7 @@
   "name": "learnfinity",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -11,6 +12,8 @@
     "formik": "^2.2.9",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
+    "react-client-session": "^0.0.8",
+    "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
     "react-router-dom": "^6.10.0",

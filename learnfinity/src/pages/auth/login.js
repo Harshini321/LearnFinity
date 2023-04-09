@@ -2,11 +2,15 @@ import React,{useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Form,Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { useCookies } from 'react-cookie';
+// import { ReactSession } from 'react-client-session';
 import "./auth.css"
 import axios from 'axios'
 function Login() {
+    // ReactSession.setStoreType("localStorage");
     const [email_id,setEmailid]=useState('')
     const [password,setPassword]=useState('')
+    const [cookies, setCookie] = useCookies(['access_token']);
     const navigate = useNavigate()
     const loginUser =() =>{
         console.log("Form Submitted")
@@ -15,14 +19,13 @@ function Login() {
         setEmailid('')
         setPassword('')
         axios.post('http://localhost:5000/signin', {
-            email_id :email_id,
-            password: password
-        }, {
-            headers: {
+            "email_id" : email_id,
+            "password" : password
+        },{headers: {
                 'Content-Type': 'application/json',
-            }
-        }).then((response)=>{
-            console.log(response)
+            }}, {withCredentials: true}).then((response)=>{
+            console.log(response.data.access_token)
+            setCookie('access_token', response.data.access_token, { path: '/' });
             alert("Login Successful")
             navigate("/dashboard")
         }).catch((err)=>{

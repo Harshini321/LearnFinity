@@ -105,7 +105,6 @@ def getAllCourses():    #Fetches all the courses in the database corresponding t
 
 def editCourse():  #Requires admin access to edit a course
     req = request.get_json(force=True)
-    print(req)
     response = users_controller.isAdmin()
     if(response['status_code'] == 200):
         course = courses.Course.query.filter_by(course_id = req['id']).first()
@@ -144,9 +143,6 @@ def editCourse():  #Requires admin access to edit a course
             }
 
 def getUserCourse():
-    print("here2")
-    print("args, ", request.args)
-    req = request.get_json(force=True)
     response = users_controller.getUser()
     user_email = response['email_id']
     if(response['status_code'] == 200):
@@ -168,18 +164,18 @@ def getUserCourse():
                         }
                 courses_list.append(course)
             return {
-                "status_code": 200, 
+                # "status_code": 200, 
                 "courses": courses_list
                 }
         else:
             return {
                 "message": "No courses defined for admin, use another endpoint",
-                "status_code" : 401
+                # "status_code" : 401
                 }
     else:
         return {
-            "message": "User not found",
-            "status_code" : 232
+            "message": "User not found"
+            # "status_code" : 400
             }
 def addUser():
     req = request.get_json(force=True)
@@ -316,14 +312,17 @@ def getSlot(year, semester, slot_id):
             }
 
 def getPastCourses(): #takes in current year, semester and user object as input. Returns a user's past courses
-    req = request.get_json(force=True)
+    
+    print("here i ampast courses")
+    print(request.cookies)
     response = users_controller.getUser()
+    print(response)
     if(response['status_code'] == 200):
         courses_list=[]
         courses_list_all = courses.User_Course.query.filter_by(user = response['email_id']).all()
         for course in courses_list_all:
             course_obj = courses.Course.query.filter_by(course_id = course.course).first()
-            if(int(course_obj.course_year) < int(req['year']) or (str(course_obj.course_year) == str(req['year']) and int(course_obj.course_semester) < int(req['semester']))):
+            if(int(course_obj.course_year) < int(2023) or (str(course_obj.course_year) == str(2023) and int(course_obj.course_semester) < int(2))):
                 courses_list.append({
                         "name": course_obj.course_name, 
                         "year": course_obj.course_year, 
@@ -345,14 +344,13 @@ def getPastCourses(): #takes in current year, semester and user object as input.
             }
 
 def getPresentCourses(): #takes in current year, semester and user object as input. Returns a user's present courses
-    req = request.get_json(force=True)
     response = users_controller.getUser()
     if(response['status_code'] == 200):
         courses_list=[]
         courses_list_all = courses.User_Course.query.filter_by(user = response['email_id']).all()
         for course in courses_list_all:
             course_obj = courses.Course.query.filter_by(course_id = course.course).first()
-            if(str(course_obj.course_year) == str(req['year']) and str(course_obj.course_semester) == str(req['semester'])):
+            if(str(course_obj.course_year) == str(2023) and str(course_obj.course_semester) == str(2)):
                 courses_list.append({
                         "name": course_obj.course_name, 
                         "year": course_obj.course_year, 
@@ -366,6 +364,11 @@ def getPresentCourses(): #takes in current year, semester and user object as inp
         return {
             "status_code": 200, 
             "courses": courses_list
+            }
+    else:
+        return {
+            "message": "User Not Found",
+            "status_code" : 404
             }
 
 def getCourseUsers(): #Fetches all users corresponding to a course

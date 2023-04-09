@@ -12,6 +12,7 @@ import Coming from './pages/coming/coming';
 import Posts from "./pages/posts/posts"
 import PostsDet from "./pages/posts/postsdet"
 import Course from "./pages/course/course"
+import Course_id from './pages/course/course_id';
 import Grades from "./pages/grades/grades"
 import Grades_courses from './pages/grades/grades_course';
 import Notes from "./pages/notes/notes"
@@ -37,7 +38,6 @@ import Cut from './pages/admin/cut';
 import Minor from './pages/admin/minor';
 import Enrolled from './pages/admin/enrolled';
 import Major from './pages/admin/major';
-
 import Notes_add from './pages/admin/notes_add';
 import Trial from "./pages/trial/trial"
 function App() {
@@ -58,7 +58,9 @@ function App() {
           <Route path="/courses/:year/:semester" element={<AllCourses_inst_year/>}/> 
           <Route path="/courses/:year/:semester/:slot_id" element={<AllCourses_inst_year/>}/>
 
+          <Route path="/course/:course_id" element={<Course_id/>}/>
           <Route path="/course" element={<Course/>}/> 
+           
           <Route path="/pastcourses" element={<AllCourses/>}/> 
           <Route path="/posts" element={<Posts/>}/>
           <Route path="/posts/postsdet" element={<PostsDet/>}/>

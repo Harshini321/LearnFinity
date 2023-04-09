@@ -4,18 +4,19 @@ from ..controllers import users_controller as users
 from flask_cors import CORS
 #Blueprint for the submodule
 communication_app = Blueprint('communication', __name__)
-CORS(communication_app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
+CORS(communication_app, supports_credentials=True, origins=['http://localhost:3000', 'http://localhost:5000', "http://127.0.0.1:5000", "http://127.0.0.1:3000",'http://localhost:3000/', 'http://localhost:5000/', "http://127.0.0.1:5000/", "http://127.0.0.1:3000/" ])
 #Endpoints for announcements
 @communication_app.route('/announcement', methods=['GET', 'POST']) #Only Prof can post announcements for the courses they're taking (add a check for that), students can only get announcements
 def handleAnnouncements(): #tested
     user_obj = users.getUser()
     print(user_obj)
-    req = request.get_json(force=True)
+    
     if(user_obj['status_code'] != 200):
         return {"message" : 'User not authenticated to perform this action. Please login', "status_code" : 401}
     if request.method == 'GET': # Get all announcements for all the courses user is enrolled in
         return communication.getAnnouncements(user_obj['email_id'])
     else:
+        req = request.get_json(force=True)
         if(user_obj['is_Prof'] == True):
             return communication.postAnnouncement(user_obj['email_id'], req['course_id'], req['title'], req['body'], req['static_files']) #Create a new annoncement
         else:
