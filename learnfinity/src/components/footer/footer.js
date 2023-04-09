@@ -2,6 +2,7 @@ import React from 'react';
 import './footer.css';
 import lg from '../../images/logo_black.png';
 export default function footer() {
+    
   return (      
     <div class="card">
                 <div class="card-body">

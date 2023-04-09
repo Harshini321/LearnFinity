@@ -246,10 +246,10 @@ export default function Course_id() {
                     <div class="card">
                         <div class="card-body">
                             <h4 class='px-3'>Posts And Comments</h4>
-                                {postsList.map((content, key)=>{
+                                {postsList.map((content)=>{
                                 <div class="card my-3">
                                     <div class="card-body">
-                                        {console.log(content)}
+
                                         {content['title']}
                                         {content.body}
                                     </div>

@@ -4,19 +4,21 @@ import Nav from "../../components/navbar/navbar"
 import Footer from "../../components/footer/footer"
 import Profile_comp from '../../components/profile';
 import Grade_card from '../../components/grade_card';
+import {ReactSession} from 'react-client-session'
+import axios from 'axios'
 export default function Grades() {
-    const [grades,setGrades]=useState([])
-    useEffect(()=>{
-        fetch("/grades",{
-            'methods':'GET',
-            headers:{
-                'Content-Type':'application/json'
-            }
+    const [gradeList, setgradeList] = useState([]);
+    ReactSession.setStoreType('localStorage');
+	const token = ReactSession.get('access_token');
+    useEffect(() =>
+    {
+        axios.get('http://10.17.6.4/grades', {headers: { Authorization: `Bearer ${token}` }},{withCredentials: true })
+        .then(res => {
+            console.log(res.data)
+            console.log("courselist")
+            setgradeList(res.data)
         })
-        .then(resp => resp.json())
-        .then(resp => setGrades(resp))
-        .catch(error => console.log(error))
-    },[])
+    }, [])
   return (
     <div className='container-fluid dashboard row  min-vh-100'>      
         <Nav></Nav>
@@ -70,14 +72,16 @@ export default function Grades() {
                             </div>
                         </div>
                     </div>
-                    {grades.map(grade=>{
+                    <h4>Previous Courses</h4>
+                    {gradeList.map(grade=>{
+                        if(grade.grade!="Not Graded Yet"){
                         return <Grade_card
                             id={grade.id}
                             grade={grade.grade}
-                            student_id={grade.student_id}
-                            course_id={grade.course_id}
-                        ></Grade_card>
-                    })}
+                            student_id={grade.user_email}
+                            course_id={grade.course_name}
+                        ></Grade_card>}}
+                    )}
                 </div>              
             </div>
             

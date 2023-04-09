@@ -8,7 +8,6 @@ import CourseCard from "../../components/course_card/coursecard"
 import Announcement from '../../components/announcement_card';
 import axios from 'axios';
 import dl from "../../images/deadline.png"
-import Announcement from "../../components/announcement_card"
 import quiz from "../../images/quiz.png"
 import lab from "../../images/lab.png"
 import nf from "../../images/notification.png"
