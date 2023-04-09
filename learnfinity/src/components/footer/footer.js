@@ -2,7 +2,6 @@ import React from 'react';
 import './footer.css';
 import lg from '../../images/logo_black.png';
 export default function footer() {
-    
   return (      
     <div class="card">
                 <div class="card-body">
@@ -13,7 +12,7 @@ export default function footer() {
                             </a>
                         </div>
                         <div class="col-11">
-                            <h6>You are logged in as Sakshi (log out)</h6>
+                            <h6>You are logged in</h6>
                             <small>© Copyright LearnFinity  </small>
                         </div>
                     </div>

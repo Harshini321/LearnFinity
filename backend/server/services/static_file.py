@@ -24,3 +24,21 @@ def deleteStatic(id):
     db.session.delete(obj)
     db.session.commit()
     return {'id': resp.file_id, 'name': resp.file_name, 'media_url': resp.file_path, 'course_id': resp.file_course}
+
+def postNote(id, course_id):
+    note_obj=static_files.Note(note_course_id=course_id, note_file_id=id)
+    db.session.add(note_obj)
+    db.session.commit()
+    return {"id": note_obj.note_id, "course_id": course_id, "file_id": id}
+
+def notesByCourse(course_id):
+    notes_list=[]
+    notes = static_files.Note.query.filter_by(note_course_id=course_id).all()
+    for note in notes:
+        x = getStatic(note.note_file_id)
+        notes_list.append(x)
+    return {"status_code" :200,
+            "notes": notes_list
+    }
+
+

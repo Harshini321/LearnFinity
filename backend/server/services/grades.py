@@ -32,7 +32,8 @@ def calcGradedirect(user, course):
 def getGrades(user, courses_list):
     grades = []
     for course in courses_list:
-        res = {'user_email': user, 'grade' : calcGradedirect(user,course), 'course_name': course_model.Course.query.filter_by(course_id=course).first().course_name, 'course_id': course}
+        obj= course_model.Course.query.filter_by(course_id=course).first()
+        res = {'user_email': user, 'grade' : calcGradedirect(user,course), "course_name": obj.course_name, 'course_id': course, 'course_year': obj.course_year, 'course_semester' : obj.course_semester}
         grades.append(res)
     return grades
 

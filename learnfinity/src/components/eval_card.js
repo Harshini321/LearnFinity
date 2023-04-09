@@ -11,7 +11,7 @@ function Eval_card(props) {
                             <img src={nt} alt='CAIC' width='40' height='40' />
                         </div>
                         <div class="col-9 pt-2">
-                            <h5>{props.course_id} : {props.title}</h5>
+                            <strong>{props.title}</strong>
                         </div>
                     </div>
 
@@ -32,21 +32,23 @@ function Eval_card(props) {
                     {props.content}
                 </div>
                 <div class="col-6">
-                <p class='py-1 px-2'> Weightage : {props.weightage}</p>
+                <p class='py-1 px-2'> Weightage : {props.weightage}%</p>
                 </div>
                 <div class="col-6">
                 <p class='py-1 px-2'> Total Marks : {props.total_marks}</p>
                 </div>
             </div>
             <div class="row px-3">
-                <div class="col-2 px-3">
-                    <button type="button" class="btn btn-primary loginbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Submit
-                    </button>
-                </div>
+                {Date.parse(props.deadline)>Date.now() && 
+                                <div class="col-2 px-3">
+                                <button type="button" class="btn btn-primary loginbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Submit
+                                </button>
+                            </div>}
+                
                 <div class="col-2">
-                    <button type="button" class="btn btn-outline-primary signupbtn" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                        Download
+                    <button type="button"  class="btn btn-outline-primary signupbtn" >
+                        <a STYLE="text-decoration:none;" href={props.staticfile_url} download={props.staticfile_name}>Download</a>
                     </button>
                 </div>
             </div>
