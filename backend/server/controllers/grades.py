@@ -13,11 +13,11 @@ CORS(grade_app)
 @grade_app.route('/grades', methods = ['GET']) #get grades for all the courses the user has
 def getAllGrades():
     user = users.getUser()['email_id']
-    courses = course.getCourses()
+    courses = course.getCourses()["courses"]
     courselist = []
     for c in courses:
         courselist.append(c['id'])
-    return grades.getGrades(user = user, courses = courselist)
+    return grades.getGrades(user = user, courses_list = courselist)
 
 @grade_app.route('/total/<course_id>', methods = ['GET'])
 def getTotal(course_id): #get grades for a particular course

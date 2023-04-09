@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 from ..services import static_file
+from ..controllers import users_controller
 from flask_cors import CORS
 #Blueprint for the submodule
 static_app = Blueprint('static_files', __name__)
@@ -22,3 +23,21 @@ def postStatic():
 @static_app.route('/static/delete', methods = ['POST'])
 def deleteStatic():
     return static_file.deleteStatic(id = request.json['id'])
+
+@static_app.route('/notes', methods = ['POST', 'GET'])
+def notesByCourse():
+    course_id=request.form['course_id']
+    if request.method=='GET':
+        return static_file.notesByCourse(course_id)
+    else:
+        user = users_controller.getUser()
+        if(user['status_code']==200):
+            print(user)
+            if(user['is_Prof']):
+                x = postStatic()
+                return static_file.postNote(x['id'], course_id)
+            else:
+                return{"message": "User not authorized", "status_code": 401}
+
+
+

@@ -71,7 +71,19 @@ export default function Home() {
             setAnnouncementList(res.data.announcement_list)
         })
     }, [])
-    
+    const [evaluationList, setEvaluationList] = useState([]);
+    useEffect(() =>
+    {   
+        axios.get(`http://10.17.6.4/evaluation/`, {headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` 
+
+        }},{withCredentials: true })
+        .then(res => {
+            console.log(res.data)
+            setEvaluationList(res.data)
+        })
+    }, [])
   return (
     <div className='container-fluid dashboard row  min-vh-100'>      
         <Nav></Nav>
@@ -134,28 +146,19 @@ export default function Home() {
                 <div class="col-4 ">
                     <div class="card">
                         <div class="card-body">
-                            <h4 className='px-3'>Deadlines</h4>
+                            <h4 className='px-3'>Upcoming Deadlines</h4>
+                            {evaluationList.map(evaln=>{
+                                if (Date.parse(evaln.deadline)>Date.now()){
+                            return(
                             <div class="form-check dl py-2 ">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    COP 290-lab3 Weightage 50%
+                                    {evaln.title} 
                                 </label><br></br>
-                                <small>15 March</small>
-                            </div>
-                            <div class="form-check dl py-2">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    COP 290-lab3 Weightage 50%
-                                </label><br></br>
-                                <small>15 March</small>
-                            </div>
-                            <div class="form-check dl py-2">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    COP 290-lab3 Weightage 50%
-                                </label><br></br>
-                                <small>15 March</small>
-                            </div>
+                                <small>{evaln.deadline}</small>
+                            </div>)}
+})}
+                            
                         </div>
                     </div>
                 </div>
@@ -178,33 +181,6 @@ export default function Home() {
                                     ></Announcement>
                                 )
                             })}                         
-                            <div class="card my-2">
-                                <div class="card-body">
-                                    <div class="row px-3">
-                                        <div class="col-3">
-                                            <div class="row">
-                                                <div class="col-3 icon-block">
-                                                    <img src={ann} alt='CAIC' width='40' height='40' />
-                                                </div>
-                                                <div class="col-9">
-                                                    New Assignment<br></br>
-                                                    COP 290
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-9">
-
-                                        </div>
-                                    </div>
-                                    <div class="row px-3">
-                                        <div class="col-12">
-                                        <p className='py-2 px-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
                             
                         </div>
                     </div>

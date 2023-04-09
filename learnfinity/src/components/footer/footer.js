@@ -12,7 +12,7 @@ export default function footer() {
                             </a>
                         </div>
                         <div class="col-11">
-                            <h6>You are logged in as Sakshi (log out)</h6>
+                            <h6>You are logged in</h6>
                             <small>© Copyright LearnFinity  </small>
                         </div>
                     </div>
