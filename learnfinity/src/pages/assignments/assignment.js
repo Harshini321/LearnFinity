@@ -58,9 +58,7 @@ export default function Assignment() {
                     </div>
                     <div class="row px-3">
                         <div class="col-2 px-3">
-                            <button type="button" class="btn btn-primary loginbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                Submit
-                            </button>
+                        <a href="/eval_submission" class="btn btn-primary btn-sm" className="btn btn-primary  loginbtn" role="button" aria-disabled="true">Submit</a>
                         </div>
                         <div class="col-2">
                             <button type="button" class="btn btn-outline-primary signupbtn" data-bs-toggle="modal" data-bs-target="#exampleModal1">
