@@ -1,5 +1,6 @@
 from ..models import evaluations
 from ..controllers import users_controller as users
+from ..services import static_file
 from server.db import db
 import json
 
@@ -13,10 +14,11 @@ def getEvaluations(courses):
             evals.append({'id': e.evaluation_id, 
                         'title': e.evaluation_title,
                          'content' : e.evaluation_content,
-                          'staticfile_id': e.evaluation_file, 
+                          'staticfile_name': static_file.getStatic(e.evaluation_file)['name'], 
+                          'staticfile_url': static_file.getStatic(e.evaluation_file)['media_url'],
                           'deadline': str(e.evaluation_deadline), 
                           'course_id': e.evaluation_course, 
-                          'weightage': e.evaluation_weightage, 
+                          'weightage': e.evaluation_weightage*100, 
                           'total_marks': e.evaluation_max_score,
                            'submission_allowed': e.evaluation_submission_allowed})
     return evals

@@ -14,10 +14,13 @@ export default function coursecard(props) {
               <h5 class="card-title">{props.name}</h5>
               <p class="card-text">{props.description}</p>
           </div>
-          
+          {console.log(props.image)}
           <div class="card-body">
-              <a href="#" class="card-link no_underline">credits:{props.credits}</a>
-              <a href="#" class="card-link no_underline">year:{props.year}</a>
+              <a href="#" class="card-link no_underline">Credits:{props.credits}</a>
+              <a href="#" class="card-link no_underline">Year:{props.year}</a>
+              <a href="#" class="card-link no_underline">Semester:{props.semester}</a>
+              <a href="#" class="card-link no_underline">Slot:{props.slot_id}</a>
+
           </div>
           <button type="button" class="btn btn-outline-dark" onClick={handleClick}>Read More</button>
       </div>   
