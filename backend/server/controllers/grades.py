@@ -8,7 +8,8 @@ from flask_cors import CORS
 
 #Blueprint for the submodule
 grade_app = Blueprint('grade', __name__)
-CORS(grade_app, supports_credentials=True, origins=['http://localhost:3000', 'http://localhost:5000', "http://127.0.0.1:5000", "http://127.0.0.1:3000",'http://localhost:3000/', 'http://localhost:5000/', "http://127.0.0.1:5000/", "http://127.0.0.1:3000/" ])
+CORS(grade_app)
+#CORS(grade_app, supports_credentials=True, origins=['http://localhost:3000', 'http://localhost:5000', "http://127.0.0.1:5000", "http://127.0.0.1:3000",'http://localhost:3000/', 'http://localhost:5000/', "http://127.0.0.1:5000/", "http://127.0.0.1:3000/",  "http://127.0.0.1:80/", "http://127.0.0.1:80", 'http://localhost:80 ', 'http://localhost:80/', 'http://10.17.6.4/', 'http://10.17.6.4/80','http://10.17.6.4/80/', 'http://10.17.6.4'])
 @grade_app.route('/grades', methods = ['GET']) #get grades for all the courses the user has
 def getAllGrades():
     user = users.getUser()['email_id']

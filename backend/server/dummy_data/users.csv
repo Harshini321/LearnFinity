@@ -1,10 +1,10 @@
 Name, Email, insti_id, is_Staff, is_Admin, password
-Kavya Chopra, cs1210081@iitb.ac.in, 1, False, False, password_kavya
-Sakshi Gupta, cs1210567@iitb.ac.in, 1, False, False, password_sakshi
-Penta Harshini, cs12100108@iitb.ac.in, 1, False, False, password_penta
-Ashish Arora, cs1210069@iitb.ac.in, 1, False, False, password_ashish
-Rijurekha Sen, rijucs@iitb.ac.in, 1, True, False, password_rijurekha
-Abhishek Dixit, abhishekee@iitb.ac.in, 1, True, False, password_abhishek
+Kavya Chopra, cs1210081@iitb.ac.in, 1, False, False, $2b$12$x4ZlPS6hVX2lo3ZSHufLAOjkAjBO/NT6DlMwp7NxRHxC2MSFisuim
+Sakshi Gupta, cs1210567@iitb.ac.in, 1, False, False, $2b$12$GyUezUdmB0RuslZxz/Tn1eC0kBUG4uyxG8PJfr/nReaS0CGHhN9mC
+Penta Harshini, cs12100108@iitb.ac.in, 1, False, False, $2b$12$pctG7eaY9R0rlkNVh21iH.B8djtF.p6f0pIFRof/TJkLiWGXK9HrG
+Ashish Arora, cs1210069@iitb.ac.in, 1, False, False, $2b$12$M5iAx8X7YPllRiiGz5ZdEezvVY3y9flac.WO77lJP.zTErdhXKq1W
+Rijurekha Sen, rijucs@iitb.ac.in, 1, True, False, $2b$12$cDv6/fNs63wznKkNksBRv.2BeBk5FHfBlAbqPPzCl/xOJVwdmHiwe
+Abhishek Dixit, abhishekee@iitb.ac.in, 1, True, False, $2b$12$TEYCpTJi311YCjgjWTeNOedNINXLLV3HMq/pwnA6zR2COfXxsSg/.
 IITB_Admin, admin@iitb.ac.in, 1, True, True, password_admin_iitb
 Kavya Chopra, cs1210081@iitd.ac.in, 2, False, False, password_kavya
 Sakshi Gupta, cs1210567@iitd.ac.in, 2, False, False, password_sakshi

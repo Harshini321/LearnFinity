@@ -2,7 +2,6 @@ from server.db import db
 from server.models import user
 from flask import request
 from ..services import static_file
-
 import jwt
 
 def getUser(access_token): # Returns the user object. For the purpose of testing before login, we return the details of a particular user.

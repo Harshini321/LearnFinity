@@ -144,8 +144,9 @@ def editCourse():  #Requires admin access to edit a course
 
 def getUserCourse():
     response = users_controller.getUser()
-    user_email = response['email_id']
+    print(response)
     if(response['status_code'] == 200):
+        user_email = response['email_id']
         if(response['is_Admin'] == False):
             print("hereim")
             mappings = courses.User_Course.query.filter_by(user = user_email).all()

@@ -12,14 +12,18 @@ import lab from "../../images/lab.png"
 import nf from "../../images/notification.png"
 import ann from "../../images/ann.png"
 import { useState, useEffect } from 'react';
+import { ReactSession } from 'react-client-session';
+import 'react-cookie'
 export default function Home() {
     const [courseList, setCourseList] = useState([]);
     const [pastCourseList, setPastCourseList] = useState([]);
     const [presentCourseList, setPresentCourseList] = useState([]);
     const [announcementList, setAnnouncementList] = useState([]);
+    ReactSession.setStoreType('localStorage');
+	const token = ReactSession.get('access_token');
     useEffect(() =>
     {
-        axios.get('http://localhost:5000/courses',  {withCredentials: true })
+        axios.get('http://10.17.6.4/courses', {headers: { Authorization: `Bearer ${token}` }}, {withCredentials:true})
         .then(res => {
             console.log(res.data.courses)
             console.log("courselist")
@@ -28,7 +32,7 @@ export default function Home() {
     }, [])
     useEffect(() =>
     {
-        axios.get('http://localhost:5000/courses/past', {withCredentials: true})
+        axios.get('http://10.17.6.4/courses/past', {withCredentials: true})
         .then(res => {
             console.log(res.data.courses)
             console.log("courselist")
@@ -37,7 +41,7 @@ export default function Home() {
     }, [])
     useEffect(() =>
     {
-        axios.get('http://localhost:5000/courses/present', {withCredentials: true })
+        axios.get('http://10.17.6.4/courses/present', {withCredentials: true })
         .then(res => {
             console.log(res.data.courses)
             console.log("courselist")
@@ -46,7 +50,7 @@ export default function Home() {
     }, [])
     useEffect(() =>
     {
-        axios.get('http://localhost:5000/announcement', {withCredentials: true })
+        axios.get('http://10.17.6.4/announcement', {withCredentials: true })
         .then(res => {
             console.log(res.data.announcement_list)
             console.log("courselist")

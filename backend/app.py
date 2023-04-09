@@ -7,9 +7,10 @@ from flask_cors import CORS
 #basic setup
 def create_app():
     app = Flask(__name__)
-    CORS(app, supports_credentials=True, origins=['http://localhost:3000', 'http://localhost:5000', "http://127.0.0.1:5000", "http://127.0.0.1:3000",'http://localhost:3000/', 'http://localhost:5000/', "http://127.0.0.1:5000/", "http://127.0.0.1:3000/" ])    
+    CORS(app)
+    #CORS(app, supports_credentials=True, origins=['http://10.17.6.4/', 'http://localhost:3000', 'http://localhost:5000', "http://127.0.0.1:5000", "http://127.0.0.1:3000",'http://localhost:3000/', 'http://localhost:5000/', "http://127.0.0.1:5000/", "http://127.0.0.1:3000/", "http://127.0.0.1:80/", "http://127.0.0.1:80", 'http://localhost:80 ', 'http://localhost:80/', 'http://10.17.6.4/80', 'http://10.17.6.4/80/', 'http://10.17.6.4'])    
     app.config['SECRET_KEY'] = 'SGVsbG9vb29vLi4uLklmIHUgYXJlIHRoaXMgdmVsbGEgcGxzIGRvIG15IGFzc2lnbm1lbnQgOik='
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password@localhost/learnfinity'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:open@localhost/learnfinity'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     #setting up blueprints
     app.register_blueprint(base.base_app)

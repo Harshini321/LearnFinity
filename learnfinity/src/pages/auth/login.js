@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { Form,Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useCookies } from 'react-cookie';
+import { ReactSession } from 'react-client-session';
+
 // import { ReactSession } from 'react-client-session';
 import "./auth.css"
 import axios from 'axios'
 function Login() {
-    // ReactSession.setStoreType("localStorage");
+    ReactSession.setStoreType("localStorage");
     const [email_id,setEmailid]=useState('')
     const [password,setPassword]=useState('')
     const [cookies, setCookie] = useCookies(['access_token']);
@@ -18,16 +20,19 @@ function Login() {
         console.log(password)
         setEmailid('')
         setPassword('')
-        axios.post('http://localhost:5000/signin', {
+        axios.post('http://10.17.6.4/signin', {
             "email_id" : email_id,
             "password" : password
         },{headers: {
                 'Content-Type': 'application/json',
-            }}, {withCredentials: true}).then((response)=>{
-            console.log(response.data.access_token)
+            }}).then((response)=>{
+                if(response.data.status_code!=200){
+                    alert(response.data.message)
+                }else{
+            ReactSession.set("access_token", response.data.access_token)
             setCookie('access_token', response.data.access_token, { path: '/' });
             alert("Login Successful")
-            navigate("/dashboard")
+            navigate("/dashboard")}
         }).catch((err)=>{
             console.log(err)
             alert("Login Failed")
