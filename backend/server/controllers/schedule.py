@@ -13,7 +13,7 @@ def slots():
         user_obj = users.getUser()
         return schedule.getSlots(insti_id = user_obj['insti_id'])
     elif request.method == 'POST':
-        if(users.checkAdmin()):
+        if(users.isAdmin()):
             user_obj = users.getUser()
             print(user_obj)
             return schedule.postSlot(insti_id = user_obj['insti_id'], slot_name = request.json['name'])
@@ -35,7 +35,7 @@ def entries():
         user_obj = users.getUser()
         return schedule.getEntries(insti_id = user_obj['insti_id'])
     elif request.method =="POST":
-        if(users.checkAdmin()):
+        if(users.isAdmin()):
             user_obj = users.getUser()
             return schedule.postEntry(insti_id = user_obj['insti_id'], entry_day = request.json['day'], entry_start_time = request.json['start_time'], entry_end_time = request.json['end_time'])
         else:
@@ -43,7 +43,7 @@ def entries():
 
 @schedule_app.route('/entries/delete', methods = ["POST"])
 def entry_delete():
-    if users.checkAdmin():
+    if users.isAdmin():
         return schedule.deleteEntry(id = request.json['id'])
     return {"message" : 'User not authorized to perform this action', "status_code" : 401}
 

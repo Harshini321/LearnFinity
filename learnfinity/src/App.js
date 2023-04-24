@@ -40,6 +40,8 @@ import Enrolled from './pages/admin/enrolled';
 import Major from './pages/admin/major';
 import Notes_add from './pages/admin/notes_add';
 import Trial from "./pages/trial/trial"
+
+import Eval_submission from './components/eval_submission';
 function App() {
   return (
     <div>
@@ -74,6 +76,7 @@ function App() {
           <Route path="/notes" element={<Notes/>}/>
 
           <Route path="/evaluation" element={<Assignment/>}/>
+          <Route path="/eval_submission" element={<Eval_submission/>}/>
           <Route path="/evaluation/:course_id" element={<Assignment_course/>}/>
           <Route path="/trial" element={<Trial/>}/>
 

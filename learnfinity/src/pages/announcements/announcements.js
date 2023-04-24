@@ -3,21 +3,35 @@ import './announcements.css';
 import Nav from "../../components/navbar/navbar"
 import Footer from "../../components/footer/footer"
 import ann from "../../images/ann.png"
+import axios from 'axios';
+import { ReactSession } from 'react-client-session';
 import Profile_comp from '../../components/profile';
 import Announcement from '../../components/announcement_card';
 export default function Announcements() {
-    const [ans,setAns]=useState([])
-    useEffect(()=>{
-        fetch("/announcement",{
-            'methods':'GET',
-            headers:{
-                'Content-Type':'application/json'
-            }
+    // const [ans,setAns]=useState([])
+    // useEffect(()=>{
+    //     fetch("/announcement",{
+    //         'methods':'GET',
+    //         headers:{
+    //             'Content-Type':'application/json'
+    //         }
+    //     })
+    //     .then(resp => resp.json())
+    //     .then(resp => setAns(resp))
+    //     .catch(error => console.log(error))
+    // },[])
+    const [announcementList, setAnnouncementList] = useState([]);
+    ReactSession.setStoreType('localStorage');
+	const token = ReactSession.get('access_token');
+    useEffect(() =>
+    {
+        axios.get('http://10.17.6.4/announcement', {headers: { Authorization: `Bearer ${token}` }},{withCredentials: true })
+        .then(res => {
+            console.log(res.data.announcement_list)
+            console.log("courselist")
+            setAnnouncementList(res.data.announcement_list)
         })
-        .then(resp => resp.json())
-        .then(resp => setAns(resp))
-        .catch(error => console.log(error))
-    },[])
+    }, [])
 
   return (
     <div className='container-fluid dashboard row  min-vh-100'>      
@@ -27,34 +41,7 @@ export default function Announcements() {
                 <div class="col-11 pb-3 pt-1"><h2>Announcements</h2></div>
                 <Profile_comp></Profile_comp>
             </div>
-            <div class="card my-3">
-                <div class="card-body">
-                    <div class="row px-3">
-                        <div class="col-3">
-                            <div class="row">
-                                <div class="col-3 icon-block">
-                                    <img src={ann} alt='CAIC' width='40' height='40' />
-                                </div>
-                                <div class="col-9">
-                                    New Assignment<br></br>
-                                    COP 290
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="col-9">
-
-                        </div>
-                    </div>
-                    <div class="row px-3">
-                        <div class="col-12">
-                        <p className='py-2 px-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            {ans.map(an=>{
+            {announcementList.map(an=>{
                 return(
                     <Announcement 
                         id={an.id}

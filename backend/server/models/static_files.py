@@ -15,3 +15,9 @@ class Static_File(db.Model):
     # course_images = db.relationship('Course', backref='course_image', lazy=True)
     def __repr__(self):
         return f"Static_Files('{self.file_name}', '{self.file_path}', '{self.file_course}')"
+
+class Note(db.Model):
+    __tablename__='note'
+    note_id=db.Column(db.Integer, primary_key=True)
+    note_file_id=db.Column(db.Integer, db.ForeignKey("static_file.file_id"))
+    note_course_id=db.Column(db.Integer, db.ForeignKey("course.course_id"))

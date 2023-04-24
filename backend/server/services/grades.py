@@ -2,6 +2,7 @@
 
 from server.db import db
 from ..models import grades, evaluations
+from ..models import courses as course_model
 from ..controllers import evaluations as evalcontroller
 import json
 
@@ -21,10 +22,18 @@ def calcGrade(course):
         if cutoff.cutoff_lowerlimit <= total <= cutoff.cutoff_upperlimit:
             return cutoff.cutoff_grade
 
-def getGrades(user, courses):
+def calcGradedirect(user, course):
+    grade = grades.Grade.query.filter_by(grade_user=user, grade_course=course).first()
+    if grade is None:
+        return "Not Graded Yet"
+    else:
+        return grade.grade_value
+
+def getGrades(user, courses_list):
     grades = []
-    for course in courses:
-        res = {'user_email': user, 'grade' : calcGrade(course), 'course_id': course}
+    for course in courses_list:
+        obj= course_model.Course.query.filter_by(course_id=course).first()
+        res = {'user_email': user, 'grade' : calcGradedirect(user,course), "course_name": obj.course_name, 'course_id': course, 'course_year': obj.course_year, 'course_semester' : obj.course_semester}
         grades.append(res)
     return grades
 

@@ -2,7 +2,7 @@
 
 from flask import Blueprint, request
 from ..services import evaluations
-from ..controllers import users_controller, course
+from ..controllers import users_controller as users, course
 from flask_cors import CORS
 #Blueprint for the submodule
 eval_app = Blueprint('eval', __name__)
@@ -12,10 +12,10 @@ CORS(eval_app)
 @eval_app.route('/evaluation/', methods = ['GET', 'POST'])
 def evaluation():
     if request.method == 'GET':
-        res = course.getCourses()
+        res = course.getCourses()['courses']
         courses = []
         for c in res:
-            courses.append(c.json['id'])
+            courses.append(c['id'])
         return evaluations.getEvaluations(courses = courses)
     else:
         if users.checkAdmin() or users.checkInstructor():

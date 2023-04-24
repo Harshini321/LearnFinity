@@ -6,7 +6,7 @@ import Nav from "../../components/navbar/navbar"
 import CourseCard from "../../components/course_card/coursecard"
 import Footer from "../../components/footer/footer"
 import { useNavigate, useLocation } from 'react-router-dom';
-
+import { ReactSession } from 'react-client-session';
 const courses=[
     {
         'name':'course1',
@@ -59,18 +59,23 @@ export default function AllCourses() {
     //     .catch(error => console.log(error))
     // },[])
     
-
-    // const [courses,setCourses]=useState([])
+    ReactSession.setStoreType('localStorage');
+	const token = ReactSession.get('access_token');
+    const [courses,setCourses]=useState([])
     
-    // useEffect(() =>
-    // {
-    //     axios.get('http://localhost:5000/courses',  {withCredentials: true })
-    //     .then(res => {
-    //         console.log(res.data.courses)
-    //         console.log("courselist")
-    //         setCourses(res.data.courses)
-    //     })
-    // }, [])
+    useEffect(() =>
+    {
+        axios.get('http://10.17.6.4/courses',{headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` 
+
+        }},  {withCredentials: true })
+        .then(res => {
+            console.log(res.data.courses)
+            console.log("courselist")
+            setCourses(res.data.courses)
+        })
+    }, [])
 
   return (
     <div class='container-fluid dashboard row  min-vh-100'>      
@@ -81,9 +86,9 @@ export default function AllCourses() {
                 
             
                     {/* <div class="col-4 mt-3"> */}
-                        {courses.map(course=>{
+                        {courses.map((course,key)=>{
                             return <CourseCard
-                                
+                                key={key}
                                 name={course.name}
                                 description={course.description}
                                 id={course.id}

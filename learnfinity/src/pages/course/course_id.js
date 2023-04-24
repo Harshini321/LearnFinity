@@ -1,4 +1,5 @@
 import React , { useState, useEffect }  from 'react';
+import { Link } from 'react-router-dom';
 import './course.css';
 import { useParams } from 'react-router-dom';
 import Nav from "../../components/navbar/navbar"
@@ -11,39 +12,71 @@ import notes from "../../images/notes.png"
 import Announcement from '../../components/announcement_card';
 import Evaluation_card from '../../components/evaluation_card';
 import axios from 'axios';
+import { ReactSession } from 'react-client-session';
+
 export default function Course_id() {
     const parms=useParams()
     const course_id=parms.course_id
+    console.log(course_id)
     const [ans,setAns]=useState([])
     const [announcementList, setAnnouncementList] = useState([]);
     const [evaluationList, setEvaluationList] = useState([]);
-    const [postList, setPostList] = useState([]);
-
+    const [postsList, setPostList] = useState([]);
+    const [coursedetail, setCourseDetails] = useState({})
+    ReactSession.setStoreType('localStorage');
+	const token = ReactSession.get('access_token');
     useEffect(() =>
     {
-        axios.get(`http://localhost:5000/announcement/${course_id}`, {withCredentials: true })
+        axios.get(`http://10.17.6.4/announcement/${course_id}`, {headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` 
+
+        }}, {withCredentials: true })
         .then(res => {
             console.log(res.data.announcement_list)
             console.log("courselist")
             setAnnouncementList(res.data.announcement_list)
         })
     }, [])
-
+    
+    
     useEffect(() =>
     {
-        axios.get(`http://localhost:5000/evaluation/${course_id}`, {withCredentials: true })
+        axios.get(`http://10.17.6.4/evaluation/${course_id}`, {headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` 
+
+        }},{withCredentials: true })
         .then(res => {
-            console.log(res.data.evaluation_list)
-            setEvaluationList(res.data.evaluation_list)
+            console.log(res.data)
+            setEvaluationList(res.data)
         })
     }, [])
 
+
     useEffect(() =>
     {
-        axios.get(`http://localhost:5000/post/${course_id}`, {withCredentials: true })
+        axios.get(`http://10.17.6.4/post/${course_id}`,{headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` 
+
+        }}, {withCredentials: true })
         .then(res => {
-            console.log(res.data.post_list)
-            setEvaluationList(res.data.post_list)
+            console.log(res.data.posts_list)
+            setPostList(res.data.posts_list)
+            
+        })
+    }, [])
+    useEffect(() =>
+    {
+        axios.get(`http://10.17.6.4/courses/id/${course_id}`,{headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` 
+
+        }}, {withCredentials: true })
+        .then(res => {
+            console.log(res.data)
+            setCourseDetails(res.data)
         })
     }, [])
 
@@ -52,7 +85,7 @@ export default function Course_id() {
             <Nav></Nav>
         <div class="col-10 dash">
         <div class="row">
-                <div class="col-11 pb-3 pt-1"><h2>{course_id} : COP 290</h2></div>
+                <div class="col-11 pb-3 pt-1"><h2>{coursedetail.name}</h2></div>
                 <div class="col-1">
                     <a type="button" class='navbar-brand nav-logo'   data-bs-toggle="modal" data-bs-target="#exampleModal1" >
                         <img src={profile} alt='CAIC' width='40' height='40' />
@@ -106,27 +139,14 @@ export default function Course_id() {
                 <div class="col-6 ">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class='px-3'>Evaluation</h4>
-                            <div class="form-check dl2 py-2">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    COP 290-lab3 Weightage 50%
-                                </label><br></br>
-                                <small>15 March</small>
-                            </div>
-                            <div class="form-check dl2 py-2">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    COP 290-lab3 Weightage 50%
-                                </label><br></br>
-                                <small>15 March</small>
-                            </div>
+                            <h4 class='px-3'><a href={'/evaluation/'+course_id} class="link-dark">Evaluation</a></h4> 
                             {evaluationList.map(evl=>{
                                 return(
                                     <Evaluation_card
                                         id={evl.id}
                                         title={evl.title}
-                                        staticfile_id={evl.staticfile_id}
+                                        staticfile_name={evl.staticfile_name}
+                                        staticfile_url = {evl.staticfile_url}
                                         deadline={evl.deadline}
                                         course_id={evl.course_id}
                                         weightage={evl.weightage}
@@ -168,7 +188,7 @@ export default function Course_id() {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class='px-3'>Announcements</h4>
+                            <h4 class='px-3'><a href={'/announcement/'+course_id} class="link-dark">Announcements</a></h4>
                             {announcementList.map(an=>{
                                 return(
                                     <Announcement 
@@ -182,61 +202,8 @@ export default function Course_id() {
                                     ></Announcement>
                                 )
                             })} 
-                            <div class="card my-3">
-                                <div class="card-body">
-                                    <div class="row px-3">
-                                        <div class="col-3">
-                                            <div class="row">
-                                                <div class="col-3 icon-block">
-                                                    <img src={ann} alt='CAIC' width='40' height='40' />
-                                                </div>
-                                                <div class="col-9">
-                                                    New Assignment<br></br>
-                                                    COP 290
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-9">
-
-                                        </div>
-                                    </div>
-                                    <div class="row px-3">
-                                        <div class="col-12">
-                                        <p class='py-2 px-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
                             
-                            <div class="card my-2">
-                                <div class="card-body">
-                                    <div class="row px-3">
-                                        <div class="col-3">
-                                            <div class="row">
-                                                <div class="col-3 icon-block">
-                                                    <img src={ann} alt='CAIC' width='40' height='40' />
-                                                </div>
-                                                <div class="col-9">
-                                                    New Assignment<br></br>
-                                                    COP 290
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-9">
-
-                                        </div>
-                                    </div>
-                                    <div class="row px-3">
-                                        <div class="col-12">
-                                        <p class='py-2 px-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
+                            
                             
                         </div>
                     </div>
@@ -280,11 +247,16 @@ export default function Course_id() {
                     <div class="card">
                         <div class="card-body">
                             <h4 class='px-3'>Posts And Comments</h4>
+                                {postsList.map((content)=>{
                                 <div class="card my-3">
                                     <div class="card-body">
-                                        This is some text within a card body.
+
+                                        {content['title']}
+                                        {content.body}
                                     </div>
                                 </div>
+                                })}
+                                
                                 <div class="card my-3">
                                     <div class="card-body">
                                         This is some text within a card body.
