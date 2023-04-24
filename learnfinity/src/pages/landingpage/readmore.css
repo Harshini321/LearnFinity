@@ -23,6 +23,15 @@
     text-align: center;
 }
 
+.back {
+    text-decoration: none;
+}
+
+.back1 {
+    margin-left: 340px;
+    ;
+}
+
 #inf1 {
     margin-left: -200px;
     opacity: 0.5;

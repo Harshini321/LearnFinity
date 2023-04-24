@@ -51,7 +51,7 @@ export default function landingpage() {
                 <div class="row">
                     <div class="col-4"></div>
                     <div class="col-4 rmbtn_div">
-                        <button type="button" class="btn btn-primary rmbtn">Read More</button>
+                        <button type="button" class="btn btn-primary rmbtn"> <a href="/readmore" class="link-light readmo">Read More</a></button>
                     </div>
                     <div class="col-4"></div>
                 </div>

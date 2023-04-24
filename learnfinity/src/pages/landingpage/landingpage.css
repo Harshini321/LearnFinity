@@ -58,6 +58,10 @@
     /* background-size: cover; */
 }
 
+.readmo {
+    text-decoration: none;
+}
+
 body {
     overflow-x: hidden;
     /* Hide horizontal scrollbar */

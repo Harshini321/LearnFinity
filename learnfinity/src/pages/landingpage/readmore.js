@@ -36,6 +36,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
                         </h4>
                     </div>
+                    <div class="col-4 rmbtn_div back1">
+                        <button type="button" class="btn btn-primary rmbtn"> <a href="/" class="link-light back">Back</a></button>
+                    </div>
                     <div class="col-1"></div>
                 </div>
             </div>
