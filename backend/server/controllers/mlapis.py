@@ -7,3 +7,8 @@ mlapi_app = Blueprint('mlapi', __name__)
 def textToSpeech():
     text = request.json['text']
     return mlapis.textToSpeech(text)
+
+@mlapi_app.route('/askgpt', methods=['POST'])
+def askGPT():
+    text = request.json['text']
+    return mlapis.askGPT(text)

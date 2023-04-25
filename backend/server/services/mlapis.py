@@ -2,8 +2,10 @@ from google.cloud import texttospeech
 import os
 from dotenv import load_dotenv
 from uuid import uuid4
+import requests
 load_dotenv()
 GOOGLE_APPLICATION_CREDENTIALS = os.getenv('GOOGLE_APPLICATION_CREDENTIALS') #need to set this in .env file and remember to add creds file
+OPEN_API_KEY = os.getenv('OPEN_API_KEY') #need to set this in .env file
 
 def textToSpeech(text):
 
@@ -30,3 +32,22 @@ def textToSpeech(text):
         # Write the response to the output file.
         out.write(response.audio_content)
     return {'media_url' : f"statics/{uid}.mp3"}
+
+def askGPT(text):
+    body = {
+                "model": "gpt-3.5-turbo",
+                "messages": [{"role": "user", "content": text}]
+            }
+    
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization" : f"Bearer {OPEN_API_KEY}"
+    }
+
+    response = requests.post("https://api.openai.com/v1/chat/completions", json=body, headers=headers)
+    if (response.status_code == 200):
+        data = response.json()
+        return {'text' : data['choices'][0]['message']['content']}
+    else:
+        return {'error' : 'OpenAI API error'}
+
