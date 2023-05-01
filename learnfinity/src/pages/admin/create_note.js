@@ -3,7 +3,6 @@ import axios from 'axios'
 import Nav from '../../components/navbar/navbar';
 import { Form, Button } from 'react-bootstrap'
 import { ReactSession } from 'react-client-session';
-import { Link } from 'react-router-dom'
 import { useNavigate, useParams } from 'react-router-dom';
 export default function New_note(props) {
     const navigate = useNavigate()
