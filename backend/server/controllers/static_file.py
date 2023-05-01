@@ -10,6 +10,10 @@ CORS(static_app)
 def getStatic(id):
     return static_file.getStatic(id)
 
+@static_app.route('/staticfile/<id>', methods=['GET'])
+def getFile(id):
+    return static_file.getMetadata(id)
+
 @static_app.route('/static', methods = ['POST'])
 def postStatic():
     file = request.files['file']
@@ -24,20 +28,30 @@ def postStatic():
 def deleteStatic():
     return static_file.deleteStatic(id = request.json['id'])
 
-@static_app.route('/notes', methods = ['POST', 'GET'])
-def notesByCourse():
-    course_id=request.form['course_id']
-    if request.method=='GET':
-        return static_file.notesByCourse(course_id)
-    else:
-        user = users_controller.getUser()
-        if(user['status_code']==200):
-            print(user)
-            if(user['is_Prof']):
-                x = postStatic()
-                return static_file.postNote(x['id'], course_id)
-            else:
-                return{"message": "User not authorized", "status_code": 401}
+# @static_app.route('/notes', methods = ['POST'])
+# def notesPost():
+#     course_id=request.form['course_id']
+#     user = users_controller.getUser()
+#     if(user['status_code']==200):
+#         print(user)
+#         if(user['is_Prof']):
+#             x = postStatic()
+#             return static_file.postNote(x['id'], course_id)
+#         else:
+#             return{"message": "User not authorized", "status_code": 401}
+@static_app.route('/notes', methods = ['POST'])
+def notesPost():
+    course_id=request.json['course_id']
+    user = users_controller.getUser()
+    if(user['status_code']==200):
+        print(user)
+        if(user['is_Prof']):
+            file_id=request.json['file_id']
+            return static_file.postNote(file_id, course_id)
+        else:
+            return{"message": "User not authorized", "status_code": 401}
 
-
-
+@static_app.route('/notes/<id>', methods = ['GET'])
+def notesByCourse(id):
+    return static_file.notesByCourse(id)
+   

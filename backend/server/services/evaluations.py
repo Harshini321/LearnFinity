@@ -1,4 +1,4 @@
-from ..models import evaluations
+from ..models import evaluations, courses
 from ..controllers import users_controller as users
 from ..services import static_file
 from server.db import db
@@ -6,9 +6,9 @@ import json
 
 # Evaluation functions
 
-def getEvaluations(courses):
+def getEvaluations(user_courses):
     evals = []
-    for course in courses:
+    for course in user_courses:
         res = evaluations.Evaluation.query.filter_by(evaluation_course = course).all()
         for e in res:
             evals.append({'id': e.evaluation_id, 
@@ -16,8 +16,10 @@ def getEvaluations(courses):
                          'content' : e.evaluation_content,
                           'staticfile_name': static_file.getStatic(e.evaluation_file)['name'], 
                           'staticfile_url': static_file.getStatic(e.evaluation_file)['media_url'],
+                          'staticfile_id': e.evaluation_file,
                           'deadline': str(e.evaluation_deadline), 
                           'course_id': e.evaluation_course, 
+                          'course_name' : courses.Course.query.filter_by(course_id=e.evaluation_course).first().course_name,
                           'weightage': e.evaluation_weightage*100, 
                           'total_marks': e.evaluation_max_score,
                            'submission_allowed': e.evaluation_submission_allowed})
@@ -61,8 +63,13 @@ def makeSubmission(evaluation_id, staticfile_id):
 
 def getSubmission(evaluation_id):
     user = users.getUser()['email_id']
-    submission = evaluations.Submission.query.filter_by(submission_evaluation = evaluation_id, submission_author = user).first()
-    return {'id': submission.submission_id, 'evaluation_id': submission.submission_evaluation, 'student_id': submission.submission_author, 'marks' : submission.submission_score, 'staticfile_id': submission.submission_file}
+    submissions = evaluations.Submission.query.filter_by(submission_evaluation = evaluation_id, submission_author = user).all()
+    print(submissions)
+    if(len(submissions) == 0):
+        return {"message" : "No submissions yet"}
+    else:
+        submission = submissions[-1]
+        return {'id': submission.submission_id, 'evaluation_id': submission.submission_evaluation, 'student_id': submission.submission_author, 'marks' : submission.submission_score, 'staticfile_id': submission.submission_file, "datetime": submission.submission_date}
 
 def deleteSubmission(evaluation_id):
     user = users.getUser()['email_id']

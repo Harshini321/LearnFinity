@@ -95,8 +95,9 @@ export default function AllCourses_inst_year() {
                     </div>      
                 </div>
             </div>
-            <Footer></Footer>
+        
         </div>
+        <Footer></Footer>
     </div>
   );
 }

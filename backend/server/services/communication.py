@@ -61,8 +61,8 @@ def courseAnnouncement(course_id):
     for announcement in announcements:
         static_announcements = communication.Announcement_Attachment.query.filter_by(announcement_attachment_announcement=announcement.announcement_id).all()
         static_files = []
-        for announcement in static_announcements:
-            static_files.append(announcement.announcement_attachment_file)
+        for fileAnn in static_announcements:
+            static_files.append(fileAnn.announcement_attachment_file)
         announcement_list.append({  "id" : announcement.announcement_id,
                                     "course_id" : announcement.announcement_course,
                                     "title" : announcement.announcement_title, 
@@ -147,7 +147,7 @@ def coursePost(course_id, email, is_Admin):
                                         "createdAt" : post.post_date,
                                         "author_id" : post.post_author, 
                                         "can_comment": True})
-                return {"posts_list" : posts_list, "status_code" : 200}
+                return {"posts_list" : posts_list, "status_code" : 200, "course_name" : courses.Course.query.filter_by(course_id=course_id).first().course_name}
 
 def getPostId(post_id, email, is_Admin):
     post = communication.Post.query.filter_by(post_id=post_id).first()
@@ -169,7 +169,8 @@ def getPostId(post_id, email, is_Admin):
                     "body" : post.post_content, 
                     "static_files" : static_files, 
                     "createdAt" : post.post_date,
-                    "author_id" : post.post_author, 
+                    "author_id": post.post_author,
+                    "author_name" : user.User.query.filter_by(email = post.post_author).first().name, 
                     "can_comment": True}
             return {"post" : post, "status_code" : 200}
 
@@ -190,8 +191,8 @@ def deletePost(post_id, email, is_Prof):
             else:
                 return {"message" : 'User not authorised to delete this post', "status_code" : 401}
 
-def postComment(email, parentpost_id, parentcomment_id, body, static_files):
-    user = user.User.query.filter_by(email=email).first()
+def postComment(email, parentpost_id, body, static_files):
+    userObj = user.User.query.filter_by(email=email).first()
     post = communication.Post.query.filter_by(post_id=parentpost_id).first()
     if(post is None):
         return {"message" : 'Post not found. Please enter a valid post id', "status_code" : 404}
@@ -201,24 +202,15 @@ def postComment(email, parentpost_id, parentcomment_id, body, static_files):
         if(mapping is None):
             return {"message" : 'User not associated with the course. Unauthorised access', "status_code" : 401}
         else:
-            if(parentcomment_id is not None):
-                comment = communication.Comment(comment_post=parentpost_id, comment_parentComment=parentcomment_id, comment_content=body, comment_author=user.email)
-                db.session.add(comment)
+            
+            comment = communication.Comment(comment_post= parentpost_id, comment_parentPost=parentpost_id, comment_content=body, comment_author=userObj.email)
+            db.session.add(comment)
+            db.session.commit()
+            for static_file in static_files:
+                comment_attachment = communication.Comment_Attachment(comment_attachment_comment=comment.comment_id, comment_attachment_file=static_file)
+                db.session.add(comment_attachment)
                 db.session.commit()
-                for static_file in static_files:
-                    comment_attachment = communication.Comment_Attachment(comment_attachment_comment=comment.comment_id, comment_attachment_file=static_file)
-                    db.session.add(comment_attachment)
-                    db.session.commit()
-                return {"message" : 'Comment posted successfully', "status_code" : 200}
-            else:
-                comment = communication.Comment(comment_post= parentpost_id, comment_parentPost=parentpost_id, comment_content=body, comment_author=user.email)
-                db.session.add(comment)
-                db.session.commit()
-                for static_file in static_files:
-                    comment_attachment = communication.Comment_Attachment(comment_attachment_comment=comment.comment_id, comment_attachment_file=static_file)
-                    db.session.add(comment_attachment)
-                    db.session.commit()
-                return {"message" : 'Comment posted successfully', "status_code" : 200}
+            return {"message" : 'Comment posted successfully', "status_code" : 200}
             
 
 def getCommentById(comment_id, email, is_Admin):
@@ -261,11 +253,11 @@ def getCommentsByPostId(post_id):
                 static_files.append(static_comment.comment_attachment_file)
             comments_list.append({ "id" : comment.comment_id,
                                     "post_id" : comment.comment_post,
-                                    "parent_id" : comment.comment_parent, 
                                     "body" : comment.comment_content, 
                                     "static_files" : static_files, 
                                     "createdAt" : comment.comment_date,
                                     "author_id" : comment.comment_author, 
+                                    "author_name" : user.User.query.filter_by(email = comment.comment_author).first().name, 
                                     "can_comment": True})
         return {"comments_list" : comments_list, "status_code" : 200}
 

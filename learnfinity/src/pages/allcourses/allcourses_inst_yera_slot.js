@@ -96,8 +96,9 @@ export default function AllCourses_inst_year_slot() {
                     </div>        
                 </div>
             </div>
-            <Footer></Footer>
+      
         </div>
+        <Footer></Footer>
     </div>
   );
 }

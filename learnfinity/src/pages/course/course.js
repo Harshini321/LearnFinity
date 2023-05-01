@@ -231,9 +231,10 @@ export default function Course() {
                 </div>
             </div>
             
-           <Footer></Footer>
+           
 
         </div>
+        <Footer></Footer>
     </div>
   );
 }

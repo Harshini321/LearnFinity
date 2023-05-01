@@ -1,61 +1,84 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './posts.css';
-import logo from '../../images/course.png';
 import Nav from "../../components/navbar/navbar"
-import CourseCard from "../../components/course_card/coursecard"
 import Footer from "../../components/footer/footer"
-import profile from "../../images/default.png"
-import pf from "../../images/prof_def.png"
-import expand from "../../images/expand.png"
-import profile_comp from '../../components/profile';
+import axios from 'axios';
+import Posts_card from '../../components/posts_card';
+import { ReactSession } from 'react-client-session';
+import { useNavigate, useParams } from 'react-router-dom';
 export default function Posts() {
-  return (
-    <div className='container-fluid dashboard row  min-vh-100'>      
-        <Nav></Nav>
-        <div class="col-10 dash">
-            
-        <div class="row">
-                <div class="col-11 pb-3 pt-1"><h2>Posts and Comments</h2></div>
-                <profile_comp></profile_comp>
-            </div>           
-            <div class="row py-3">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 className='px-3'>COP 290</h4> 
-                            <div class="row py-3">
-                                <div class="col-4 px-3">
-                                    <div class="px-2">
-                                        <div class="card rem-rad">
-                                            <img class="card-img-top" src={logo} alt="Card image cap"></img>
-                                            <div class="card-body">
-                                                <h5 class="card-title">Title</h5>
-                                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                            </div>
-                                            <div class="card-body">
-                                                <a href="#" class="card-link no_underline">Read More</a>
-                                            </div> 
-                                        </div>  
-                                        
-                                    </div>
-                                    
-                                </div>
-                                <div class="col-4 px-3">
-                                    <CourseCard></CourseCard>
-                                </div>
-                                <div class="col-4 px-3">
-                                    <CourseCard></CourseCard>
-                                </div>
-                            </div>
+    const navigate = useNavigate()
+    const parms = useParams()
+    const course_id = parms.course_id
+    console.log(course_id)
+    const [postsList, setPostList] = useState([]);
+    const [course, setCourse] = useState({});
+    ReactSession.setStoreType('localStorage');
+    const token = ReactSession.get('access_token');
+    const history = useNavigate();
+    function detailCourse(id) {
+        history(`/postdet/${id}`);
+    }
+    useEffect(() => {
+        axios.get(`http://10.17.6.4/post/${course_id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+
+            }
+        }, { withCredentials: true })
+            .then(res => {
+                if (res.data.status_code != 200) {
+                    alert(res.data.message)
+                    navigate("/dashboard")
+                }
+                console.log(res.data.posts_list)
+                setCourse(res.data)
+                setPostList(res.data.posts_list)
+
+            })
+    }, [])
+
+    return (
+        <div className='container-fluid dashboard row  min-vh-100'>
+            <Nav></Nav>
+            <div class="col-10 dash">
+
+                <div class="row">
+                    <div class="col-11 pb-3 pt-1"><h2>{course.course_name} : Posts and Comments </h2></div>
+                    <profile_comp></profile_comp>
+                </div>
+                <div class="col-2 mx-2">
+                    <a type="button" class="btn btn-primary loginbtn" href={"/posts/" + course_id + "/new"}>
+                        Add New Post
+                    </a>
+                </div>
+                <div class="row py-3">
+                    <div class="col-12">
+                        <div class="row py-3 px-2">
+
+                            {postsList.map((post, key) => {
+                                { console.log(post) }
+                                return (
+                                    <Posts_card
+                                        title={post.title}
+                                        body={post.body}
+                                        id={post.id}
+                                        onDetail={detailCourse}
+                                    ></Posts_card>
+                                )
+                            })}
+
                         </div>
+
                     </div>
-                </div>   
+
+                </div>
+                
 
             </div>
             <Footer></Footer>
-
         </div>
-    </div>
-  );
+    );
 }

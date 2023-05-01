@@ -9,16 +9,17 @@ eval_app = Blueprint('eval', __name__)
 CORS(eval_app)
 #CORS(eval_app, supports_credentials=True, origins=['http://localhost:3000', 'http://localhost:5000', "http://127.0.0.1:5000", "http://127.0.0.1:3000",'http://localhost:3000/', 'http://localhost:5000/', "http://127.0.0.1:5000/", "http://127.0.0.1:3000/",  "http://127.0.0.1:80/", "http://127.0.0.1:80", 'http://localhost:80 ', 'http://localhost:80/', 'http://10.17.6.4/', 'http://10.17.6.4/80','http://10.17.6.4/80/', 'http://10.17.6.4'])
 # Evaluation endpoints
-@eval_app.route('/evaluation/', methods = ['GET', 'POST'])
+@eval_app.route('/evaluations', methods = ['GET', 'POST'])
 def evaluation():
     if request.method == 'GET':
+        print(course.getCourses())
         res = course.getCourses()['courses']
         courses = []
         for c in res:
             courses.append(c['id'])
-        return evaluations.getEvaluations(courses = courses)
+        return evaluations.getEvaluations(user_courses = courses)
     else:
-        if users.checkAdmin() or users.checkInstructor():
+        if users_controller.isAdmin() or users_controller.isStaff():
             title = request.json['title']
             staticfile_id = request.json['staticfile_id']
             deadline = request.json['deadline']
@@ -34,11 +35,11 @@ def evaluation():
 
 @eval_app.route('/evaluation/<course_id>', methods = ['GET'])
 def getEvaluations(course_id):
-    return evaluations.getEvaluations(courses = [course_id]) #same method as evaluation() but with a single course_id
+    return evaluations.getEvaluations(user_courses = [course_id]) #same method as evaluation() but with a single course_id
 
 @eval_app.route('/evaluation/edit', methods = ['POST'])
 def editEvaluation():
-    if users.checkAdmin or users.checkInstructor:
+    if users_controller.isAdmin or users_controller.isStaff:
         id = request.json['id']
         title = request.json['title']
         content = request.json['content']
@@ -52,7 +53,7 @@ def editEvaluation():
 
 @eval_app.route('/evaluation/delete', methods = ['POST'])
 def deleteEvaluation():
-    if users.checkAdmin or users.checkInstructor:
+    if users_controller.checkAdmin or users_controller.checkInstructor:
         id = request.json['id']
         return evaluations.deleteEvaluation(id = id)
 
@@ -74,9 +75,11 @@ def deleteSubmission(evaluation_id):
 
 @eval_app.route('/submission/grade', methods = ['POST'])
 def gradeSubmission():
-    if users.checkAdmin or users.checkInstructor:
+    if users_controller.checkAdmin or users_controller.checkInstructor:
         submission_id = request.json['submission_id']
         marks = request.json['marks']
         return evaluations.gradeSubmission(submission_id = submission_id, marks = marks)
 
     return {"message" : 'User not authorized to perform this action', "status_code" : 401}
+
+

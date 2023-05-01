@@ -37,14 +37,14 @@ def getEntries(insti_id):
     return entries
 
 def postEntry(insti_id, entry_day, entry_start_time, entry_end_time):
-    r = schedule.Entry.query.filter_by(entry_day = entry_day, entry_start_time = entry_start_time, entry_end_time = entry_end_time, entry_insti_id = insti_id).first()
-    if r:
-        return {"message": "Entry already exists", "status_code": 400}
-    else:
-        obj = schedule.Entry(entry_day = entry_day, entry_start_time = entry_start_time, entry_end_time = entry_end_time, entry_insti_id = insti_id)
-        db.session.add(obj)
-        db.session.commit()
-        return {"id": obj.entry_id, "day": obj.entry_day, "start_time": str(obj.entry_start_time), "end_time": str(obj.entry_end_time), "insti_id": obj.entry_insti_id, "status_code": 200, "message": "Entry added successfully"}
+        r = schedule.Entry.query.filter_by(entry_day = entry_day, entry_start_time = entry_start_time, entry_end_time = entry_end_time, entry_insti_id = insti_id)
+        if r:
+            return {"message": "Entry already exists", "status_code": 400}
+        else:
+            obj = schedule.Entry(entry_day = entry_day, entry_start_time = entry_start_time, entry_end_time = entry_end_time, entry_insti_id = insti_id)
+            db.session.add(obj)
+            db.session.commit()
+            return {"id": obj.entry_id, "day": obj.entry_day, "start_time": str(obj.entry_start_time), "end_time": str(obj.entry_end_time), "insti_id": obj.entry_insti_id, "status_code": 200, "message": "Entry added successfully"}
 
 def deleteEntry(id):
     obj = schedule.Entry.query.filter_by(entry_id = id).first()

@@ -9,7 +9,8 @@ import AllCourses_Insti from './pages/allcourses/allcourses_inst';
 import AllCourses_year from './pages/allcourses/allcourses_year';
 import AllCourses_inst_year from './pages/allcourses/allcourses_inst_year';
 import Coming from './pages/coming/coming';
-import Posts from "./pages/posts/posts"
+import Posts from "./pages/posts/posts";
+import New_post from './pages/posts/new_post';
 import PostsDet from "./pages/posts/postsdet"
 import Course from "./pages/course/course"
 import Course_id from './pages/course/course_id';
@@ -40,8 +41,9 @@ import Enrolled from './pages/admin/enrolled';
 import Major from './pages/admin/major';
 import Notes_add from './pages/admin/notes_add';
 import Trial from "./pages/trial/trial"
-
+import New_assignment from './pages/admin/create_assignment';
 import Eval_submission from './components/eval_submission';
+import New_note from './pages/admin/create_note';
 function App() {
   return (
     <div>
@@ -64,8 +66,9 @@ function App() {
           <Route path="/course" element={<Course/>}/> 
            
           <Route path="/pastcourses" element={<AllCourses/>}/> 
-          <Route path="/posts" element={<Posts/>}/>
-          <Route path="/posts/postsdet" element={<PostsDet/>}/>
+          <Route path="/posts/:course_id" element={<Posts/>}/>
+          <Route path="/posts/:course_id/new" element={<New_post/>}/>
+          <Route path="/postdet/:post_id" element={<PostsDet/>}/>
 
           <Route path="/announcement" element={<Announcements/>}/> 
           <Route path="/announcement/unread" element={<Announcements_Unread/>}/> 
@@ -73,7 +76,7 @@ function App() {
 
           <Route path="/grades" element={<Grades/>}/>
           <Route path="/grades/:course_id" element={<Grades_courses/>}/>
-          <Route path="/notes" element={<Notes/>}/>
+          <Route path="/notes/:course_id" element={<Notes/>}/>
 
           <Route path="/evaluation" element={<Assignment/>}/>
           <Route path="/eval_submission" element={<Eval_submission/>}/>
@@ -81,17 +84,18 @@ function App() {
           <Route path="/trial" element={<Trial/>}/>
 
           <Route path="/admin" element={<Landingpage_a/>}/>
-          <Route path="/admin/dashboard" element={<Dashboard_a/>}/>
+          <Route path="/dashboard/:course_id" element={<Dashboard_a/>}/>
           <Route path="/admin/course_tot" element={<Course_tot/>}/>
           <Route path="/admin/minor" element={<Minor/>}/>
           <Route path="/admin/cut" element={<Cut/>}/>
           <Route path="/admin/major" element={<Major/>}/>
           <Route path="/admin/enrolled" element={<Enrolled/>}/>
-          <Route path="/admin/assignment/add" element={<Assignment_add/>}/>
-          <Route path="/admin/announcement/add" element={<Announcement_add/>}/>
-          <Route path="/admin/announcement/add/new" element={<Create_Ann/>}/>
-          <Route path="/admin/notes/add" element={<Notes_add/>}/>
-
+          <Route path="/admin/assignment/" element={<Assignment_add/>}/>
+          <Route path="/admin/announcement" element={<Announcement_add/>}/>
+          <Route path="/announcement/:course_id/new" element={<Create_Ann/>}/>
+          <Route path="/notes/:course_id/new" element={<New_note/>}/>
+          <Route path="/assignment/:course_id/new" element={<New_assignment/>}/>
+         
         </Routes>
         
       </Router>

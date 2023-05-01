@@ -169,18 +169,18 @@ def getUserCourse():
                 courses_list.append(course)
                 print(courses_list)
             return {
-                # "status_code": 200, 
+                "status_code": 200, 
                 "courses": courses_list
                 }
         else:
             return {
                 "message": "No courses defined for admin, use another endpoint",
-                # "status_code" : 401
+                "status_code" : 401
                 }
     else:
         return {
-            "message": "User not found"
-            # "status_code" : 400
+            "message": "User not found",
+            "status_code" : 400
             }
 def addUser():
     req = request.get_json(force=True)

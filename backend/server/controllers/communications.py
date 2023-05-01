@@ -106,7 +106,7 @@ def postComment(): #Create a new comment
     if(user_obj['status_code'] != 200):
         return {"message" : 'User not authenticated to perform this action. Please login', "status_code" : 401}
     else:
-        return communication.postComment(user_obj['email_id'], req['parentpost_id'], req['parentcomment_id'], req['body'], req['static_files'])
+        return communication.postComment(user_obj['email_id'], req['parentpost_id'], req['body'], req['static_files'])
 
 @communication_app.route('/comment/<comment_id>', methods = ['GET'])
 def getCommentById(comment_id): #Get comment by commentid
@@ -117,7 +117,7 @@ def getCommentById(comment_id): #Get comment by commentid
         return communication.getCommentById(comment_id, user['email'], user['is_Admin'])
 
 
-@communication_app.route('/comment/<parentpost_id>', methods = ['GET'])
+@communication_app.route('/comment/post/<parentpost_id>', methods = ['GET'])
 def getComments(parentpost_id): #Get all the comments for a post
     return communication.getCommentsByPostId(parentpost_id)
 
