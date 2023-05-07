@@ -44,7 +44,7 @@ def notesPost():
     course_id=request.json['course_id']
     user = users_controller.getUser()
     if(user['status_code']==200):
-        print(user)
+        # print(user)
         if(user['is_Prof']):
             file_id=request.json['file_id']
             return static_file.postNote(file_id, course_id)

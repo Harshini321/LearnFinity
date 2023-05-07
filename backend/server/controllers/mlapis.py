@@ -5,7 +5,7 @@ mlapi_app = Blueprint('mlapi', __name__)
 
 @mlapi_app.route('/tts', methods=['POST'])
 def textToSpeech():
-    print("here in tts")
+    # print("here in tts")
     text = request.json['text']
     return mlapis.textToSpeech(text)
 

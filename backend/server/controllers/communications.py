@@ -10,7 +10,7 @@ CORS(communication_app)
 @communication_app.route('/announcement', methods=['GET', 'POST']) #Only Prof can post announcements for the courses they're taking (add a check for that), students can only get announcements
 def handleAnnouncements(): #tested
     user_obj = users.getUser()
-    print(user_obj)
+    # print(user_obj)
     
     if(user_obj['status_code'] != 200):
         return {"message" : 'User not authenticated to perform this action. Please login', "status_code" : 401}

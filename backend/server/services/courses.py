@@ -146,11 +146,11 @@ def editCourse():  #Requires admin access to edit a course
 
 def getUserCourse():
     response = users_controller.getUser()
-    print(response)
+    # print(response)
     if(response['status_code'] == 200):
         user_email = response['email_id']
         if(response['is_Admin'] == False):
-            print("hereim")
+            # print("hereim")
             mappings = courses.User_Course.query.filter_by(user = user_email).all()
             courses_list = []
             for mappping in mappings:
@@ -167,7 +167,7 @@ def getUserCourse():
                         "id": course_obj.course_id 
                         }
                 courses_list.append(course)
-                print(courses_list)
+                # print(courses_list)
             return {
                 "status_code": 200, 
                 "courses": courses_list
@@ -231,13 +231,13 @@ def removeUser():
             "status_code" : 401
             }
 def getYear(year):
-    print(year)
+    # print(year)
     req = request.get_json(force=True)
     response = users_controller.getUser()
     if(response['status_code'] == 200):
         courses_list=[]
         courses_list_all = courses.Course.query.filter_by(course_insti_id = response['insti_id']).all()
-        print(courses_list_all)
+        # print(courses_list_all)
         for course in courses_list_all:
             if(str(course.course_year) == str(year)):
                 courses_list.append({
@@ -321,10 +321,10 @@ def getSlot(year, semester, slot_id):
 
 def getPastCourses(): #takes in current year, semester and user object as input. Returns a user's past courses
     
-    print("here i ampast courses")
-    print(request.cookies)
+    # print("here i ampast courses")
+    # print(request.cookies)
     response = users_controller.getUser()
-    print(response)
+    # print(response)
     if(response['status_code'] == 200):
         courses_list=[]
         courses_list_all = courses.User_Course.query.filter_by(user = response['email_id']).all()
@@ -371,7 +371,7 @@ def getPresentCourses(): #takes in current year, semester and user object as inp
                         "image": static_file.getStatic(course_obj.course_image)['media_url'],
                         "id": course_obj.course_id 
                         })
-        print(courses_list)
+        # print(courses_list)
         return {
             "status_code": 200, 
             "courses": courses_list

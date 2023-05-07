@@ -64,7 +64,7 @@ def makeSubmission(evaluation_id, staticfile_id):
 def getSubmission(evaluation_id):
     user = users.getUser()['email_id']
     submissions = evaluations.Submission.query.filter_by(submission_evaluation = evaluation_id, submission_author = user).all()
-    print(submissions)
+    # print(submissions)
     if(len(submissions) == 0):
         return {"message" : "No submissions yet"}
     else:

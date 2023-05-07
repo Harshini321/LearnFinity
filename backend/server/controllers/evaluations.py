@@ -12,7 +12,7 @@ CORS(eval_app)
 @eval_app.route('/evaluations', methods = ['GET', 'POST'])
 def evaluation():
     if request.method == 'GET':
-        print(course.getCourses())
+        # print(course.getCourses())
         res = course.getCourses()['courses']
         courses = []
         for c in res:

@@ -9,7 +9,7 @@ CORS(user_app)
 def getUser():
     # print("req", request)
     # print("cook", request.cookies)
-    print(request.headers)
+    # print(request.headers)
     access_token=None
     bearer = request.headers.get('Authorization')    # Bearer YourTokenHere
     if(bearer is None):

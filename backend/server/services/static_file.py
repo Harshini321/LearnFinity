@@ -7,7 +7,7 @@ uploadDir = "static/"
 
 def getMetadata(id):
     resp = static_files.Static_File.query.filter_by(file_id=id).first()
-    print(resp.file_path)
+    # print(resp.file_path)
     return send_from_directory("/home/baadalvm/LearnFinity/backend/static", resp.file_path, as_attachment=True)
 
 def sendFile(path):
@@ -46,7 +46,7 @@ def notesByCourse(course_id):
     notes = static_files.Note.query.filter_by(note_course_id=course_id).all()
     for note in notes:
         x = getStatic(note.note_file_id)
-        print(x)
+        # print(x)
         notes_list.append(x)
     return {"status_code" :200,
             "notes": notes_list

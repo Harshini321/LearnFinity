@@ -11,12 +11,12 @@ def signup():
 
 @auth_app.route('/signin', methods = ['POST'])
 def signin():
-    print("Signing in...")
-    print(request.headers)
-    print(request.get_json(force=True))
+    # print("Signing in...")
+    # print(request.headers)
+    # print(request.get_json(force=True))
     email = request.get_json(force=True)['email_id']
     password = request.get_json(force=True)['password']
-    print(email, password)
+    # print(email, password)
     return auth.signin(email = email, password = password)
 
 @auth_app.route('/forgotpwd', methods = ['POST'])

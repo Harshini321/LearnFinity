@@ -15,7 +15,7 @@ def slots():
     elif request.method == 'POST':
         if(users.checkAdmin()):
             user_obj = users.getUser()
-            print(user_obj)
+            # print(user_obj)
             return schedule.postSlot(insti_id = user_obj['insti_id'], slot_name = request.json['name'])
         else:
             return {"message" : 'User not authorized to perform this action', "status_code" : 401}
