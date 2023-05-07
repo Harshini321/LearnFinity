@@ -1,3 +1,5 @@
 venv/
 static/
 migrations/
+google_service_account.json
+.env
